@@ -55,7 +55,7 @@
 <screen_info "{{@screen.width}}x{{@screen.height}}">
 
 <some_sentence[responsive(@screen.width)] {
-    *long: "This is a very long sentence",
+    *long: "This is a very long sentence.",
     short: "A sentence.",
 }>
 

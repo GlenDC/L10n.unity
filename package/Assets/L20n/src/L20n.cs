@@ -29,7 +29,7 @@ using L20nInfoCollector = L20nCore.External.InfoCollector;
 
 public static class L20n
 {
-	public static void Initialize(string manifest_path, string locale = null)
+	public static void Initialize(string manifest_path, string defLocale = null)
 	{
 		var core = GetCore();
 		if (core.IsInitialized) {
@@ -41,14 +41,15 @@ public static class L20n
 
 		core.ImportManifest(manifest_path);
 
-		string localeType = null;
-		if (locale == null) {
-			locale = LoadSetting(SETTING_USER_LOCAL);
+		string localeType = "user-cached";
+		string locale = LoadSetting(SETTING_USER_LOCAL);
+		if(locale == null) {
+			locale = defLocale;
 			if (locale == null) {
 				locale = SystemLocale;
 				localeType = "system-defined";
 			} else {
-				localeType = "user-cached";
+				localeType = "default-game";
 			}
 		}
 

@@ -28,3 +28,8 @@
 }>
 
 <enjoy "Desfrute de executar este exemplo em {{@platform}} => {{@os}}">
+
+<some_sentence[responsive(@screen.width)] {
+    *long: "Esta é uma frase muito longa.",
+    short: "Uma frase.",
+}>
