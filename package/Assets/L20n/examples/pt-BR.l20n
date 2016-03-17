@@ -1,0 +1,30 @@
+<hello "Olá, Mundo!">
+
+<greeting[get_greeting(@hour)] {
+    morning: "Bom dia",
+    afternoon: "Boa tarde",
+    evening: "Boa noite",
+}>
+
+/* In this case the translator of pt-br is in trouble,
+ * as she cannot translate the "zero" case correctly.
+ * In order to do so he/she would need the gender of the only follower.
+ */
+<followers($n) {
+    $n == 0 ? "seus zero seguidores"
+        : $n == 1 ? "seu único seguidor" : "seus {{ $n }} seguidores"
+}>
+
+<personal_lucky_greeting "{{ personal_greeting }} O número da sorte de hoje é {{ $lucky_number }}!">
+
+<shared[$user.gender]
+    "{{ $user.name }} compartilhou sua mensagem com {{ followers($user.followers) }}.">
+
+/* in português the possessive adjective's gender doesn't depend on the subject */
+<best_friend[$user.friend.gender] {
+    masculine: "{{ $user.name }} seu melhor amigo é {{ $user.friend.name }}.",
+    feminine: "{{ $user.name }} sua melhor amiga é {{ $user.friend.name }}.",
+    *default: "{{ $user.name }} seu melhor amigo é {{ $user.friend.name }}.",
+}>
+
+<enjoy "Desfrute de executar este exemplo em {{@platform}} => {{@os}}">
