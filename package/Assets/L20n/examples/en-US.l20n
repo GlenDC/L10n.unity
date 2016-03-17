@@ -48,6 +48,17 @@
     *default: "{{ $user.name }} their best friend is {{ $user.friend.name }}.",
 }>
 
+<responsive($n) {
+    $n < 300 ? "short" : "long"
+}>
+
+<screen_info "{{@screen.width}}x{{@screen.height}}">
+
+<some_sentence[responsive(@screen.width)] {
+    *long: "This is a very long sentence",
+    short: "A sentence.",
+}>
+
 <enjoy "Enjoy running this example at {{@platform}} => {{@os}}">
 
 <tooBig "Attachment too big: {{ $sizeInKB / 1024 }} MB.">
