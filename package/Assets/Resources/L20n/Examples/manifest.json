@@ -1,0 +1,11 @@
+{
+  "locales": [
+    "en_US",
+    "pt_BR",
+    "zn_Hans",
+  ],
+  "default_locale": "en_US",
+  "resources": [
+    "./{{locale}}.bytes",
+  ]
+}

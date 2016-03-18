@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using System;
 using System.Collections.Generic;
 
@@ -10,65 +14,111 @@ namespace L20nUnity
 {
 	[AddComponentMenu("L20n/Text")]
 	public sealed class L20nText : MonoBehaviour {
-		[SerializeField] private string m_Identifier;
-		[SerializeField] private List<L20nVariable> m_Variables = new List<L20nVariable>();
+		public string Identifier = "";
+		public List<string> Values = new List<string>();
+		public List<string> Keys = new List<string>();
 
-		private Text m_TextComponent;
-		private L20nCore.UserVariables m_UserVariables;
+		private Text m_TextComponent = null;
+		private L20nCore.UserVariables m_UserVariables = null;
 
-		void Start () {
+		void OnEnable()
+		{
+			m_UserVariables = new L20nCore.UserVariables(Keys.Count);
+			for(int i = 0; i < Keys.Count; ++i) {
+				if(Values[i] != null && Keys[i] != null) {
+					m_UserVariables.Add(Keys[i], Values[i]);
+				}
+			}
+			
 			m_TextComponent = GetComponent<Text>();
+
 			Debug.Assert(
 				m_TextComponent != null,
 				"<L20nText> requires a <TextComponent> to be attached");
 			Debug.Assert(
-				m_Identifier != null && m_Identifier != "",
+				Identifier != null && Identifier != "",
 				"<L20nText> requires a <string-identifier> to be attached");
-
-			m_UserVariables = new L20nCore.UserVariables();
-			for(int i = 0; i < m_Variables.Count; ++i)
-				m_UserVariables.Add(m_Variables[i].Key, m_Variables[i].Value);
-			m_Variables = null;
-
-
 		}
 		
 		// Update is called once per frame
 		void Update () {
+			if(Identifier == "") return;
+
 			if (m_UserVariables.Count > 0) {
-				m_TextComponent.text = L20n.Translate(m_Identifier, m_UserVariables);
+				m_TextComponent.text = L20n.Translate(Identifier, m_UserVariables);
 			} else {
-				m_TextComponent.text = L20n.Translate(m_Identifier);
+				m_TextComponent.text = L20n.Translate(Identifier);
 			}
 		}
 	}
 
-	[Serializable]
-	class L20nVariable
-	{
-		public string Key { get { return m_Key; } }
-		public UserVariable Value
+#if UNITY_EDITOR
+	[CustomEditor(typeof(L20nText))]
+	[CanEditMultipleObjects]
+	public class L20nTextEditor : Editor
+	{	
+		L20nText m_Target;
+		
+		public void OnEnable()
 		{
-			get
-			{
-				if(m_Value.Variable != null)
-					return m_Value.Variable;
-				if(m_Value.Text != null && m_Value.Text != "")
-					return m_Value.Text;
-				return m_Value.Literal;
-			}
+			m_Target = target as L20nText;
 		}
+		
+		public override void OnInspectorGUI()
+		{
+			m_Target.Identifier = EditorGUILayout.TextField(
+				"Identifier", m_Target.Identifier);
 
-		[SerializeField] private string m_Key;
-		[SerializeField] private L20nVariableValue m_Value;
+			var text = m_Target.gameObject.GetComponent<Text>();
+			if (text != null)
+				text.text = m_Target.Identifier;
+
+			EditorGUILayout.LabelField("User Variables");
+
+			EditorGUILayout.BeginHorizontal();
+
+			if (m_Target.Keys.Count > 0) {
+				if (GUILayout.Button ("-")) {
+					m_Target.Keys.RemoveAt (0);
+					m_Target.Values.RemoveAt (0);
+				}
+				else if (GUILayout.Button ("+")) {
+					m_Target.Keys.Insert (0, null);
+					m_Target.Values.Insert (0, null);
+				}
+			}
+
+			EditorGUILayout.EndHorizontal();
+
+			for(int i = 0; i < m_Target.Keys.Count; ++i) {
+				EditorGUILayout.BeginHorizontal();
+
+				if(GUILayout.Button("-")) {
+					m_Target.Keys.RemoveAt(i);
+					m_Target.Values.RemoveAt(i);
+					break;
+				}
+
+				m_Target.Keys[i] = EditorGUILayout.TextField(m_Target.Keys[i]);
+				m_Target.Values[i] = EditorGUILayout.TextField(m_Target.Values[i]);
+
+				EditorGUILayout.EndHorizontal();
+			}
+
+			EditorGUILayout.BeginHorizontal();
+			
+			if (m_Target.Keys.Count > 0 && GUILayout.Button ("-")) {
+				var i = m_Target.Keys.Count - 1;
+				m_Target.Keys.RemoveAt(i);
+				m_Target.Values.RemoveAt(i);
+			}
+			if (GUILayout.Button ("+")) {
+				m_Target.Keys.Add(null);
+				m_Target.Values.Add(null);
+			}
+
+			EditorGUILayout.EndHorizontal();
+		}
 	}
-	
-	
-	[Serializable]
-	class L20nVariableValue
-	{
-		public int Literal = 0;
-		public string Text = "";
-		public L20nCore.External.UserHashValue Variable = null;
-	}
+#endif
 }

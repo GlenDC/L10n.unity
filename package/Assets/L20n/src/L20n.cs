@@ -29,6 +29,21 @@ using L20nInfoCollector = L20nCore.External.InfoCollector;
 
 public static class L20n
 {
+	public static string CurrentLocale
+	{
+		get { return GetCore().CurrentLocale; }
+	}
+
+	public static string DefaultLocale
+	{
+		get { return GetCore().DefaultLocale; }
+	}
+	
+	public static List<string> Locales
+	{
+		get { return GetCore().Locales; }
+	}
+
 	public static void Initialize(string manifest_path, string defLocale = null)
 	{
 		var core = GetCore();
@@ -38,6 +53,7 @@ public static class L20n
 				manifest_path);
 			return;
 		}
+
 
 		core.ImportManifest(manifest_path);
 
@@ -120,10 +136,14 @@ public static class L20n
 
 	private static Translator CreateCore()
 	{
+		L20nCore.IO.StreamReaderFactory.SetCallback(CreateStreamReader);
+
 		s_Core = new Translator();
 		s_Core.SetWarningDelegate(Debug.LogWarning);
 		GetCore = (() => s_Core);
+
 		AddUnityGlobals();
+
 		return s_Core;
 	}
 
@@ -147,6 +167,45 @@ public static class L20n
 	private static void SaveSetting(string id, string value)
 	{
 		PlayerPrefs.SetString(SETTING_PREFIX + id, value);
+	}
+
+	private static System.IO.StreamReader CreateStreamReader(
+		string path, System.Text.Encoding encoding, bool detectEncoding)
+	{
+		path = System.IO.Path.ChangeExtension(path, null);
+		var parts = path.Split('/');
+		var newParts = new List<string>(path.Length);
+		for(int i = 0; i < parts.Length; ++i) {
+			if(parts[i] == "..") {
+				if(parts.Length == 0) {
+					throw new L20nCore.Exceptions.ImportException(
+						String.Format("couldn't load resource '{0}', " +
+					              "you can't go outside the Resources folder", path));
+				}
+				
+				newParts.RemoveAt(newParts.Count - 1);
+			} else if(parts[i] != ".") {
+				newParts.Add(parts[i]);
+			}
+		}
+
+		if(parts.Length == 0) {
+			throw new L20nCore.Exceptions.ImportException(
+				String.Format("couldn't load resource '{0}', " +
+			              "path results in an empty path", path));
+		}
+		
+		path = String.Join("/", newParts.ToArray());
+		var data = Resources.Load<TextAsset>(path);
+		if(data == null) {
+			throw new L20nCore.Exceptions.ImportException(
+				String.Format("couldn't load resource '{0}', " +
+			              "ensure that the path exists", path));
+		}
+		
+		var stream = new System.IO.MemoryStream(data.bytes);
+		return new System.IO.StreamReader(
+			stream, encoding, detectEncoding);
 	}
 
 	/// <summary>

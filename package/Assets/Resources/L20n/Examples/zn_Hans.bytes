@@ -1,0 +1,13 @@
+<greeting[get_greeting(@hour)] {
+    morning: "早上好",
+    afternoon: "下午好",
+    evening: {
+        *normal: "晚上好",
+        late: "晚安",
+    },
+}>
+
+<some_sentence[responsive(@screen.width)] {
+    *long: "这是一个很长的句子",
+    short: "一句话",
+}>
