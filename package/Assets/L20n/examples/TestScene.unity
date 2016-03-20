@@ -1072,8 +1072,14 @@ MonoBehaviour:
     - user
     - lucky_number
     values:
-    - Glen
-    - 42
+    - type: 2
+      literal: 0
+      text: Glen
+      hash: {fileID: 0}
+    - type: 0
+      literal: 105
+      text: 
+      hash: {fileID: 0}
 --- !u!114 &961641691
 MonoBehaviour:
   m_ObjectHideFlags: 0

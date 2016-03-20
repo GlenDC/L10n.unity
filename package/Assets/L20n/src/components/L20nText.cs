@@ -41,22 +41,59 @@ namespace L20nUnity
 	[Serializable]
 	public sealed class VariableCollection {
 		public List<String> keys;
-		public List<String> values;
+		public List<ExternalValue> values;
 
 		public VariableCollection()
 		{
 			keys = new List<string>();
-			values = new List<string>();
+			values = new List<ExternalValue>();
 		}
 
 		public L20nCore.UserVariables GetVariables()
 		{
 			var variables = new L20nCore.UserVariables();
 			for (int i = 0; i < keys.Count; ++i) {
-				variables.Add(keys[i], values[i]);
+				variables.Add(keys[i], values[i].GetValue());
 			}
 
 			return variables;
+		}
+	}
+
+	public interface IWhatever {}
+	
+	[Serializable]
+	public sealed class ExternalValue {
+		public Type type;
+
+		public int literal;
+		public string text;
+		public UnityEngine.Object hash;
+
+		public ExternalValue()
+		{
+			type = Type.String;
+		}
+		
+		public L20nCore.UserVariable GetValue()
+		{
+			switch (type) {
+			case Type.Literal:
+				return literal;
+			case Type.String:
+				return text;
+			case Type.HashTable:
+				var k = hash as IWhatever;
+				return null;
+			}
+
+			return null;
+		}
+
+		public enum Type {
+			Literal,
+			String,
+			HashTable
 		}
 	}
 
@@ -101,18 +138,54 @@ namespace L20nUnity
 			}
 
 			for (int i = 0; i < keys.arraySize; ++i) {
+				EditorGUILayout.Separator();
+
 				EditorGUILayout.BeginHorizontal();
 
-				if(GUILayout.Button("x")) {
+				if(GUILayout.Button("delete")) {
 					keys.DeleteArrayElementAtIndex(i);
 					values.DeleteArrayElementAtIndex(i);
 					break;
 				}
-				
-				EditorGUILayout.PropertyField(keys.GetArrayElementAtIndex(i), GUIContent.none);
-				EditorGUILayout.PropertyField(values.GetArrayElementAtIndex(i), GUIContent.none);
 
+				EditorGUILayout.PropertyField(keys.GetArrayElementAtIndex(i), GUIContent.none);
 				EditorGUILayout.EndHorizontal();
+
+				
+				
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.PropertyField(values.GetArrayElementAtIndex(i), GUIContent.none);
+				EditorGUILayout.EndHorizontal();
+			}
+		}
+	}
+	
+	[CustomPropertyDrawer(typeof(ExternalValue))]
+	public class ExternalValueDrawer : PropertyDrawer {
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+			var type = property.FindPropertyRelative("type");
+			EditorGUILayout.PropertyField(type, GUIContent.none);
+
+			string field = null;
+			switch ((ExternalValue.Type)type.enumValueIndex) {
+				case ExternalValue.Type.Literal: {
+					var value = property.FindPropertyRelative("literal");
+					EditorGUILayout.PropertyField(value, GUIContent.none);
+					break;
+				}
+
+				case ExternalValue.Type.String: {
+					var value = property.FindPropertyRelative("text");
+					EditorGUILayout.PropertyField(value, GUIContent.none);
+					break;
+				}
+
+				case ExternalValue.Type.HashTable: {
+					var hash = property.FindPropertyRelative("hash");
+					hash.objectReferenceValue = EditorGUILayout.ObjectField(
+						hash.objectReferenceValue, typeof (L20nCore.External.UserHashValue), true);
+					break;
+				}
 			}
 		}
 	}
