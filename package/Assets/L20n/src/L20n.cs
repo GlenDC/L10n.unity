@@ -23,10 +23,6 @@ using UnityEngine;
 
 using L20nCore;
 
-// some aliases for convience
-using L20nVariable = L20nCore.External.UserHashValue;
-using L20nInfoCollector = L20nCore.External.InfoCollector;
-
 public static class L20n
 {
 	public static string CurrentLocale
@@ -98,35 +94,27 @@ public static class L20n
 		return GetCore().Translate(id);
 	}
 	
-	public static string Translate(string id, UserVariables variables)
+	public static string Translate(string id, string[] keys, L20nCore.Objects.L20nObject[] values)
 	{
-		return GetCore().Translate(id, variables);
+		return GetCore().Translate(id, keys, values);
 	}
 	
 	public static string Translate(string id,
-	                        string parameter_key, UserVariable parameter_value)
+	                        string parameter_key, int parameter_value)
 	{
 		return GetCore().Translate(id, parameter_key, parameter_value);
 	}
 	
 	public static string Translate(string id,
-	                        string parameter_key_a, UserVariable parameter_value_a,
-	                        string parameter_key_b, UserVariable parameter_value_b)
+	                               string parameter_key, string parameter_value)
 	{
-		return GetCore().Translate(id,
-		                    parameter_key_a, parameter_value_a,
-		                    parameter_key_b, parameter_value_b);
+		return GetCore().Translate(id, parameter_key, parameter_value);
 	}
 	
 	public static string Translate(string id,
-	                        string parameter_key_a, UserVariable parameter_value_a,
-	                        string parameter_key_b, UserVariable parameter_value_b,
-	                        string parameter_key_c, UserVariable parameter_value_c)
+	                               string parameter_key, L20nCore.External.IHashValue parameter_value)
 	{
-		return GetCore().Translate(id,
-		                    parameter_key_a, parameter_value_a,
-		                    parameter_key_b, parameter_value_b,
-		                    parameter_key_c, parameter_value_c);
+		return GetCore().Translate(id, parameter_key, parameter_value);
 	}
 	
 	private delegate Translator GetCoreDelegate();
@@ -314,9 +302,9 @@ public static class L20n
 		#endif
 	} }
 
-	private sealed class ScreenInfo : L20nVariable
+	private sealed class ScreenInfo : L20nCore.External.IHashValue
 	{
-		public override void Collect(L20nInfoCollector info)
+		public void Collect(L20nCore.External.InfoCollector info)
 		{
 			info.Add("width", () => Screen.width);
 			info.Add("height", () => Screen.height);
