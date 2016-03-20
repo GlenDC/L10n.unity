@@ -8,116 +8,112 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 
-using UserVariable = L20nCore.UserVariable;
-
 namespace L20nUnity
 {
 	[AddComponentMenu("L20n/Text")]
-	public sealed class L20nText : MonoBehaviour {
-		public string Identifier = "";
-		public List<string> Values = new List<string>();
-		public List<string> Keys = new List<string>();
+	public sealed class L20nText : MonoBehaviour{
+		public string identifier;
+		public bool useVariables;
+		public VariableCollection variables;
 
-		private Text m_TextComponent = null;
-		private L20nCore.UserVariables m_UserVariables = null;
+		private Text m_TextComponent;
 
-		void OnEnable()
-		{
-			m_UserVariables = new L20nCore.UserVariables(Keys.Count);
-			for(int i = 0; i < Keys.Count; ++i) {
-				if(Values[i] != null && Keys[i] != null) {
-					m_UserVariables.Add(Keys[i], Values[i]);
-				}
-			}
-			
+		void OnEnable() {
 			m_TextComponent = GetComponent<Text>();
 
 			Debug.Assert(
 				m_TextComponent != null,
 				"<L20nText> requires a <TextComponent> to be attached");
-			Debug.Assert(
-				Identifier != null && Identifier != "",
-				"<L20nText> requires a <string-identifier> to be attached");
 		}
 		
 		// Update is called once per frame
 		void Update () {
-			if(Identifier == "") return;
+			if (identifier == "")
+				return;
 
-			if (m_UserVariables.Count > 0) {
-				m_TextComponent.text = L20n.Translate(Identifier, m_UserVariables);
-			} else {
-				m_TextComponent.text = L20n.Translate(Identifier);
+			if(useVariables)
+				m_TextComponent.text = L20n.Translate(identifier, variables.GetVariables());
+			else
+				m_TextComponent.text = L20n.Translate(identifier);
+		}
+	}
+	
+	[Serializable]
+	public sealed class VariableCollection {
+		public List<String> keys;
+		public List<String> values;
+
+		public VariableCollection()
+		{
+			keys = new List<string>();
+			values = new List<string>();
+		}
+
+		public L20nCore.UserVariables GetVariables()
+		{
+			var variables = new L20nCore.UserVariables();
+			for (int i = 0; i < keys.Count; ++i) {
+				variables.Add(keys[i], values[i]);
 			}
+
+			return variables;
 		}
 	}
 
 #if UNITY_EDITOR
-	[CustomEditor(typeof(L20nText))]
+	[CustomEditor (typeof (L20nText))]
 	[CanEditMultipleObjects]
-	public class L20nTextEditor : Editor
-	{	
-		L20nText m_Target;
+	public class L20nTextEditor : Editor {
+		SerializedProperty identifier;
+		SerializedProperty useVariables;
+		SerializedProperty variables;	
 		
-		public void OnEnable()
-		{
-			m_Target = target as L20nText;
+		void OnEnable () {
+			identifier = serializedObject.FindProperty ("identifier");
+			useVariables = serializedObject.FindProperty ("useVariables");
+			variables = serializedObject.FindProperty ("variables");
 		}
 		
-		public override void OnInspectorGUI()
-		{
-			m_Target.Identifier = EditorGUILayout.TextField(
-				"Identifier", m_Target.Identifier);
+		public override void OnInspectorGUI() {
+			serializedObject.Update();
 
-			var text = m_Target.gameObject.GetComponent<Text>();
-			if (text != null)
-				text.text = m_Target.Identifier;
+			EditorGUILayout.PropertyField(identifier);
+			EditorGUILayout.PropertyField(useVariables);
 
-			EditorGUILayout.LabelField("User Variables");
+			if(useVariables.boolValue)
+				EditorGUILayout.PropertyField(variables);
 
-			EditorGUILayout.BeginHorizontal();
+			serializedObject.ApplyModifiedProperties();
+		}
+	}
 
-			if (m_Target.Keys.Count > 0) {
-				if (GUILayout.Button ("-")) {
-					m_Target.Keys.RemoveAt (0);
-					m_Target.Values.RemoveAt (0);
-				}
-				else if (GUILayout.Button ("+")) {
-					m_Target.Keys.Insert (0, null);
-					m_Target.Values.Insert (0, null);
-				}
+	[CustomPropertyDrawer(typeof(VariableCollection))]
+	public class VariableCollectionDrawer : PropertyDrawer {
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+			EditorGUI.LabelField(position, "External Variables");
+
+			var keys = property.FindPropertyRelative("keys");
+			var values = property.FindPropertyRelative("values");
+
+			if(GUILayout.Button("Add Value")) {
+				keys.InsertArrayElementAtIndex(keys.arraySize);
+				values.InsertArrayElementAtIndex(values.arraySize);
 			}
 
-			EditorGUILayout.EndHorizontal();
-
-			for(int i = 0; i < m_Target.Keys.Count; ++i) {
+			for (int i = 0; i < keys.arraySize; ++i) {
 				EditorGUILayout.BeginHorizontal();
 
-				if(GUILayout.Button("-")) {
-					m_Target.Keys.RemoveAt(i);
-					m_Target.Values.RemoveAt(i);
+				if(GUILayout.Button("x")) {
+					keys.DeleteArrayElementAtIndex(i);
+					values.DeleteArrayElementAtIndex(i);
 					break;
 				}
-
-				m_Target.Keys[i] = EditorGUILayout.TextField(m_Target.Keys[i]);
-				m_Target.Values[i] = EditorGUILayout.TextField(m_Target.Values[i]);
+				
+				EditorGUILayout.PropertyField(keys.GetArrayElementAtIndex(i), GUIContent.none);
+				EditorGUILayout.PropertyField(values.GetArrayElementAtIndex(i), GUIContent.none);
 
 				EditorGUILayout.EndHorizontal();
 			}
-
-			EditorGUILayout.BeginHorizontal();
-			
-			if (m_Target.Keys.Count > 0 && GUILayout.Button ("-")) {
-				var i = m_Target.Keys.Count - 1;
-				m_Target.Keys.RemoveAt(i);
-				m_Target.Values.RemoveAt(i);
-			}
-			if (GUILayout.Button ("+")) {
-				m_Target.Keys.Add(null);
-				m_Target.Values.Add(null);
-			}
-
-			EditorGUILayout.EndHorizontal();
 		}
 	}
 #endif
