@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,31 +11,15 @@ namespace L20nUnity
 {
 	namespace Components
 	{
-		[AddComponentMenu("L20n/Text")]
-		public sealed class L20nText : MonoBehaviour{
+		public abstract class L20nBaseText : MonoBehaviour{
 			public string identifier;
 			public bool useVariables;
 			public Internal.VariableCollection variables;
-
-			#if UI_NGUI
-			private UILabel m_TextComponent;
-			#else
-			private Text m_TextComponent;
-			#endif
 
 			void OnEnable() {
 				Debug.Assert(
 					identifier != "",
 					"<L20nText> requires an <identifier> to be givn");
-
-				#if UI_NGUI
-				m_TextComponent = GetComponent<UILabel>();
-				#else
-				m_TextComponent = GetComponent<Text>();
-				#endif
-				Debug.Assert(
-					m_TextComponent != null,
-					"<L20nText> requires a <TextComponent> to be attached");
 			}
 			
 			// Update is called once per frame
@@ -45,11 +28,13 @@ namespace L20nUnity
 					return;
 
 				if(useVariables)
-					m_TextComponent.text = L20n.Translate(identifier,
-						variables.keys.ToArray(), variables.GetValues());
+					SetText(L20n.Translate(identifier,
+						variables.keys.ToArray(), variables.GetValues()));
 				else
-					m_TextComponent.text = L20n.Translate(identifier);
+					SetText(L20n.Translate(identifier));
 			}
+
+			public abstract void SetText(string text);
 		}
 
 		namespace Internal
@@ -115,11 +100,11 @@ namespace L20nUnity
 			}
 
 		#if UNITY_EDITOR
-			[CustomEditor (typeof (L20nText))]
+			[CustomEditor (typeof (L20nBaseText))]
 			public class L20nTextEditor : Editor {
 				SerializedProperty identifier;
 				SerializedProperty useVariables;
-				SerializedProperty variables;	
+				SerializedProperty variables;
 				
 				void OnEnable () {
 					identifier = serializedObject.FindProperty ("identifier");
@@ -132,6 +117,17 @@ namespace L20nUnity
 
 					EditorGUILayout.PropertyField(identifier);
 					EditorGUILayout.PropertyField(useVariables);
+
+					if (!Application.isPlaying) {
+						var text = identifier.stringValue;
+						if (text == "") {
+							text = "<MISSING IDENTIFIER>";
+						} else if (useVariables.boolValue) {
+							text += "*";
+						}
+
+						(target as L20nBaseText).SetText (text);
+					}
 
 					if(useVariables.boolValue)
 						EditorGUILayout.PropertyField(variables);
