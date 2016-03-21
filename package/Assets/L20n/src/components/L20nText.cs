@@ -18,14 +18,22 @@ namespace L20nUnity
 			public bool useVariables;
 			public Internal.VariableCollection variables;
 
+			#if UI_NGUI
+			private UILabel m_TextComponent;
+			#else
 			private Text m_TextComponent;
+			#endif
 
 			void OnEnable() {
 				Debug.Assert(
 					identifier != "",
 					"<L20nText> requires an <identifier> to be givn");
-				
+
+				#if UI_NGUI
+				m_TextComponent = GetComponent<UILabel>();
+				#else
 				m_TextComponent = GetComponent<Text>();
+				#endif
 				Debug.Assert(
 					m_TextComponent != null,
 					"<L20nText> requires a <TextComponent> to be attached");
