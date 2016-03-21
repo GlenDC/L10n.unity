@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using L20nCore;
+using L20nCore.Objects;
+using L20nCore.External;
 
 public static class L20n
 {
@@ -115,6 +117,114 @@ public static class L20n
 	                               string parameter_key, L20nCore.External.IHashValue parameter_value)
 	{
 		return GetCore().Translate(id, parameter_key, parameter_value);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, int parameter_value_a,
+	                               string parameter_key_b, int parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new Literal(parameter_value_a), new Literal(parameter_value_b)
+		};
+
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, int parameter_value_a,
+	                               string parameter_key_b, string parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new Literal(parameter_value_a), new StringOutput(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, int parameter_value_a,
+	                               string parameter_key_b, IHashValue parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new Literal(parameter_value_a), new Entity(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, string parameter_value_a,
+	                               string parameter_key_b, string parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new StringOutput(parameter_value_a), new StringOutput(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, string parameter_value_a,
+	                               string parameter_key_b, int parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new StringOutput(parameter_value_a), new Literal(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, string parameter_value_a,
+	                               string parameter_key_b, IHashValue parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new StringOutput(parameter_value_a), new Entity(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, IHashValue parameter_value_a,
+	                               string parameter_key_b, IHashValue parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new Entity(parameter_value_a), new Entity(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, IHashValue parameter_value_a,
+	                               string parameter_key_b, int parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new Entity(parameter_value_a), new Literal(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
+	}
+	
+	public static string Translate(string id,
+	                               string parameter_key_a, IHashValue parameter_value_a,
+	                               string parameter_key_b, string parameter_value_b)
+	{
+		var keys = new string[] { parameter_key_a, parameter_key_b };
+		var values = new L20nObject[] {
+			new Entity(parameter_value_a), new StringOutput(parameter_value_b)
+		};
+		
+		return GetCore().Translate(id, keys, values);
 	}
 	
 	private delegate Translator GetCoreDelegate();
