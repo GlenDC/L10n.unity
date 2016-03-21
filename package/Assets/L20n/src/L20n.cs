@@ -27,6 +27,9 @@ using L20nCore.External;
 
 public static class L20n
 {
+	public delegate void EventAction();
+	public static event EventAction OnLocaleChange;
+
 	public static string CurrentLocale
 	{
 		get { return GetCore().CurrentLocale; }
@@ -76,6 +79,9 @@ public static class L20n
 				"tried to load {0}-locale `{1}` but this is not supported by your manifest, " +
 				"default locale will be used instead as been specified by your manifest.", localeType, locale);
 		}
+
+		if(OnLocaleChange != null)
+			OnLocaleChange();
 	}
 
 	public static void SetLocale(string id)
@@ -83,6 +89,10 @@ public static class L20n
 		try {
 			var core = GetCore();
 			core.SetLocale(id);
+
+			if(OnLocaleChange != null)
+				OnLocaleChange();
+
 			SaveSetting(SETTING_USER_LOCAL, core.CurrentLocale);
 		} catch(L20nCore.Exceptions.ImportException e) {
 			Debug.LogWarningFormat(

@@ -20,6 +20,7 @@ namespace L20nUnity
 				Debug.Assert(
 					identifier != "",
 					"<L20nText> requires an <identifier> to be givn");
+				Initialize();
 			}
 			
 			// Update is called once per frame
@@ -33,7 +34,8 @@ namespace L20nUnity
 				else
 					SetText(L20n.Translate(identifier));
 			}
-
+			
+			protected abstract void Initialize();
 			public abstract void SetText(string text);
 		}
 
@@ -101,7 +103,7 @@ namespace L20nUnity
 
 		#if UNITY_EDITOR
 			[CustomEditor (typeof (L20nBaseText))]
-			public class L20nTextEditor : Editor {
+			public class L20nBaseTextEditor : Editor {
 				SerializedProperty identifier;
 				SerializedProperty useVariables;
 				SerializedProperty variables;

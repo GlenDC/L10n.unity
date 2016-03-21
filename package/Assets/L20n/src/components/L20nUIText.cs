@@ -35,7 +35,7 @@ namespace L20nUnity
 				m_Component = new Option<Text>();
 			}
 
-			void OnEnable()
+			protected override void Initialize()
 			{
 				Debug.Assert(Component.IsSet,
 				             "<L20nUIText> requires a <Text> component to be attached");
@@ -52,7 +52,7 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[CustomEditor (typeof (L20nUIText))]
-			public class L20nUITextEditor : L20nTextEditor {}
+			public class L20nUITextEditor : L20nBaseTextEditor {}
 		}
 		#endif
 	}

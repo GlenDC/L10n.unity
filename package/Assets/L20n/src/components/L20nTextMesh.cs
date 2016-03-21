@@ -34,7 +34,7 @@ namespace L20nUnity
 				m_Component = new Option<TextMesh>();
 			}
 			
-			void OnEnable()
+			protected override void Initialize()
 			{
 				Debug.Assert(Component.IsSet,
 				             "<L20nTextMesh> requires a <TextMesh> component to be attached");
@@ -51,7 +51,7 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[CustomEditor (typeof (L20nTextMesh))]
-			public class L20nTextMeshEditor : L20nTextEditor {}
+			public class L20nTextMeshEditor : L20nBaseTextEditor {}
 		}
 		#endif
 	}
