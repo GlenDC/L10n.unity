@@ -566,7 +566,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 288273189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11c8f82010574b4bbecbc8010d62c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ec20a7ff5d114ff0ac8502e0d5f44ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocaleIdentifier: zn_Hans
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 648634746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11c8f82010574b4bbecbc8010d62c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ec20a7ff5d114ff0ac8502e0d5f44ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocaleIdentifier: en_US
@@ -1352,7 +1352,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 936648093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11c8f82010574b4bbecbc8010d62c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ec20a7ff5d114ff0ac8502e0d5f44ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocaleIdentifier: pt_BR
@@ -1580,14 +1580,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e755bac80afb433bbfa04e36baaed14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textures:
+  resources:
     keys:
     - zn_Hans
-    - ar
     values:
     - {fileID: 10900, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
-  defaultTexture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+  defaultResource: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &1042030383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,6 +1873,97 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569593275}
+--- !u!1 &1590822507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1590822511}
+  - 33: {fileID: 1590822510}
+  - 65: {fileID: 1590822509}
+  - 23: {fileID: 1590822508}
+  - 114: {fileID: 1590822512}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1590822508
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590822507}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!65 &1590822509
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590822507}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1590822510
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590822507}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1590822511
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590822507}
+  m_LocalRotation: {x: -.377168149, y: -.461419374, z: .0228019804, w: .802693248}
+  m_LocalPosition: {x: 254, y: 383.600006, z: 4.43650818}
+  m_LocalScale: {x: 8.01797199, y: 8.01797104, z: 8.01797104}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+--- !u!114 &1590822512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1590822507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32415caf4f2541629680e727e52be17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resources:
+    keys:
+    - zn_Hans
+    values:
+    - {fileID: 2100000, guid: 5e0bcc707ba1f4cfeaa3742274f2a5c8, type: 2}
+  defaultResource: {fileID: 2100000, guid: 1168fc57b3fdf44669e332cdf222189d, type: 2}
 --- !u!1 &1778754225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,12 +2074,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2895f3544c7f749d39c5b8a1201bd663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
+  resources:
     keys:
     - zn_Hans
     values:
     - {fileID: 8300000, guid: 7d59a018c0c3744a481f071797c4e71a, type: 3}
-  defaultClip: {fileID: 8300000, guid: 26e35668ddf75401381c69cb22d9acf9, type: 3}
+  defaultResource: {fileID: 8300000, guid: 26e35668ddf75401381c69cb22d9acf9, type: 3}
 --- !u!1 &1847616671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,13 +2126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c683fd89b1742598de85d060368e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
+  resources:
     keys:
     - zn_Hans
     values:
-    - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-    - {fileID: 0}
-  defaultSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  defaultResource: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &1847616674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,7 +2465,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101447335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11c8f82010574b4bbecbc8010d62c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ec20a7ff5d114ff0ac8502e0d5f44ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_LocaleIdentifier: ar

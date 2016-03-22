@@ -5,41 +5,15 @@ using UnityEditor;
 #endif
 
 using System;
-using L20nCore.Utils;
 
 namespace L20nUnity
 {
 	namespace Components
 	{
 		[AddComponentMenu("L20n/TextMesh (3D)")]
-		public sealed class L20nTextMesh : L20nBaseText {
-			Option<TextMesh> m_Component;
-			Option<TextMesh> Component
-			{
-				get
-				{
-					if(!m_Component.IsSet) {
-						var text = GetComponent<TextMesh>();
-						if(text != null) {
-							m_Component.Set(text);
-						}
-					}
-					
-					return m_Component;
-				}
-			}
-			
-			public L20nTextMesh()
-			{
-				m_Component = new Option<TextMesh>();
-			}
-			
-			protected override void Initialize()
-			{
-				Debug.Assert(Component.IsSet,
-				             "<L20nTextMesh> requires a <TextMesh> component to be attached");
-			}
-			
+		public sealed class L20nTextMesh
+			: Internal.L20nBaseTextComponent<TextMesh>
+		{
 			public override void SetText(string text)
 			{
 				Component.UnwrapIf(
@@ -51,7 +25,7 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[CustomEditor (typeof (L20nTextMesh))]
-			public class L20nTextMeshEditor : L20nBaseTextEditor {}
+			public class L20nTextMeshEditor : Internal.L20nBaseTextEditor {}
 		}
 		#endif
 	}

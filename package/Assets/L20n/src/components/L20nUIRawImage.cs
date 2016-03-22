@@ -13,35 +13,10 @@ namespace L20nUnity
 	namespace Components
 	{
 		[AddComponentMenu("L20n/UIRawImage (2D)")]
-		public sealed class L20nUIRawImage : L20nBaseTexture {
-			Option<RawImage> m_Component;
-			Option<RawImage> Component
-			{
-				get
-				{
-					if(!m_Component.IsSet) {
-						var text = GetComponent<RawImage>();
-						if(text != null) {
-							m_Component.Set(text);
-						}
-					}
-					
-					return m_Component;
-				}
-			}
+		public sealed class L20nUIRawImage :
+		Internal.L20nBaseComponent<RawImage, Texture, Internal.TextureCollection> {
 			
-			public L20nUIRawImage()
-			{
-				m_Component = new Option<RawImage>();
-			}
-			
-			protected override void Initialize()
-			{
-				Debug.Assert(Component.IsSet,
-				             "<L20nUIRawImage> requires a <RawImage> component to be attached");
-			}
-			
-			public override void SetTexture(Texture texture)
+			public override void SetResource(Texture texture)
 			{
 				Component.UnwrapIf(
 					(component) => component.texture = texture);
@@ -52,7 +27,7 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[CustomEditor (typeof (L20nUIRawImage))]
-			public class L20nUIRawImageEditor : L20nBaseTextureEditor {}
+			public class L20nUIRawImageEditor : L20nBaseResourceEditor {}
 		}
 		#endif
 	}

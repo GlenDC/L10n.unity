@@ -13,46 +13,48 @@ namespace L20nUnity
 {
 	namespace Components
 	{
-		public abstract class L20nBaseSprite : MonoBehaviour{
-			public Internal.SpriteCollection sprites;
-			public Sprite defaultSprite;
-			
-			void OnEnable() {
-				L20n.OnLocaleChange += OnLocaleChange;
-			}
-			
-			void OnDisable() {
-				L20n.OnLocaleChange -= OnLocaleChange;
-			}
-			
-			public void OnLocaleChange()
-			{
-				SetSprite(sprites.GetSprite(L20n.CurrentLocale)
-				           .UnwrapOr(defaultSprite));
-				
-			}
-
-			protected abstract void Initialize();
-			public abstract void SetSprite(Sprite sprite);
-		}
-		
 		namespace Internal
 		{
-			[Serializable]
-			public sealed class SpriteCollection {
-				public List<String> keys;
-				public List<Sprite> values;
+			public abstract class L20nBaseResource<T, U> : MonoBehaviour
+				where U: L20nResourceCollection<T>
+			{
+				public U resources;
+				public T defaultResource;
 				
-				public SpriteCollection()
-				{
-					keys = new List<string>();
-					values = new List<Sprite>();
+				void OnEnable() {
+					L20n.OnLocaleChange += OnLocaleChange;
 				}
 				
-				public Option<Sprite> GetSprite(string key)
+				void OnDisable() {
+					L20n.OnLocaleChange -= OnLocaleChange;
+				}
+				
+				public void OnLocaleChange()
 				{
-					var result = new Option<Sprite>();
+					SetResource(resources.GetResource(L20n.CurrentLocale)
+					          .UnwrapOr(defaultResource));
+					
+				}
+				
+				protected abstract void Initialize();
+				public abstract void SetResource(T resource);
+			}
 
+			[Serializable]
+			public class L20nResourceCollection<T> {
+				public List<String> keys;
+				public List<T> values;
+				
+				public L20nResourceCollection()
+				{
+					keys = new List<string>();
+					values = new List<T>();
+				}
+				
+				public Option<T> GetResource(string key)
+				{
+					var result = new Option<T>();
+					
 					var count = Math.Min(keys.Count, values.Count);
 					for(int i = 0; i < count; ++i) {
 						if(keys[i].Equals(key)) {
@@ -66,25 +68,23 @@ namespace L20nUnity
 			}
 			
 			#if UNITY_EDITOR
-			[CustomEditor (typeof (L20nBaseSprite))]
-			public class L20nBaseSpriteEditor : Editor {
+			public class L20nBaseResourceEditor : Editor {
 				SerializedProperty sprites;
 				SerializedProperty defaultSprite;
 				
 				void OnEnable () {
-					sprites = serializedObject.FindProperty ("sprites");
-					defaultSprite = serializedObject.FindProperty ("defaultSprite");
+					sprites = serializedObject.FindProperty ("resources");
+					defaultSprite = serializedObject.FindProperty ("defaultResource");
 				}
 				
 				public override void OnInspectorGUI() {
 					serializedObject.Update();
-					
-					
+
 					EditorGUILayout.BeginHorizontal();
-					EditorGUILayout.LabelField("Default Locale");
+					EditorGUILayout.LabelField("Default");
 					EditorGUILayout.PropertyField(defaultSprite, GUIContent.none);
 					EditorGUILayout.EndHorizontal();
-					
+
 					EditorGUILayout.Space();
 					
 					EditorGUILayout.PropertyField(sprites);
@@ -92,16 +92,15 @@ namespace L20nUnity
 					serializedObject.ApplyModifiedProperties();
 				}
 			}
-			
-			[CustomPropertyDrawer(typeof(SpriteCollection))]
-			public class SpriteCollectionDrawer : PropertyDrawer {
+
+			public class L20nResourceCollectionDrawer : PropertyDrawer {
 				public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 					EditorGUI.LabelField(position, "Other Locales");
 					
 					var keys = property.FindPropertyRelative("keys");
 					var values = property.FindPropertyRelative("values");
 					
-					if(GUILayout.Button("Add Locale-Sprite")) {
+					if(GUILayout.Button("Add Localized Resource")) {
 						keys.InsertArrayElementAtIndex(keys.arraySize);
 						values.InsertArrayElementAtIndex(values.arraySize);
 					}

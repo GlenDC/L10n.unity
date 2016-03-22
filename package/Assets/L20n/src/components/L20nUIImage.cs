@@ -13,35 +13,10 @@ namespace L20nUnity
 	namespace Components
 	{
 		[AddComponentMenu("L20n/UIImage (2D)")]
-		public sealed class L20nUIImage : L20nBaseSprite {
-			Option<Image> m_Component;
-			Option<Image> Component
-			{
-				get
-				{
-					if(!m_Component.IsSet) {
-						var text = GetComponent<Image>();
-						if(text != null) {
-							m_Component.Set(text);
-						}
-					}
-					
-					return m_Component;
-				}
-			}
+		public sealed class L20nUIImage :
+		Internal.L20nBaseComponent<Image, Sprite, Internal.SpriteCollection> {
 			
-			public L20nUIImage()
-			{
-				m_Component = new Option<Image>();
-			}
-
-			protected override void Initialize()
-			{
-				Debug.Assert(Component.IsSet,
-				             "<L20nUIImage> requires a <Image> component to be attached");
-			}
-			
-			public override void SetSprite(Sprite sprite)
+			public override void SetResource(Sprite sprite)
 			{
 				Component.UnwrapIf(
 					(component) => component.sprite = sprite);
@@ -52,7 +27,7 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[CustomEditor (typeof (L20nUIImage))]
-			public class L20nUIImageEditor : L20nBaseSpriteEditor {}
+			public class L20nUIImageEditor : L20nBaseResourceEditor {}
 		}
 		#endif
 	}

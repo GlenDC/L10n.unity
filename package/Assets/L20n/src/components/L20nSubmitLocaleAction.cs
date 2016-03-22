@@ -7,8 +7,8 @@ namespace L20nUnity
 {
 	namespace Components
 	{
-		[AddComponentMenu("L20n/SubmitLocale")]
-		public sealed class L20nSubmitLocale : MonoBehaviour {
+		[AddComponentMenu("L20n/SubmitLocaleAction")]
+		public sealed class L20nSubmitLocaleAction : MonoBehaviour {
 			[SerializeField] private string m_LocaleIdentifier = null;
 
 			void Start () {
