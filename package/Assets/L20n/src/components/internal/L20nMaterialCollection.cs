@@ -30,12 +30,12 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[Serializable]
-			public sealed class MaterialCollection
+			public sealed class L20nMaterialCollection
 			: L20nResourceCollection<Material> {}
 			
 			#if UNITY_EDITOR
-			[CustomPropertyDrawer(typeof(MaterialCollection))]
-			public sealed class MaterialCollectionDrawer
+			[CustomPropertyDrawer(typeof(L20nMaterialCollection))]
+			public sealed class L20nMaterialCollectionDrawer
 			: L20nResourceCollectionDrawer {}
 			#endif
 		}

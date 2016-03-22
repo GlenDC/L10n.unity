@@ -30,7 +30,7 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/MeshRenderer (3D)")]
 		public sealed class L20nMeshRenderer :
-			Internal.L20nBaseResourceComponent<MeshRenderer, Material, Internal.MaterialCollection> {
+			Internal.L20nBaseResourceComponent<MeshRenderer, Material, Internal.L20nMaterialCollection> {
 			
 			public override void SetResource(Material material)
 			{

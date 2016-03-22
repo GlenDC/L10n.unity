@@ -41,6 +41,7 @@ namespace L20nUnity
 				
 				void OnEnable() {
 					L20n.OnLocaleChange += OnLocaleChange;
+					Initialize();
 				}
 				
 				void OnDisable() {

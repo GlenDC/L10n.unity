@@ -30,12 +30,12 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[Serializable]
-			public sealed class AudioClipCollection
+			public sealed class L20nAudioClipCollection
 			: L20nResourceCollection<AudioClip> {}
 
 			#if UNITY_EDITOR
-			[CustomPropertyDrawer(typeof(AudioClipCollection))]
-			public sealed class AudioClipCollectionDrawer
+			[CustomPropertyDrawer(typeof(L20nAudioClipCollection))]
+			public sealed class L20nAudioClipCollectionDrawer
 				: L20nResourceCollectionDrawer {}
 			#endif
 		}

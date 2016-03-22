@@ -30,12 +30,12 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[Serializable]
-			public sealed class SpriteCollection
+			public sealed class L20nSpriteCollection
 			: L20nResourceCollection<Sprite> {}
 			
 			#if UNITY_EDITOR
-			[CustomPropertyDrawer(typeof(SpriteCollection))]
-			public sealed class SpriteCollectionDrawer
+			[CustomPropertyDrawer(typeof(L20nSpriteCollection))]
+			public sealed class L20nSpriteCollectionDrawer
 			: L20nResourceCollectionDrawer {}
 			#endif
 		}

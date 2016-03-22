@@ -31,7 +31,7 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/UIImage (2D)")]
 		public sealed class L20nUIImage :
-			Internal.L20nBaseResourceComponent<Image, Sprite, Internal.SpriteCollection> {
+			Internal.L20nBaseResourceComponent<Image, Sprite, Internal.L20nSpriteCollection> {
 			
 			public override void SetResource(Sprite sprite)
 			{

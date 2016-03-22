@@ -30,7 +30,7 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/AudioSource (clip)")]
 		public sealed class L20nAudioSource :
-			Internal.L20nBaseResourceComponent<AudioSource, AudioClip, Internal.AudioClipCollection> {
+			Internal.L20nBaseResourceComponent<AudioSource, AudioClip, Internal.L20nAudioClipCollection> {
 			
 			public override void SetResource(AudioClip clip)
 			{

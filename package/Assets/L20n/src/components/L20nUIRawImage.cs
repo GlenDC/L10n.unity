@@ -31,7 +31,7 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/UIRawImage (2D)")]
 		public sealed class L20nUIRawImage :
-			Internal.L20nBaseResourceComponent<RawImage, Texture, Internal.TextureCollection> {
+			Internal.L20nBaseResourceComponent<RawImage, Texture, Internal.L20nTextureCollection> {
 			
 			public override void SetResource(Texture texture)
 			{
