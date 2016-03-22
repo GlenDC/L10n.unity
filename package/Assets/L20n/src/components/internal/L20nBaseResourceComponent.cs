@@ -17,11 +17,9 @@
  */
 
 using UnityEngine;
-using System;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using System;
+using L20nCore.Utils;
 
 namespace L20nUnity
 {
@@ -29,15 +27,38 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
-			[Serializable]
-			public sealed class TextureCollection
-			: L20nResourceCollection<Texture> {}
-			
-			#if UNITY_EDITOR
-			[CustomPropertyDrawer(typeof(TextureCollection))]
-			public sealed class TextureCollectionDrawer
-			: L20nResourceCollectionDrawer {}
-			#endif
+			public abstract class L20nBaseResourceComponent<T, U, V>
+				: L20nBaseResource<U, V>
+					where V: L20nResourceCollection<U>
+			{
+				protected Option<T> m_Component;
+				protected Option<T> Component
+				{
+					get
+					{
+						if(!m_Component.IsSet) {
+							var text = GetComponent<T>();
+							if(text != null) {
+								m_Component.Set(text);
+							}
+						}
+						
+						return m_Component;
+					}
+				}
+				
+				public L20nBaseResourceComponent()
+				{
+					m_Component = new Option<T>();
+				}
+				
+				protected override void Initialize()
+				{
+					Debug.Assert(Component.IsSet,
+						"{0} requires a {1} to be attached",
+					    GetType(), typeof(T));
+				}
+			}
 		}
 	}
 }
