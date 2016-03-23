@@ -150,9 +150,14 @@ namespace L20nUnity
 							
 							(target as L20nBaseText).SetText (text);
 						}
-						
-						if(useVariables.boolValue)
-							EditorGUILayout.PropertyField(variables);
+
+						if (useVariables.boolValue) {
+							var size = variables.FindPropertyRelative("keys").arraySize;
+							EditorGUILayout.BeginHorizontal(
+								GUILayout.MinHeight(30 + size * 30 + (size - 1) * 20));
+							EditorGUILayout.PropertyField (variables);
+							EditorGUILayout.EndHorizontal();
+						}
 						
 						serializedObject.ApplyModifiedProperties();
 					}
@@ -160,62 +165,82 @@ namespace L20nUnity
 				
 				[CustomPropertyDrawer(typeof(VariableCollection))]
 				public class VariableCollectionDrawer : PropertyDrawer {
+					Rect Offset(Rect position, float sx, float sy, float sw, float sh) {
+						return new Rect(position.x + (position.width * sx),
+						                position.y + (position.height * sy),
+						                position.width * sw, position.height * sh);
+					}
+
 					public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-						EditorGUI.LabelField(position, "External Variables");
-						
 						var keys = property.FindPropertyRelative("keys");
 						var values = property.FindPropertyRelative("values");
+
+						var labelRect = new Rect(position.x, position.y, 120, position.height);
+						EditorGUI.LabelField(labelRect, "External Variables");
 						
-						if(GUILayout.Button("Add Value")) {
+						var btnRect = new Rect(
+							position.x + labelRect.width,
+							position.y,
+							position.width - labelRect.width,
+							position.height);
+
+						if(GUI.Button(btnRect, new GUIContent("Add Variable", "add an external variable"))) {
 							keys.InsertArrayElementAtIndex(keys.arraySize);
 							values.InsertArrayElementAtIndex(values.arraySize);
 						}
-						
+			
+						position = Offset(position, 0, 1.50f, 1, 1);
+
 						for (int i = 0; i < keys.arraySize; ++i) {
-							EditorGUILayout.Separator();
-							
-							EditorGUILayout.BeginHorizontal();
-							
-							if(GUILayout.Button("delete")) {
+							var deleteRect = Offset(position, 0, 0, .2f, 1f);
+							if(GUI.Button(deleteRect, new GUIContent("delete", "delete this external variable"))) {
 								keys.DeleteArrayElementAtIndex(i);
 								values.DeleteArrayElementAtIndex(i);
 								break;
 							}
 							
-							EditorGUILayout.PropertyField(keys.GetArrayElementAtIndex(i), GUIContent.none);
-							EditorGUILayout.EndHorizontal();
+							var keyRect = Offset(position, .21f, 0, .79f, 1f);
+							EditorGUI.PropertyField(keyRect, keys.GetArrayElementAtIndex(i), GUIContent.none);
 							
+							var valueRect = Offset(position, 0, 1.25f, 1f, 1f);
+							EditorGUI.PropertyField(valueRect, values.GetArrayElementAtIndex(i), GUIContent.none);
 							
-							
-							EditorGUILayout.BeginHorizontal();
-							EditorGUILayout.PropertyField(values.GetArrayElementAtIndex(i), GUIContent.none);
-							EditorGUILayout.EndHorizontal();
+							position = Offset(position, 0, 3.0f, 1, 1);
 						}
 					}
 				}
 				
 				[CustomPropertyDrawer(typeof(ExternalValue))]
 				public class ExternalValueDrawer : PropertyDrawer {
+					Rect Offset(Rect position, float sx, float sy, float sw, float sh) {
+						return new Rect(position.x + (position.width * sx),
+						                position.y + (position.height * sy),
+						                position.width * sw, position.height * sh);
+					}
+
 					public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 						var type = property.FindPropertyRelative("type");
-						EditorGUILayout.PropertyField(type, GUIContent.none);
 						
+						var typeRect = Offset(position, 0, 0, 0.28f, 1f);
+						EditorGUI.PropertyField(typeRect, type, GUIContent.none);
+						
+						var valueRect = Offset(position, 0.29f, 0, 0.71f, 1f);
 						switch ((ExternalValue.Type)type.enumValueIndex) {
 						case ExternalValue.Type.Literal: {
 							var value = property.FindPropertyRelative("literal");
-							EditorGUILayout.PropertyField(value, GUIContent.none);
+							EditorGUI.PropertyField(valueRect, value, GUIContent.none);
 							break;
 						}
 							
 						case ExternalValue.Type.String: {
 							var value = property.FindPropertyRelative("text");
-							EditorGUILayout.PropertyField(value, GUIContent.none);
+							EditorGUI.PropertyField(valueRect, value, GUIContent.none);
 							break;
 						}
 							
 						case ExternalValue.Type.HashValue: {
 							var hash = property.FindPropertyRelative("hash");
-							hash.objectReferenceValue = EditorGUILayout.ObjectField(
+							hash.objectReferenceValue = EditorGUI.ObjectField(valueRect,
 								hash.objectReferenceValue, typeof (HashValueBehaviour), true);
 							break;
 						}

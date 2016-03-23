@@ -29,6 +29,7 @@ namespace L20nUnity
 		{
 			public abstract class L20nBaseResourceComponent<T, U, V>
 				: L20nBaseResource<U, V>
+					where U: UnityEngine.Object
 					where V: L20nResourceCollection<U>
 			{
 				protected Option<T> m_Component;

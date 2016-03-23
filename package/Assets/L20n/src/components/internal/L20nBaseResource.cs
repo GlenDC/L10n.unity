@@ -34,6 +34,7 @@ namespace L20nUnity
 		namespace Internal
 		{
 			public abstract class L20nBaseResource<T, U> : MonoBehaviour
+				where T: UnityEngine.Object
 				where U: L20nResourceCollection<T>
 			{
 				public U resources;
@@ -88,25 +89,23 @@ namespace L20nUnity
 			
 			#if UNITY_EDITOR
 			public class L20nBaseResourceEditor : Editor {
-				SerializedProperty sprites;
-				SerializedProperty defaultSprite;
+				SerializedProperty resources;
+				SerializedProperty defaultResource;
 				
 				void OnEnable () {
-					sprites = serializedObject.FindProperty ("resources");
-					defaultSprite = serializedObject.FindProperty ("defaultResource");
+					resources = serializedObject.FindProperty ("resources");
+					defaultResource = serializedObject.FindProperty ("defaultResource");
 				}
 				
 				public override void OnInspectorGUI() {
 					serializedObject.Update();
 
-					EditorGUILayout.BeginHorizontal();
 					EditorGUILayout.LabelField("Default");
-					EditorGUILayout.PropertyField(defaultSprite, GUIContent.none);
-					EditorGUILayout.EndHorizontal();
+					EditorGUILayout.PropertyField(defaultResource, GUIContent.none);
 
 					EditorGUILayout.Space();
 					
-					EditorGUILayout.PropertyField(sprites);
+					EditorGUILayout.PropertyField(resources);
 					
 					serializedObject.ApplyModifiedProperties();
 				}

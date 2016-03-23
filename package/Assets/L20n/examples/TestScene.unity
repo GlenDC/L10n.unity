@@ -1415,7 +1415,7 @@ MonoBehaviour:
       hash: {fileID: 0}
     - type: 0
       literal: 42
-      text: Glen
+      text: 
       hash: {fileID: 0}
 --- !u!114 &961641691
 MonoBehaviour:
@@ -1963,6 +1963,7 @@ MonoBehaviour:
     - zn_Hans
     values:
     - {fileID: 2100000, guid: 5e0bcc707ba1f4cfeaa3742274f2a5c8, type: 2}
+    - {fileID: 0}
   defaultResource: {fileID: 2100000, guid: 1168fc57b3fdf44669e332cdf222189d, type: 2}
 --- !u!1 &1778754225
 GameObject:
