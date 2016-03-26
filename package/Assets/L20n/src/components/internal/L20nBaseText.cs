@@ -32,9 +32,35 @@ namespace L20nUnity
 		namespace Internal
 		{
 			public abstract class L20nBaseText : MonoBehaviour {
-				public string identifier;
-				public bool useVariables;
-				public Internal.VariableCollection variables;
+				[SerializeField] string identifier;
+				[SerializeField] bool useVariables;
+				[SerializeField] Internal.VariableCollection variables;
+
+				public bool SetVariable(string key, int value)
+				{
+					return useVariables && variables.SetVariable(key, value);
+				}
+				
+				public bool SetVariable(string key, string value)
+				{
+					return useVariables && variables.SetVariable(key, value);
+				}
+				
+				public bool SetVariable(string key, HashValueBehaviour value)
+				{
+					return useVariables && variables.SetVariable(key, value);
+				}
+
+				public bool SetIdentifier(string id)
+				{
+					if (id != null) {
+						identifier = id;
+						return true;
+					}
+
+					Debug.LogWarning("tried to nullify the identifier of <L20nBaseText>", this);
+					return false;
+				}
 				
 				void OnEnable() {
 					Debug.Assert(
@@ -65,6 +91,11 @@ namespace L20nUnity
 				public sealed class VariableCollection {
 					public List<String> keys;
 					public List<ExternalValue> values;
+
+					public int Count
+					{
+						get { return Math.Min(keys.Count, values.Count); }
+					}
 					
 					public VariableCollection()
 					{
@@ -81,15 +112,57 @@ namespace L20nUnity
 						
 						return output;
 					}
+					
+					public bool SetVariable(string key, int value)
+					{
+						var variable = GetVariable(key);
+						if (variable == null)
+							return false;
+
+						variable.SetValue(value);
+						return true;
+					}
+					
+					public bool SetVariable(string key, string value)
+					{
+						var variable = GetVariable(key);
+						if (variable == null)
+							return false;
+						
+						variable.SetValue(value);
+						return true;
+					}
+					
+					public bool SetVariable(string key, HashValueBehaviour value)
+					{
+						var variable = GetVariable(key);
+						if (variable == null)
+							return false;
+						
+						variable.SetValue(value);
+						return true;
+					}
+					
+					private ExternalValue GetVariable(string key)
+					{
+						var count = Count;
+						for(int i = 0; i < count; ++i) {
+							if(keys[i].Equals(key)) {
+								return values[i];
+							}
+						}
+						
+						return null;
+					}
 				}
 				
 				[Serializable]
 				public sealed class ExternalValue {
-					public Type type;
+					[SerializeField] Type type;
 					
-					public int literal;
-					public string text;
-					public HashValueBehaviour hash;
+					[SerializeField] int literal;
+					[SerializeField] string text;
+					[SerializeField] HashValueBehaviour hash;
 					
 					public ExternalValue()
 					{
@@ -112,6 +185,24 @@ namespace L20nUnity
 						}
 						
 						return null;
+					}
+
+					public void SetValue(int value)
+					{
+						type = Type.Literal;
+						literal = value;
+					}
+					
+					public void SetValue(string value)
+					{
+						type = Type.String;
+						text = value;
+					}
+					
+					public void SetValue(HashValueBehaviour value)
+					{
+						type = Type.HashValue;
+						hash = value;
 					}
 					
 					public enum Type {

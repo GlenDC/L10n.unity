@@ -15,6 +15,8 @@
         : $n == 1 ? "seu único seguidor" : "seus {{ $n }} seguidores"
 }>
 
+<troll "Shr. cantarolar">
+
 <personal_lucky_greeting "{{ personal_greeting }} O número da sorte de hoje é {{ $lucky_number }}!">
 
 <shared[$user.gender]

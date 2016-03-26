@@ -12,5 +12,7 @@
     short: "جملة.",
 }>
 
+<troll "السيد القزم">
+
 <personal_greeting "!{{ $user }} {{ greeting }}">
 <personal_lucky_greeting "!{{ $lucky_number }} عدد محظوظا اليوم هو {{ personal_greeting }}">

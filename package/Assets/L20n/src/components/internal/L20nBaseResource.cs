@@ -37,16 +37,22 @@ namespace L20nUnity
 				where T: UnityEngine.Object
 				where U: L20nResourceCollection<T>
 			{
-				public U resources;
-				public T defaultResource;
+				[SerializeField] U resources;
+				[SerializeField] T defaultResource;
 				
-				void OnEnable() {
-					L20n.OnLocaleChange += OnLocaleChange;
-					Initialize();
+				public bool SetResource(string key, T value)
+				{
+					if (key == null) {
+						Debug.LogWarning("tried to assign a resource to a <L20nBaseResource> with null as a key", this);
+						return false;
+					}
+
+					return resources.SetResource(key, value);
 				}
-				
-				void OnDisable() {
-					L20n.OnLocaleChange -= OnLocaleChange;
+
+				public void SetDefaultResource(T value)
+				{
+					defaultResource = value;
 				}
 				
 				public void OnLocaleChange()
@@ -58,12 +64,26 @@ namespace L20nUnity
 				
 				protected abstract void Initialize();
 				public abstract void SetResource(T resource);
+				
+				void OnEnable() {
+					L20n.OnLocaleChange += OnLocaleChange;
+					Initialize();
+				}
+				
+				void OnDisable() {
+					L20n.OnLocaleChange -= OnLocaleChange;
+				}
 			}
 
 			[Serializable]
 			public class L20nResourceCollection<T> {
-				public List<String> keys;
-				public List<T> values;
+				[SerializeField] List<String> keys;
+				[SerializeField] List<T> values;
+
+				public int Count
+				{
+					get { return Math.Min(keys.Count, values.Count); }
+				}
 				
 				public L20nResourceCollection()
 				{
@@ -75,7 +95,7 @@ namespace L20nUnity
 				{
 					var result = new Option<T>();
 					
-					var count = Math.Min(keys.Count, values.Count);
+					var count = Count;
 					for(int i = 0; i < count; ++i) {
 						if(keys[i].Equals(key)) {
 							result.Set(values[i]);
@@ -84,6 +104,19 @@ namespace L20nUnity
 					}
 					
 					return result;
+				}
+
+				public bool SetResource(string key, T value)
+				{
+					var count = Count;
+					for(int i = 0; i < count; ++i) {
+						if(keys[i].Equals(key)) {
+							values[i] = value;
+							return true;
+						}
+					}
+					
+					return false;
 				}
 			}
 			

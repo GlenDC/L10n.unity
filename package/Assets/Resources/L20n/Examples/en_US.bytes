@@ -20,6 +20,8 @@
     },
 }>
 
+<troll "Mr. Troll">
+
 <personal_greeting "{{ greeting }} {{ $user }}!">
 <personal_lucky_greeting "{{ personal_greeting }} The lucky number of today is {{ $lucky_number }}!">
 
