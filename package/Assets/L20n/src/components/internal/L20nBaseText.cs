@@ -31,6 +31,7 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			[DisallowMultipleComponent]
 			public abstract class L20nBaseText : MonoBehaviour {
 				[SerializeField] string identifier;
 				[SerializeField] bool useVariables;
@@ -67,14 +68,19 @@ namespace L20nUnity
 						identifier != "",
 						"<L20nText> requires an <identifier> to be givn");
 					Initialize();
-				}
-
-				void Start () {
 					UpdateText();
 				}
 
 				void Update () {
 					UpdateText();
+				}
+				
+				void OnBecameVisible() {
+					enabled = true;
+				}
+				
+				void OnBecameInvisible() {
+					enabled = false;
 				}
 
 				private void UpdateText()
@@ -252,10 +258,19 @@ namespace L20nUnity
 							(target as L20nBaseText).SetText (text);
 						}
 						
-								EditorGUILayout.PropertyField(useVariables);
+						EditorGUILayout.PropertyField(useVariables);
 
 						if (useVariables.boolValue) {
 							var size = variables.FindPropertyRelative("keys").arraySize;
+							if(size == 0) {
+								var keys = variables.FindPropertyRelative("keys");
+								var values = variables.FindPropertyRelative("values");
+
+								keys.InsertArrayElementAtIndex(0);
+								values.InsertArrayElementAtIndex(0);
+								size = keys.arraySize;
+							}
+
 							EditorGUILayout.BeginHorizontal(
 								GUILayout.MinHeight(30 + size * 30 + (size - 1) * 20));
 							EditorGUILayout.PropertyField (variables);
@@ -296,13 +311,18 @@ namespace L20nUnity
 
 						for (int i = 0; i < keys.arraySize; ++i) {
 							var deleteRect = Offset(position, 0, 0, .2f, 1f);
-							if(GUI.Button(deleteRect, new GUIContent("delete", "delete this external variable"))) {
+							bool showDeleteButton = keys.arraySize > 1;
+							if(showDeleteButton && 
+							   GUI.Button(deleteRect, new GUIContent("delete", "delete this external variable"))) {
 								keys.DeleteArrayElementAtIndex(i);
 								values.DeleteArrayElementAtIndex(i);
 								break;
 							}
 							
-							var keyRect = Offset(position, .21f, 0, .79f, 1f);
+							var keyRect = showDeleteButton ?
+								Offset(position, .21f, 0, .79f, 1f) :
+								Offset(position, 0f, 0, 1f, 1f) ;
+
 							EditorGUI.PropertyField(keyRect, keys.GetArrayElementAtIndex(i), GUIContent.none);
 							
 							var valueRect = Offset(position, 0, 1.25f, 1f, 1f);

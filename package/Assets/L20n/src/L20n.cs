@@ -45,7 +45,7 @@ public static class L20n
 		get { return GetCore().Locales; }
 	}
 
-	public static void Initialize(string manifest_path, string defLocale = null)
+	public static void Initialize(string manifest_path, string overrideLocale = null)
 	{
 		var core = GetCore();
 		if (core.IsInitialized) {
@@ -58,15 +58,15 @@ public static class L20n
 
 		core.ImportManifest(manifest_path);
 
-		string localeType = "user-cached";
-		string locale = LoadSetting(SETTING_USER_LOCAL);
+		string localeType = "dev";
+		string locale = overrideLocale;
 		if(locale == null) {
-			locale = defLocale;
+			locale = LoadSetting(SETTING_USER_LOCAL);
 			if (locale == null) {
 				locale = SystemLocale;
-				localeType = "system-defined";
+				localeType = "system";
 			} else {
-				localeType = "default-game";
+				localeType = "default";
 			}
 		}
 
@@ -277,7 +277,7 @@ public static class L20n
 		PlayerPrefs.SetString(SETTING_PREFIX + id, value);
 	}
 
-	private static System.IO.StreamReader CreateStreamReader(
+	public static System.IO.StreamReader CreateStreamReader(
 		string path, System.Text.Encoding encoding, bool detectEncoding)
 	{
 		path = System.IO.Path.ChangeExtension(path, null);

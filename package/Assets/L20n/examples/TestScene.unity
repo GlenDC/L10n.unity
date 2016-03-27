@@ -134,8 +134,13 @@ MonoBehaviour:
   identifier: some_sentence
   useVariables: 0
   variables:
-    keys: []
-    values: []
+    keys:
+    - 
+    values:
+    - type: 0
+      literal: 0
+      text: 
+      hash: {fileID: 0}
 --- !u!114 &90802322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,11 +1774,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11463116, guid: c0f03c641ab4c496fb8979cff4d3ad0a, type: 2}
       propertyPath: destroyObject
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 173598, guid: c0f03c641ab4c496fb8979cff4d3ad0a, type: 2}
       propertyPath: m_Name
       value: L20nSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 11463116, guid: c0f03c641ab4c496fb8979cff4d3ad0a, type: 2}
+      propertyPath: overrideLocale
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f03c641ab4c496fb8979cff4d3ad0a, type: 2}
@@ -1899,8 +1908,13 @@ MonoBehaviour:
   identifier: hello
   useVariables: 0
   variables:
-    keys: []
-    values: []
+    keys:
+    - not used
+    values:
+    - type: 0
+      literal: 123
+      text: 
+      hash: {fileID: 0}
 --- !u!114 &1569593278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2027,8 +2041,11 @@ MonoBehaviour:
   resources:
     keys:
     - zn_Hans
+    - pt_BR
     values:
     - {fileID: 2100000, guid: 5e0bcc707ba1f4cfeaa3742274f2a5c8, type: 2}
+    - {fileID: 2100000, guid: 0409acf6e62cc43c2ac4c88d543817cd, type: 2}
+    - {fileID: 0}
     - {fileID: 0}
   defaultResource: {fileID: 2100000, guid: 1168fc57b3fdf44669e332cdf222189d, type: 2}
 --- !u!1 &1778754225
@@ -2391,8 +2408,13 @@ MonoBehaviour:
   identifier: enjoy
   useVariables: 0
   variables:
-    keys: []
-    values: []
+    keys:
+    - 
+    values:
+    - type: 0
+      literal: 0
+      text: 
+      hash: {fileID: 0}
 --- !u!1 &1989437559
 GameObject:
   m_ObjectHideFlags: 0

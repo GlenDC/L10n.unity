@@ -33,6 +33,7 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			[DisallowMultipleComponent]
 			public abstract class L20nBaseResource<T, U> : MonoBehaviour
 				where T: UnityEngine.Object
 				where U: L20nResourceCollection<T>
@@ -61,18 +62,22 @@ namespace L20nUnity
 					          .UnwrapOr(defaultResource));	
 				}
 
-				void Start()
-				{
-					SetResource(defaultResource);
-				}
-				
 				void OnEnable() {
 					L20n.OnLocaleChange += OnLocaleChange;
 					Initialize();
+					OnLocaleChange();
 				}
 				
 				void OnDisable() {
 					L20n.OnLocaleChange -= OnLocaleChange;
+				}
+
+				void OnBecameVisible() {
+					enabled = true;
+				}
+				
+				void OnBecameInvisible() {
+					enabled = false;
 				}
 				
 				protected abstract void Initialize();
@@ -154,6 +159,12 @@ namespace L20nUnity
 					
 					var keys = property.FindPropertyRelative("keys");
 					var values = property.FindPropertyRelative("values");
+
+					if (keys.arraySize == 0) {
+						keys.InsertArrayElementAtIndex(keys.arraySize);
+						values.InsertArrayElementAtIndex(values.arraySize);
+					}
+
 					
 					if(GUILayout.Button("Add Localized Resource")) {
 						keys.InsertArrayElementAtIndex(keys.arraySize);
@@ -165,7 +176,7 @@ namespace L20nUnity
 						
 						EditorGUILayout.BeginHorizontal();
 						
-						if(GUILayout.Button("delete")) {
+						if(keys.arraySize > 1 && GUILayout.Button("delete")) {
 							keys.DeleteArrayElementAtIndex(i);
 							values.DeleteArrayElementAtIndex(i);
 							break;
@@ -173,8 +184,6 @@ namespace L20nUnity
 						
 						EditorGUILayout.PropertyField(keys.GetArrayElementAtIndex(i), GUIContent.none);
 						EditorGUILayout.EndHorizontal();
-						
-						
 						
 						EditorGUILayout.BeginHorizontal();
 						EditorGUILayout.PropertyField(values.GetArrayElementAtIndex(i), GUIContent.none);
