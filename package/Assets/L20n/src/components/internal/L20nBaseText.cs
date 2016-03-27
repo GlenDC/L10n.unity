@@ -68,15 +68,23 @@ namespace L20nUnity
 						"<L20nText> requires an <identifier> to be givn");
 					Initialize();
 				}
-				
-				// Update is called once per frame
+
+				void Start () {
+					UpdateText();
+				}
+
 				void Update () {
+					UpdateText();
+				}
+
+				private void UpdateText()
+				{
 					if (identifier == "")
 						return;
 					
 					if (useVariables)
 						SetText (L20n.Translate (identifier,
-						                       variables.keys.ToArray (), variables.GetValues ()));
+						                         variables.keys.ToArray (), variables.GetValues ()));
 					else
 						SetText (L20n.Translate (identifier));
 				}

@@ -58,12 +58,13 @@ namespace L20nUnity
 				public void OnLocaleChange()
 				{
 					SetResource(resources.GetResource(L20n.CurrentLocale)
-					          .UnwrapOr(defaultResource));
-					
+					          .UnwrapOr(defaultResource));	
 				}
-				
-				protected abstract void Initialize();
-				public abstract void SetResource(T resource);
+
+				void Start()
+				{
+					SetResource(defaultResource);
+				}
 				
 				void OnEnable() {
 					L20n.OnLocaleChange += OnLocaleChange;
@@ -73,6 +74,9 @@ namespace L20nUnity
 				void OnDisable() {
 					L20n.OnLocaleChange -= OnLocaleChange;
 				}
+				
+				protected abstract void Initialize();
+				public abstract void SetResource(T resource);
 			}
 
 			[Serializable]
