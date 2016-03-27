@@ -34,26 +34,31 @@ namespace L20nUnity
 			[SerializeField]
 			string overrideLocale;
 			[SerializeField]
+			string uniqueGameID;
+			[SerializeField]
 			bool destroyObject;
 
 			public L20nSettings ()
 			{
 				manifestPath = "";
 				overrideLocale = "";
+				uniqueGameID = "";
 				destroyObject = true;
 			}
 
 			void Awake ()
 			{
-				if (manifestPath == null) {
-					Debug.LogError ("<L20nSettings> requires the manifest to be set", this);
-					return;
+				if (!L20n.IsInitialized) {
+					if (manifestPath == null) {
+						Debug.LogError ("<L20nSettings> requires the manifest to be set", this);
+						return;
+					}
+					
+					if (overrideLocale == "")
+						overrideLocale = null;
+					
+					L20n.Initialize (uniqueGameID, manifestPath, overrideLocale);
 				}
-
-				if (overrideLocale == "")
-					overrideLocale = null;
-
-				L20n.Initialize (manifestPath, overrideLocale);
 
 				if (destroyObject)
 					Destroy (gameObject);
@@ -67,6 +72,7 @@ namespace L20nUnity
 		public class L20nSettingsEditor : Editor {
 			SerializedProperty manifestPath;
 			SerializedProperty overrideLocale;
+			SerializedProperty gameID;
 			SerializedProperty destroyObject;
 
 			string path;
@@ -77,6 +83,7 @@ namespace L20nUnity
 			void OnEnable () {
 				manifestPath = serializedObject.FindProperty ("manifestPath");
 				overrideLocale = serializedObject.FindProperty ("overrideLocale");
+				gameID = serializedObject.FindProperty ("uniqueGameID");
 				destroyObject = serializedObject.FindProperty ("destroyObject");
 
 				path = "";
@@ -131,6 +138,14 @@ namespace L20nUnity
 
 				EditorGUILayout.Separator();
 				EditorGUILayout.LabelField("Development Settings");
+
+				EditorGUILayout.PropertyField(gameID);
+				if (gameID.stringValue == "") {
+					EditorGUILayout.HelpBox(
+						"Please enter an identifier unique to your game. " +
+						"This will prevent any user preference variables name clashing " +
+						"on your development machine. ", MessageType.Warning);
+				}
 
 				EditorGUILayout.PropertyField(overrideLocale);
 				if(overrideLocale.stringValue != "")

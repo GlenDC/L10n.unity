@@ -82,7 +82,8 @@ What follows is a more technical description.
     initialization of L20n at startup for you.
 
     In its editor you can set the manifest resource path
-    and other settings.
+    and other settings. You can use this component in every scene,
+    this way you don't always have to start from the actual loading screen.
 
     ----------------------------------------------------------------
     [Component]                               L20nSubmitLocaleAction

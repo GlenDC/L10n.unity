@@ -1,0 +1,15 @@
+{
+  "locales": [
+    "af",
+    "en",
+    "es",
+    "nl",
+    "fr",
+    "pt",
+    "zh_Hans",
+  ],
+  "default_locale": "en",
+  "resources": [
+    "./{{locale}}.bytes",
+  ]
+}

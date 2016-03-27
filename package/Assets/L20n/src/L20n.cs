@@ -42,7 +42,11 @@ public static class L20n
 		get { return GetCore ().Locales; }
 	}
 
-	public static void Initialize (string manifest_path, string overrideLocale = null)
+	public static bool IsInitialized {
+		get { return GetCore ().IsInitialized; }
+	}
+
+	public static void Initialize (string game_id, string manifest_path, string overrideLocale = null)
 	{
 		var core = GetCore ();
 		if (core.IsInitialized) {
@@ -52,6 +56,7 @@ public static class L20n
 			return;
 		}
 
+		s_GameID = game_id;
 
 		core.ImportManifest (manifest_path);
 
@@ -236,6 +241,7 @@ public static class L20n
 	
 	private delegate Translator GetCoreDelegate ();
 
+	private static string s_GameID;
 	private static Translator s_Core;
 	private static GetCoreDelegate GetCore = CreateCore;
 
@@ -266,12 +272,12 @@ public static class L20n
 
 	private static string LoadSetting (string id)
 	{
-		return PlayerPrefs.GetString (SETTING_PREFIX + id, null);
+		return PlayerPrefs.GetString (SETTING_PREFIX + s_GameID + id, null);
 	}
 	
 	private static void SaveSetting (string id, string value)
 	{
-		PlayerPrefs.SetString (SETTING_PREFIX + id, value);
+		PlayerPrefs.SetString (SETTING_PREFIX + s_GameID + id, value);
 	}
 
 	public static System.IO.StreamReader CreateStreamReader (
@@ -344,6 +350,8 @@ public static class L20n
 		{SystemLanguage.Icelandic, "is"},
 		{SystemLanguage.Indonesian, "id"},
 		{SystemLanguage.Italian, "it"},
+		{SystemLanguage.Japanese, "ja"},
+		{SystemLanguage.Korean, "ko"},
 		{SystemLanguage.Latvian, "lv"},
 		{SystemLanguage.Lithuanian, "lt"},
 		{SystemLanguage.Norwegian, "nb"},
