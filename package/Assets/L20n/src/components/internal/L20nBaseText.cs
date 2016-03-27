@@ -15,13 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using System;
 using System.Collections.Generic;
 
@@ -32,58 +30,66 @@ namespace L20nUnity
 		namespace Internal
 		{
 			[DisallowMultipleComponent]
-			public abstract class L20nBaseText : MonoBehaviour {
-				[SerializeField] string identifier;
-				[SerializeField] bool useVariables;
-				[SerializeField] Internal.VariableCollection variables;
+			public abstract class L20nBaseText : MonoBehaviour
+			{
+				[SerializeField]
+				string identifier;
+				[SerializeField]
+				bool useVariables;
+				[SerializeField]
+				Internal.VariableCollection variables;
 
-				public bool SetVariable(string key, int value)
+				public bool SetVariable (string key, int value)
 				{
-					return useVariables && variables.SetVariable(key, value);
+					return useVariables && variables.SetVariable (key, value);
 				}
 				
-				public bool SetVariable(string key, string value)
+				public bool SetVariable (string key, string value)
 				{
-					return useVariables && variables.SetVariable(key, value);
+					return useVariables && variables.SetVariable (key, value);
 				}
 				
-				public bool SetVariable(string key, HashValueBehaviour value)
+				public bool SetVariable (string key, HashValueBehaviour value)
 				{
-					return useVariables && variables.SetVariable(key, value);
+					return useVariables && variables.SetVariable (key, value);
 				}
 
-				public bool SetIdentifier(string id)
+				public bool SetIdentifier (string id)
 				{
 					if (id != null) {
 						identifier = id;
 						return true;
 					}
 
-					Debug.LogWarning("tried to nullify the identifier of <L20nBaseText>", this);
+					Debug.LogWarning ("tried to nullify the identifier of <L20nBaseText>", this);
 					return false;
 				}
 				
-				void OnEnable() {
-					Debug.Assert(
+				void OnEnable ()
+				{
+					Debug.Assert (
 						identifier != "",
 						"<L20nText> requires an <identifier> to be givn");
-					Initialize();
-					UpdateText();
+					Initialize ();
+					UpdateText ();
 				}
 
-				void Update () {
-					UpdateText();
+				void Update ()
+				{
+					UpdateText ();
 				}
 				
-				void OnBecameVisible() {
+				void OnBecameVisible ()
+				{
 					enabled = true;
 				}
 				
-				void OnBecameInvisible() {
+				void OnBecameInvisible ()
+				{
 					enabled = false;
 				}
 
-				private void UpdateText()
+				private void UpdateText ()
 				{
 					if (identifier == "")
 						return;
@@ -95,74 +101,75 @@ namespace L20nUnity
 						SetText (L20n.Translate (identifier));
 				}
 
-				protected abstract void Initialize();
-				public abstract void SetText(string text);
+				protected abstract void Initialize ();
+
+				public abstract void SetText (string text);
 			}
 			
 			namespace Internal
 			{
 				[Serializable]
-				public sealed class VariableCollection {
+				public sealed class VariableCollection
+				{
 					public List<String> keys;
 					public List<ExternalValue> values;
 
-					public int Count
-					{
-						get { return Math.Min(keys.Count, values.Count); }
+					public int Count {
+						get { return Math.Min (keys.Count, values.Count); }
 					}
 					
-					public VariableCollection()
+					public VariableCollection ()
 					{
-						keys = new List<string>();
-						values = new List<ExternalValue>();
+						keys = new List<string> ();
+						values = new List<ExternalValue> ();
 					}
 					
-					public L20nCore.Objects.L20nObject[] GetValues()
+					public L20nCore.Objects.L20nObject[] GetValues ()
 					{
 						var output = new L20nCore.Objects.L20nObject[values.Count];
-						for(int i = 0; i < output.Length; ++i) {
-							output[i] = values[i].GetValue();
+						for (int i = 0; i < output.Length; ++i) {
+							output [i] = values [i].GetValue ();
 						}
 						
 						return output;
 					}
 					
-					public bool SetVariable(string key, int value)
+					public bool SetVariable (string key, int value)
 					{
-						var variable = GetVariable(key);
+						var variable = GetVariable (key);
 						if (variable == null)
 							return false;
 
-						variable.SetValue(value);
+						variable.SetValue (value);
 						return true;
 					}
 					
-					public bool SetVariable(string key, string value)
+					public bool SetVariable (string key, string value)
 					{
-						var variable = GetVariable(key);
+						var variable = GetVariable (key);
 						if (variable == null)
 							return false;
 						
-						variable.SetValue(value);
+						variable.SetValue (value);
 						return true;
 					}
 					
-					public bool SetVariable(string key, HashValueBehaviour value)
+					public bool SetVariable (string key, HashValueBehaviour value)
 					{
-						var variable = GetVariable(key);
+						var variable = GetVariable (key);
 						if (variable == null)
 							return false;
 						
-						variable.SetValue(value);
+						variable.SetValue (value);
 						return true;
 					}
 					
-					private ExternalValue GetVariable(string key)
+					private ExternalValue GetVariable (string key)
 					{
 						var count = Count;
-						for(int i = 0; i < count; ++i) {
-							if(keys[i].Equals(key)) {
-								return values[i];
+						for (int i = 0; i < count; ++i) {
+							if (keys [i].Equals (key)) {
+								return values [i];
 							}
 						}
 						
@@ -171,55 +178,60 @@ namespace L20nUnity
 				}
 				
 				[Serializable]
-				public sealed class ExternalValue {
-					[SerializeField] Type type;
+				public sealed class ExternalValue
+				{
+					[SerializeField]
+					Type type;
+					[SerializeField]
+					int literal;
+					[SerializeField]
+					string text;
+					[SerializeField]
+					HashValueBehaviour hash;
 					
-					[SerializeField] int literal;
-					[SerializeField] string text;
-					[SerializeField] HashValueBehaviour hash;
-					
-					public ExternalValue()
+					public ExternalValue ()
 					{
 						type = Type.String;
 					}
 					
-					public L20nCore.Objects.L20nObject GetValue()
+					public L20nCore.Objects.L20nObject GetValue ()
 					{
 						switch (type) {
 						case Type.Literal:
-							return new L20nCore.Objects.Literal(literal);
+							return new L20nCore.Objects.Literal (literal);
 						case Type.String:
-							return new L20nCore.Objects.StringOutput(text);
+							return new L20nCore.Objects.StringOutput (text);
 						case Type.HashValue:
-							if(hash == null) {
+							if (hash == null) {
 								return null;
 							}
 							
-							return new L20nCore.Objects.Entity(hash);
+							return new L20nCore.Objects.Entity (hash);
 						}
 						
 						return null;
 					}
 
-					public void SetValue(int value)
+					public void SetValue (int value)
 					{
 						type = Type.Literal;
 						literal = value;
 					}
 					
-					public void SetValue(string value)
+					public void SetValue (string value)
 					{
 						type = Type.String;
 						text = value;
 					}
 					
-					public void SetValue(HashValueBehaviour value)
+					public void SetValue (HashValueBehaviour value)
 					{
 						type = Type.HashValue;
 						hash = value;
 					}
 					
-					public enum Type {
+					public enum Type
+					{
 						Literal,
 						String,
 						HashValue

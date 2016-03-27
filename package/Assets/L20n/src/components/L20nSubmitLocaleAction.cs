@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 namespace L20nUnity
@@ -23,16 +22,20 @@ namespace L20nUnity
 	namespace Components
 	{
 		[AddComponentMenu("L20n/SubmitLocaleAction")]
-		public sealed class L20nSubmitLocaleAction : MonoBehaviour {
-			[SerializeField] private string m_LocaleIdentifier = null;
+		public sealed class L20nSubmitLocaleAction : MonoBehaviour
+		{
+			[SerializeField]
+			private string m_LocaleIdentifier = null;
 
-			void Start () {
-				Debug.Assert(m_LocaleIdentifier != null && m_LocaleIdentifier != "",
+			void Start ()
+			{
+				Debug.Assert (m_LocaleIdentifier != null && m_LocaleIdentifier != "",
 				             "<L20nSubmitLocale> requires a local identifier to be specified");
 			}
 
-			public void OnSubmit() {
-				L20n.SetLocale(m_LocaleIdentifier);
+			public void OnSubmit ()
+			{
+				L20n.SetLocale (m_LocaleIdentifier);
 			}
 		}
 	}

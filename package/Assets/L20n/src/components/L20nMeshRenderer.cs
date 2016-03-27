@@ -15,13 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using L20nCore.Utils;
 
 namespace L20nUnity
@@ -30,11 +28,12 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/MeshRenderer (3D)")]
 		public sealed class L20nMeshRenderer :
-			Internal.L20nBaseResourceComponent<MeshRenderer, Material, Internal.L20nMaterialCollection> {
+			Internal.L20nBaseResourceComponent<MeshRenderer, Material, Internal.L20nMaterialCollection>
+		{
 			
-			public override void SetResource(Material material)
+			public override void SetResource (Material material)
 			{
-				Component.UnwrapIf(
+				Component.UnwrapIf (
 					(component) => component.material = material);
 			}
 		}

@@ -15,14 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 using L20nCore.External;
 
 namespace L20nUnity
 {
-	public abstract class HashValueBehaviour : MonoBehaviour, IHashValue {
-		public abstract void Collect(InfoCollector info);
+	public abstract class HashValueBehaviour : MonoBehaviour, IHashValue
+	{
+		public abstract void Collect (InfoCollector info);
 	}
 }

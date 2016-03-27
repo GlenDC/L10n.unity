@@ -15,14 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using L20nCore.Utils;
 
 namespace L20nUnity
@@ -31,11 +29,12 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/UIRawImage (2D)")]
 		public sealed class L20nUIRawImage :
-			Internal.L20nBaseResourceComponent<RawImage, Texture, Internal.L20nTextureCollection> {
+			Internal.L20nBaseResourceComponent<RawImage, Texture, Internal.L20nTextureCollection>
+		{
 			
-			public override void SetResource(Texture texture)
+			public override void SetResource (Texture texture)
 			{
-				Component.UnwrapIf(
+				Component.UnwrapIf (
 					(component) => component.texture = texture);
 			}
 		}

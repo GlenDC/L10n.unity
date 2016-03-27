@@ -15,14 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using L20nCore.Utils;
 
 namespace L20nUnity
@@ -31,11 +29,12 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/UIImage (2D)")]
 		public sealed class L20nUIImage :
-			Internal.L20nBaseResourceComponent<Image, Sprite, Internal.L20nSpriteCollection> {
+			Internal.L20nBaseResourceComponent<Image, Sprite, Internal.L20nSpriteCollection>
+		{
 			
-			public override void SetResource(Sprite sprite)
+			public override void SetResource (Sprite sprite)
 			{
-				Component.UnwrapIf(
+				Component.UnwrapIf (
 					(component) => component.sprite = sprite);
 			}
 		}

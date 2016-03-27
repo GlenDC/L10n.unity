@@ -15,13 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using System;
 using System.Collections.Generic;
 
@@ -38,76 +36,85 @@ namespace L20nUnity
 				where T: UnityEngine.Object
 				where U: L20nResourceCollection<T>
 			{
-				[SerializeField] U resources;
-				[SerializeField] T defaultResource;
+				[SerializeField]
+				U resources;
+				[SerializeField]
+				T defaultResource;
 				
-				public bool SetResource(string key, T value)
+				public bool SetResource (string key, T value)
 				{
 					if (key == null) {
-						Debug.LogWarning("tried to assign a resource to a <L20nBaseResource> with null as a key", this);
+						Debug.LogWarning ("tried to assign a resource to a <L20nBaseResource> with null as a key", this);
 						return false;
 					}
 
-					return resources.SetResource(key, value);
+					return resources.SetResource (key, value);
 				}
 
-				public void SetDefaultResource(T value)
+				public void SetDefaultResource (T value)
 				{
 					defaultResource = value;
 				}
 				
-				public void OnLocaleChange()
+				public void OnLocaleChange ()
 				{
-					SetResource(resources.GetResource(L20n.CurrentLocale)
-					          .UnwrapOr(defaultResource));	
+					SetResource (resources.GetResource (L20n.CurrentLocale)
+					          .UnwrapOr (defaultResource));	
 				}
 
-				void OnEnable() {
+				void OnEnable ()
+				{
 					L20n.OnLocaleChange += OnLocaleChange;
-					Initialize();
-					OnLocaleChange();
+					Initialize ();
+					OnLocaleChange ();
 				}
 				
-				void OnDisable() {
+				void OnDisable ()
+				{
 					L20n.OnLocaleChange -= OnLocaleChange;
 				}
 
-				void OnBecameVisible() {
+				void OnBecameVisible ()
+				{
 					enabled = true;
 				}
 				
-				void OnBecameInvisible() {
+				void OnBecameInvisible ()
+				{
 					enabled = false;
 				}
 				
-				protected abstract void Initialize();
-				public abstract void SetResource(T resource);
+				protected abstract void Initialize ();
+
+				public abstract void SetResource (T resource);
 			}
 
 			[Serializable]
-			public class L20nResourceCollection<T> {
-				[SerializeField] List<String> keys;
-				[SerializeField] List<T> values;
+			public class L20nResourceCollection<T>
+			{
+				[SerializeField]
+				List<String> keys;
+				[SerializeField]
+				List<T> values;
 
-				public int Count
-				{
-					get { return Math.Min(keys.Count, values.Count); }
+				public int Count {
+					get { return Math.Min (keys.Count, values.Count); }
 				}
 				
-				public L20nResourceCollection()
+				public L20nResourceCollection ()
 				{
-					keys = new List<string>();
-					values = new List<T>();
+					keys = new List<string> ();
+					values = new List<T> ();
 				}
 				
-				public Option<T> GetResource(string key)
+				public Option<T> GetResource (string key)
 				{
-					var result = new Option<T>();
+					var result = new Option<T> ();
 					
 					var count = Count;
-					for(int i = 0; i < count; ++i) {
-						if(keys[i].Equals(key)) {
-							result.Set(values[i]);
+					for (int i = 0; i < count; ++i) {
+						if (keys [i].Equals (key)) {
+							result.Set (values [i]);
 							break;
 						}
 					}
@@ -115,12 +122,12 @@ namespace L20nUnity
 					return result;
 				}
 
-				public bool SetResource(string key, T value)
+				public bool SetResource (string key, T value)
 				{
 					var count = Count;
-					for(int i = 0; i < count; ++i) {
-						if(keys[i].Equals(key)) {
-							values[i] = value;
+					for (int i = 0; i < count; ++i) {
+						if (keys [i].Equals (key)) {
+							values [i] = value;
 							return true;
 						}
 					}

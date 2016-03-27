@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 using System;
@@ -33,14 +32,13 @@ namespace L20nUnity
 					where V: L20nResourceCollection<U>
 			{
 				protected Option<T> m_Component;
-				protected Option<T> Component
-				{
-					get
-					{
-						if(!m_Component.IsSet) {
-							var text = GetComponent<T>();
-							if(text != null) {
-								m_Component.Set(text);
+
+				protected Option<T> Component {
+					get {
+						if (!m_Component.IsSet) {
+							var text = GetComponent<T> ();
+							if (text != null) {
+								m_Component.Set (text);
 							}
 						}
 						
@@ -48,16 +46,16 @@ namespace L20nUnity
 					}
 				}
 				
-				public L20nBaseResourceComponent()
+				public L20nBaseResourceComponent ()
 				{
-					m_Component = new Option<T>();
+					m_Component = new Option<T> ();
 				}
 				
-				protected override void Initialize()
+				protected override void Initialize ()
 				{
-					Debug.Assert(Component.IsSet,
+					Debug.Assert (Component.IsSet,
 						"{0} requires a {1} to be attached",
-					    GetType(), typeof(T));
+					    GetType (), typeof(T));
 				}
 			}
 		}

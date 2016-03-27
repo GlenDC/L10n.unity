@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 using System;
 
@@ -31,12 +30,16 @@ namespace L20nUnity
 		{
 			[Serializable]
 			public sealed class L20nAudioClipCollection
-			: L20nResourceCollection<AudioClip> {}
+			: L20nResourceCollection<AudioClip>
+			{
+			}
 
 			#if UNITY_EDITOR
 			[CustomPropertyDrawer(typeof(L20nAudioClipCollection))]
 			public sealed class L20nAudioClipCollectionDrawer
-				: L20nResourceCollectionDrawer {}
+				: L20nResourceCollectionDrawer
+			{
+			}
 			#endif
 		}
 	}

@@ -15,13 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using L20nCore.Utils;
 
 namespace L20nUnity
@@ -30,11 +28,12 @@ namespace L20nUnity
 	{
 		[AddComponentMenu("L20n/AudioSource (clip)")]
 		public sealed class L20nAudioSource :
-			Internal.L20nBaseResourceComponent<AudioSource, AudioClip, Internal.L20nAudioClipCollection> {
+			Internal.L20nBaseResourceComponent<AudioSource, AudioClip, Internal.L20nAudioClipCollection>
+		{
 			
-			public override void SetResource(AudioClip clip)
+			public override void SetResource (AudioClip clip)
 			{
-				Component.UnwrapIf(
+				Component.UnwrapIf (
 					(component) => component.clip = clip);
 			}
 		}

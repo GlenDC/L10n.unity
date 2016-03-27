@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -30,9 +29,9 @@ namespace L20nUnity
 		public sealed class L20nTextMesh
 			: Internal.L20nBaseTextComponent<TextMesh>
 		{
-			public override void SetText(string text)
+			public override void SetText (string text)
 			{
-				Component.UnwrapIf(
+				Component.UnwrapIf (
 					(component) => component.text = text);
 			}
 		}

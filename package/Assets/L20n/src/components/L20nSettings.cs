@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -30,33 +29,36 @@ namespace L20nUnity
 		[DisallowMultipleComponent]
 		public class L20nSettings : MonoBehaviour
 		{
-			[SerializeField] string manifestPath;
-			[SerializeField] string overrideLocale;
-			[SerializeField] bool destroyObject;
+			[SerializeField]
+			string manifestPath;
+			[SerializeField]
+			string overrideLocale;
+			[SerializeField]
+			bool destroyObject;
 
-			public L20nSettings()
+			public L20nSettings ()
 			{
 				manifestPath = "";
 				overrideLocale = "";
 				destroyObject = true;
 			}
 
-			void Awake()
+			void Awake ()
 			{
-				if(manifestPath == null) {
-					Debug.LogError("<L20nSettings> requires the manifest to be set", this);
+				if (manifestPath == null) {
+					Debug.LogError ("<L20nSettings> requires the manifest to be set", this);
 					return;
 				}
 
-				if(overrideLocale == "")
+				if (overrideLocale == "")
 					overrideLocale = null;
 
-				L20n.Initialize(manifestPath, overrideLocale);
+				L20n.Initialize (manifestPath, overrideLocale);
 
-				if(destroyObject)
-					Destroy(gameObject);
+				if (destroyObject)
+					Destroy (gameObject);
 				else
-					Destroy(this);
+					Destroy (this);
 			}
 		}
 

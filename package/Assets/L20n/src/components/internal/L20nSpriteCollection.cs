@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 using System;
 
@@ -31,12 +30,16 @@ namespace L20nUnity
 		{
 			[Serializable]
 			public sealed class L20nSpriteCollection
-			: L20nResourceCollection<Sprite> {}
+			: L20nResourceCollection<Sprite>
+			{
+			}
 			
 			#if UNITY_EDITOR
 			[CustomPropertyDrawer(typeof(L20nSpriteCollection))]
 			public sealed class L20nSpriteCollectionDrawer
-			: L20nResourceCollectionDrawer {}
+			: L20nResourceCollectionDrawer
+			{
+			}
 			#endif
 		}
 	}

@@ -15,13 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using L20nCore.Utils;
 
 namespace L20nUnity
@@ -30,16 +28,16 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
-			public abstract class L20nBaseTextComponent<T> : L20nBaseText {
+			public abstract class L20nBaseTextComponent<T> : L20nBaseText
+			{
 				protected Option<T> m_Component;
-				protected Option<T> Component
-				{
-					get
-					{
-						if(!m_Component.IsSet) {
-							var text = GetComponent<T>();
-							if(text != null) {
-								m_Component.Set(text);
+
+				protected Option<T> Component {
+					get {
+						if (!m_Component.IsSet) {
+							var text = GetComponent<T> ();
+							if (text != null) {
+								m_Component.Set (text);
 							}
 						}
 						
@@ -47,16 +45,16 @@ namespace L20nUnity
 					}
 				}
 				
-				public L20nBaseTextComponent()
+				public L20nBaseTextComponent ()
 				{
-					m_Component = new Option<T>();
+					m_Component = new Option<T> ();
 				}
 				
-				protected override void Initialize()
+				protected override void Initialize ()
 				{
-					Debug.Assert(Component.IsSet,
+					Debug.Assert (Component.IsSet,
 					             "{0} requires a {1} to be attached",
-					             GetType(), typeof(T));
+					             GetType (), typeof(T));
 				}
 			}
 		}

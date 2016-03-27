@@ -15,14 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 using L20nCore.Utils;
 
 namespace L20nUnity
@@ -33,9 +31,9 @@ namespace L20nUnity
 		public sealed class L20nUIText
 			: Internal.L20nBaseTextComponent<Text>
 		{
-			public override void SetText(string text)
+			public override void SetText (string text)
 			{
-				Component.UnwrapIf(
+				Component.UnwrapIf (
 					(component) => component.text = text);
 			}
 		}
