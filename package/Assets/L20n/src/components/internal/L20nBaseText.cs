@@ -229,18 +229,22 @@ namespace L20nUnity
 						serializedObject.Update();
 						
 						EditorGUILayout.PropertyField(identifier);
-						EditorGUILayout.PropertyField(useVariables);
 						
 						if (!Application.isPlaying) {
 							var text = identifier.stringValue;
 							if (text == "") {
 								text = "<MISSING IDENTIFIER>";
+								EditorGUILayout.HelpBox(
+									"Please enter a L20n <entity> Identifier!",
+									MessageType.Error);
 							} else if (useVariables.boolValue) {
 								text += "*";
 							}
 							
 							(target as L20nBaseText).SetText (text);
 						}
+						
+								EditorGUILayout.PropertyField(useVariables);
 
 						if (useVariables.boolValue) {
 							var size = variables.FindPropertyRelative("keys").arraySize;
