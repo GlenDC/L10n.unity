@@ -9,7 +9,7 @@ public class SliderLocale : MonoBehaviour
 	private Slider m_Slider;
 	private LocalizedLocaleText m_Text;
 
-	void OnEnable ()
+	void Start ()
 	{
 		m_Slider = GetComponent<Slider> ();
 		m_Text = transform.GetComponentInChildren<LocalizedLocaleText> ();

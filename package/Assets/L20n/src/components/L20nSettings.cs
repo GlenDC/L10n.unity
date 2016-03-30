@@ -56,7 +56,7 @@ namespace L20nUnity
 					
 					if (overrideLocale == "")
 						overrideLocale = null;
-					
+
 					L20n.Initialize (uniqueGameID, manifestPath, overrideLocale);
 				}
 

@@ -2,11 +2,29 @@
 
 <af "Afrikaans">
 <en "English">
-<es "Spanish">
 <fr "French">
 <nl "Dutch">
+<pl "Polish">
 <pt "Portuguese">
 <zn_Hans "Chinese (Simplified)">
 
 <change_locale_slider_desc
     "change the current locale (language) using the slider below">
+
+<help_change_number "change amount here">
+<help_change_user "change user here">
+
+<apples($n) {
+    $n == 0 ? "no apples" :
+        $n == 1 ? "an apple" : "{{$n}} apples"
+}>
+
+<neutral_user_name "Ashton">
+<masculine_user_name "Oliver">
+<feminine_user_name "Amelia">
+
+<user_has_apples[$user.gender] {
+    *default: "{{ $user.name }} has {{ apples($amount) }} in its bucket.",
+    masculine: "{{ $user.name }} has {{ apples($amount) }} in his bucket.",
+    feminine: "{{ $user.name }} has {{ apples($amount) }} in her bucket.",
+}>

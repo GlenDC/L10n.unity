@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace L20nUnity
 {
@@ -31,6 +32,22 @@ namespace L20nUnity
 			{
 				Debug.Assert (m_LocaleIdentifier != null && m_LocaleIdentifier != "",
 				             "<L20nSubmitLocale> requires a local identifier to be specified");
+			}
+
+			void OnEnable ()
+			{
+				var btn = GetComponent<Button> ();
+				Debug.Assert (btn != null,
+				              "<L20nSubmitLocale> requires a <UnityEngine.UI.Button> to be specified");
+				btn.onClick.AddListener (OnSubmit);
+			}
+			
+			void OnDisable ()
+			{
+				var btn = GetComponent<Button> ();
+				Debug.Assert (btn != null,
+				              "<L20nSubmitLocale> requires a <UnityEngine.UI.Button> to be specified");
+				btn.onClick.RemoveListener (OnSubmit);
 			}
 
 			public void OnSubmit ()

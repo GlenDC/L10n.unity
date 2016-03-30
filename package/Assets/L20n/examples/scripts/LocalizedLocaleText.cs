@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public class LocalizedLocaleText : MonoBehaviour
 {
-	void OnEnable ()
+	void Start ()
 	{
 		SetText ();
 	}
