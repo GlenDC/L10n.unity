@@ -14,9 +14,9 @@
 <help_change_number "change amount here">
 <help_change_user "change user here">
 
-<apples($n) {
-    $n == 0 ? "no apples" :
-        $n == 1 ? "an apple" : "{{$n}} apples"
+<apples($amount) {
+    $amount == 0 ? "no apples" :
+        $amount == 1 ? "an apple" : "{{$amount}} apples"
 }>
 
 <neutral_user_name "Ashton">
