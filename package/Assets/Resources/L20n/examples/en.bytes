@@ -1,0 +1,12 @@
+<hello "Hello">
+
+<af "Afrikaans">
+<en "English">
+<es "Spanish">
+<fr "French">
+<nl "Dutch">
+<pt "Portuguese">
+<zn_Hans "Chinese (Simplified)">
+
+<change_locale_slider_desc
+    "change the current locale (language) using the slider below">

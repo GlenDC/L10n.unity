@@ -1,14 +1,14 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &160632
+--- !u!1 &128786
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 485612}
-  - 114: {fileID: 11494464}
+  - 4: {fileID: 441578}
+  - 114: {fileID: 11451178}
   m_Layer: 0
   m_Name: L20nDemoSettings
   m_TagString: Untagged
@@ -16,32 +16,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &485612
+--- !u!4 &441578
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160632}
+  m_GameObject: {fileID: 128786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11494464
+--- !u!114 &11451178
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160632}
+  m_GameObject: {fileID: 128786}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f838b4a57c234a63a62e3983d293cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manifestPath: L20n/examples/demo/manifest
+  manifestPath: L20n/examples/manifest
   overrideLocale: 
-  uniqueGameID: L20n Demo
+  uniqueGameID: L20nDemo
   destroyObject: 1
 --- !u!1001 &100100000
 Prefab:
@@ -52,5 +52,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 160632}
+  m_RootGameObject: {fileID: 128786}
   m_IsPrefabParent: 1

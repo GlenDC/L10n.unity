@@ -267,7 +267,7 @@ namespace L20nUnity
 								text += "*";
 							}
 							
-							(target as L20nBaseText).SetText (text);
+							(target as L20nBaseText).SetText(String.Format("<{0}>", text));
 						}
 						
 						EditorGUILayout.PropertyField(useVariables);

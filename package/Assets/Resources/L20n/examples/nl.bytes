@@ -1,0 +1,12 @@
+<hello "Hallo">
+
+<af "Afrikaans">
+<en "Engels">
+<es "Spaans">
+<fr "Frans">
+<nl "Nederlands">
+<pt "Portugees">
+<zn_Hans "Chinees (Vereenvoudigd)">
+
+<change_locale_slider_desc
+    "verander de huidige taalinstelling doormiddel van de slider te gebruiken">

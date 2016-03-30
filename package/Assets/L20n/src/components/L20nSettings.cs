@@ -86,7 +86,7 @@ namespace L20nUnity
 				gameID = serializedObject.FindProperty ("uniqueGameID");
 				destroyObject = serializedObject.FindProperty ("destroyObject");
 
-				path = "";
+				path = null;
 				pathIsValid = false;
 				manifest = new L20nCore.Internal.Manifest();
 
