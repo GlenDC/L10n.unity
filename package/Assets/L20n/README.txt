@@ -16,7 +16,8 @@ table of content:
 This Unity plugin is developed by Glen De Cauwsemaecker (me).
 You can reach me at contact@glendc.com for any questions and other inquiries.
 I'm also available for hire in case you need consultancy
-related to localization of your game(s) using this technology.
+related to localization of your game(s) using this technology
+or other Game Development / Programming topics.
 
 This package is part of the bigger L20n For Games Project
 and is the first module of that project.
@@ -37,9 +38,6 @@ The library separate, and can be used in any project
 that uses the .NET environment. It's developed using the TDD principle
 and should be quite stable already. On top of that it means that any feature
 bug fixes or extensions won't break any previously tested and proven features.
-
-I would appreciate if you do not use the core library standalone
-within the Unity environment, as I do need to make a living as well.
 
 The second part is the actual Unity-specific wrapper, which consists out of
 a static class `L20n` and some components. Translations can be made purely
@@ -63,7 +61,8 @@ What follows is a more technical description.
 
     In case you would prefer you could also Initialize the L20n
     Plugin yourself by calling the `Initialize` method.
-    I would however recommend using the L20nSettings component OR prefab.
+    I would however recommend using the L20nSettings component OR prefab,
+    rather than initializing the plugin manually yourself.
 
     If preferred you could translate your entire game,
     just by using this static class, it's up to you really.
@@ -128,15 +127,37 @@ More in-depth information can be found as code-comments.
     Or simply leave it as a comment,
     in the same section where you gave a review? :)
 
+> Why do I have use the `.byte` extension for my L20n Resource (locale) files?
+
+    Sadly Unity only supports a small set of extensions to read files.
+    Custom extensions aren't allowed and `.byte` is the best fit extension
+    within the full set of extensions.
+
+    The Manifest file is just a `json` file, so using `.json` simply makes sense.
+
+    You can find more information about this topic in the Unity Manual:
+    http://docs.unity3d.com/Manual/class-TextAsset.html
+
+> Why do my L20n Resource files (locale files and Manifest)
+  have to be in the `./Resources` directory?
+
+    This is what the special folder `./Resources` is made for, by Unity.
+    It is the only /safe/ way to stores files and be able to find them
+    with the same built-in functionality as given by Unity on all their
+    supported platforms. The Resources will always exist.
+
+    You can find more information about this topic in the Unity Manual:
+    http://docs.unity3d.com/Manual/LoadingResourcesatRuntime.html
+
 > I just downloaded your plugin, what now?
 
-    As a first step I would recommend you to open `L20n/examples/demo`
-    and play through it. This will give you a quick overview of what is
-    possible and what you can expect.
+    As a first step I would recommend you to open the examples in `L20n/examples`,
+    play with them and discover how they work.
+    This will give you a quick overview of what is possible and what you can expect.
 
     After that I would recommend opening the Localize (.byte) files.
-    These contain the actual localizations used in the demo.
-    You can find them under `Resources/L20n/examples/demo`.
+    These contain the actual localizations used in the examples.
+    You can find them under `Resources/L20n/examples`.
 
     After that you are ready to start. It takes a while to get used to it
     as it means that the relationship between developer and translator shifts.
@@ -152,6 +173,20 @@ More in-depth information can be found as code-comments.
         3. Modify the `SetText` method body appropriately;
         4. Modify the names of the CustomEditor Unity Editor Code;
 
+> I need to prevent a line from breaking at a certain position, is this possible?
+
+    Yes, any special control characters can given using unicode characters.
+    Unicode characters can be added in string values of the localize files.
+    A non-breaking-character can be given as follows: "U+0083"
+    This will translate to the appropriate character during initialization.
+
+    You can find an extensive list of unicode characters here:
+    https://en.wikipedia.org/wiki/List_of_Unicode_characters
+
+    Note that you should really try to prevent /any/ form of formatting
+    within your translations. Using unicode characters you could try to format,
+    but it really is bad practice and should only be used as a last-resort solution.
+
 > Is syntax highlighting available for the L20n (.byte) files?
 
     There is a plugin available for Atom, simply look for `l20n`.
@@ -162,10 +197,11 @@ More in-depth information can be found as code-comments.
 > Is there no simpler way to add/modify translations?
 
     A free-to-use editor is in development and will be released
-    in the near future.
+    in the near future. Feel free to mail me in case you want to know more about it.
+    The editor will be open source and contributions will be possible in the future.
 
 -----
 4. License
 ---
 
-This project: Licensed under the Apache License, Version 2.0.
+This project is licensed under the Apache License, Version 2.0.
