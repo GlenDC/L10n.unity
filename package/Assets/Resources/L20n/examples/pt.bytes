@@ -1,1 +1,29 @@
 <hello "Olá">
+
+<af "Africâner">
+<en "Inglês">
+<fr "Francês">
+<nl "Holandês">
+<pl "Polonês">
+<pt "Português">
+<jp "Japonês">
+
+<change_locale_slider_desc
+    "mude o idioma deslizando o botão abaixo">
+
+/* allows the user to change the amount of apples in the variable example */
+<help_change_number "mude a quantidade aqui">
+/* allows the user to change the subject/user in the variable example */
+<help_change_user "mude o usuário aqui">
+
+<apples($amount) {
+    $amount == 0 ? "nenhuma maçã" :
+        $amount == 1 ? "uma maçã" : "{{$amount}} maçãs"
+}>
+
+<neutral_user_name "Luka">
+<masculine_user_name "João">
+<feminine_user_name "Maria">
+
+<user_has_apples
+    "{{ $user.name }} tem {{ apples($amount) }} no seu balde.">

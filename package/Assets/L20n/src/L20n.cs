@@ -253,10 +253,15 @@ public static class L20n
 
 	public static void SetFont (string locale, Font font)
 	{
+		if (!Locales.Contains (locale)) {
+			Debug.LogErrorFormat("can't set font as '{0}' is not a supported local", locale);
+			return;
+		}
+
 		if (!s_Fonts.ContainsKey (locale)) {
 			s_Fonts.Add (locale, font);
 		} else {
-			Debug.LogWarningFormat("locale {0} already has a font assigned to it", locale);
+			Debug.LogWarningFormat("locale '{0}' already has a font assigned to it", locale);
 		}
 	}
 	

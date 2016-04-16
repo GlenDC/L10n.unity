@@ -11,7 +11,9 @@
 <change_locale_slider_desc
     "change the current locale (language) using the slider below">
 
+/* allows the user to change the amount of apples in the variable example */
 <help_change_number "change amount here">
+/* allows the user to change the subject/user in the variable example */
 <help_change_user "change user here">
 
 <apples($amount) {

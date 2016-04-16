@@ -177,14 +177,8 @@ namespace L20nUnity
 					
 					var keys = property.FindPropertyRelative("keys");
 					var values = property.FindPropertyRelative("values");
-
-					if (keys.arraySize == 0) {
-						keys.InsertArrayElementAtIndex(keys.arraySize);
-						values.InsertArrayElementAtIndex(values.arraySize);
-					}
-
 					
-					if(GUILayout.Button("Add Localized Resource")) {
+					if(GUILayout.Button("Add Other Localized Resource")) {
 						keys.InsertArrayElementAtIndex(keys.arraySize);
 						values.InsertArrayElementAtIndex(values.arraySize);
 					}
@@ -193,8 +187,8 @@ namespace L20nUnity
 						EditorGUILayout.Separator();
 						
 						EditorGUILayout.BeginHorizontal();
-						
-						if(keys.arraySize > 1 && GUILayout.Button("delete")) {
+
+						if(GUILayout.Button("delete")) {
 							keys.DeleteArrayElementAtIndex(i);
 							values.DeleteArrayElementAtIndex(i);
 							break;

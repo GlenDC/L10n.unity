@@ -10,3 +10,22 @@
 
 <change_locale_slider_desc
     "verander de huidige taalinstelling doormiddel van de slider te gebruiken">
+
+/* allows the user to change the amount of apples in the variable example */
+<help_change_number "verander de hoeveelheid hier">
+/* allows the user to change the subject/user in the variable example */
+<help_change_user "verander de gebruiker hier">
+
+<apples($amount) {
+    $amount == 0 ? "geen appels" :
+        $amount == 1 ? "één appel" : "{{$amount}} appels"
+}>
+
+<neutral_user_name "Glen">
+<masculine_user_name "Henri">
+<feminine_user_name "Jenny">
+
+<user_has_apples[$user.gender] {
+    *default: "{{ $user.name }} heeft {{ apples($amount) }} in zijn emmer.",
+    feminine: "{{ $user.name }} heeft {{ apples($amount) }} in haar emmer.",
+}>

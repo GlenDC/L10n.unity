@@ -1,1 +1,19 @@
 <hello "こんにちは">
+
+<help_change_number "change amount here">
+<help_change_user "change user here">
+
+<apples($amount) {
+    $amount == 0 ? "no apples" :
+        $amount == 1 ? "an apple" : "{{$amount}} apples"
+}>
+
+<neutral_user_name "護">
+<masculine_user_name "蓮">
+<feminine_user_name "凛">
+
+<user_has_apples[$user.gender] {
+    *default: "{{ $user.name }} has {{ apples($amount) }} in its bucket.",
+    masculine: "{{ $user.name }} has {{ apples($amount) }} in his bucket.",
+    feminine: "{{ $user.name }} has {{ apples($amount) }} in her bucket.",
+}>

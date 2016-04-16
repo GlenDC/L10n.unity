@@ -478,8 +478,8 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 3
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: <help_change_user>
 --- !u!222 &577621449
@@ -572,8 +572,8 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 5
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: <help_change_number>
 --- !u!222 &747661720
@@ -947,6 +947,22 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: variables.keys.Array.size
       value: 2
@@ -1055,6 +1071,46 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.data[0]
+      value: jp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.data[0]
+      value: 
+      objectReference: {fileID: 12800000, guid: 49eda983e9ad04e04975b5cbdf5584b2,
+        type: 3}
+    - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: defaultFont
+      value: 
+      objectReference: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af,
+        type: 3}
+    - target: {fileID: 11423344, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: m_FontData.m_FontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423344, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: m_Text
+      value: <user_has_apples*>
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: useCustomFonts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: defaultFont
+      value: 
+      objectReference: {fileID: 12800000, guid: e365dff10e42a4a34af6be778a008ce6,
+        type: 3}
+    - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.data[0]
+      value: jp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.data[0]
+      value: 
+      objectReference: {fileID: 12800000, guid: 49eda983e9ad04e04975b5cbdf5584b2,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
   m_IsPrefabParent: 0
