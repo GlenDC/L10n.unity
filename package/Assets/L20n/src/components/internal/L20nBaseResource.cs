@@ -134,6 +134,17 @@ namespace L20nUnity
 					
 					return false;
 				}
+
+				public Dictionary<string, T> GetAllResources ()
+				{
+					var count = Count;
+					var resources = new Dictionary<string, T> (count);
+					for (int i = 0; i < count; ++i) {
+						resources.Add (keys [i], values [i]);
+					}
+					
+					return resources;
+				}
 			}
 			
 			#if UNITY_EDITOR

@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 using UnityEngine;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,13 +31,23 @@ namespace L20nUnity
 		public class L20nSettings : MonoBehaviour
 		{
 			[SerializeField]
-			string manifestPath;
+			string
+				manifestPath;
 			[SerializeField]
-			string overrideLocale;
+			string
+				overrideLocale;
 			[SerializeField]
-			string uniqueGameID;
+			string
+				uniqueGameID;
 			[SerializeField]
-			bool destroyObject;
+			bool
+				destroyObject;
+			[SerializeField]
+			Internal.L20nFontCollection
+				fonts;
+			[SerializeField]
+			Font
+				defaultFont;
 
 			public L20nSettings ()
 			{
@@ -58,6 +69,10 @@ namespace L20nUnity
 						overrideLocale = null;
 
 					L20n.Initialize (uniqueGameID, manifestPath, overrideLocale);
+					L20n.SetFont (L20n.DefaultLocale, defaultFont);
+					foreach (var pair in fonts.GetAllResources()) {
+						L20n.SetFont (pair.Key, pair.Value);
+					}
 				}
 
 				if (destroyObject)
@@ -74,6 +89,8 @@ namespace L20nUnity
 			SerializedProperty overrideLocale;
 			SerializedProperty gameID;
 			SerializedProperty destroyObject;
+			SerializedProperty fonts;
+			SerializedProperty defaultFont;
 
 			string path;
 			string errorMessage;
@@ -85,6 +102,8 @@ namespace L20nUnity
 				overrideLocale = serializedObject.FindProperty ("overrideLocale");
 				gameID = serializedObject.FindProperty ("uniqueGameID");
 				destroyObject = serializedObject.FindProperty ("destroyObject");
+				fonts = serializedObject.FindProperty ("fonts");
+				defaultFont = serializedObject.FindProperty ("defaultFont");
 
 				path = null;
 				pathIsValid = false;
@@ -122,22 +141,32 @@ namespace L20nUnity
 					EditorGUILayout.HelpBox (errorMessage, MessageType.Error);
 				} else {
 					EditorGUILayout.BeginHorizontal();
-					EditorGUILayout.LabelField("DefaultLocale:", EditorStyles.boldLabel);
+					EditorGUILayout.LabelField("DefaultLocale:");
 					EditorGUILayout.LabelField(manifest.DefaultLocale);
 					EditorGUILayout.EndHorizontal();
 
-					EditorGUILayout.LabelField("OtherLocales:", EditorStyles.boldLabel);
-					for(int i = 0; i < manifest.Locales.Count; i += 2) {
-						EditorGUILayout.BeginHorizontal();
-						EditorGUILayout.LabelField(manifest.Locales[i]);
-						if(i+1 < manifest.Locales.Count)
-							EditorGUILayout.LabelField(manifest.Locales[i+1]);
-						EditorGUILayout.EndHorizontal();
-					}
+					EditorGUILayout.LabelField("OtherLocales:");
+					EditorGUILayout.LabelField(
+						string.Join(", ", manifest.Locales.ToArray()),
+						EditorStyles.wordWrappedLabel);
 				}
 
+				var titleStyle = EditorStyles.boldLabel;
+				
 				EditorGUILayout.Separator();
-				EditorGUILayout.LabelField("Development Settings");
+				EditorGUILayout.LabelField("Font Settings", titleStyle);
+				EditorGUILayout.Separator();
+
+				EditorGUILayout.BeginHorizontal();
+				EditorGUILayout.LabelField("Default Resource:");
+				EditorGUILayout.PropertyField(defaultFont, GUIContent.none);
+				EditorGUILayout.EndHorizontal();
+
+				EditorGUILayout.PropertyField(fonts);
+
+				EditorGUILayout.Separator();
+				EditorGUILayout.LabelField("Development Settings", titleStyle);
+				EditorGUILayout.Separator();
 
 				EditorGUILayout.PropertyField(gameID);
 				if (gameID.stringValue == "") {
@@ -156,7 +185,8 @@ namespace L20nUnity
 						"and will result in bad user experience.", MessageType.Warning);
 				
 				EditorGUILayout.Separator();
-				EditorGUILayout.LabelField("Other Settings");
+				EditorGUILayout.LabelField("Other Settings", titleStyle);
+				EditorGUILayout.Separator();
 				
 				EditorGUILayout.PropertyField(destroyObject);
 				if (destroyObject.boolValue) {

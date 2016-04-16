@@ -684,6 +684,11 @@ MonoBehaviour:
       literal: 0
       text: 
       hash: {fileID: 0}
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
+    keys: []
+    values: []
 --- !u!114 &11429214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -738,6 +743,12 @@ MonoBehaviour:
   overrideLocale: 
   uniqueGameID: L20nDemo
   destroyObject: 1
+  fonts:
+    keys:
+    - jp
+    values:
+    - {fileID: 12800000, guid: 4cf5a612631174d44872c8a8157f3f1d, type: 3}
+  defaultFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &11443468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -777,6 +788,11 @@ MonoBehaviour:
       literal: 0
       text: 
       hash: {fileID: 0}
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
+    keys: []
+    values: []
 --- !u!114 &11447912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1529,7 +1545,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: fonts.keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fonts.values.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 197332}

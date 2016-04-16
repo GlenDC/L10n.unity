@@ -92,6 +92,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 446956, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -144,6 +152,22 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: useCustomFonts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.data[0]
+      value: jp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.data[0]
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: defaultFont
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
   m_IsPrefabParent: 0

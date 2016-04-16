@@ -169,6 +169,11 @@ MonoBehaviour:
   variables:
     keys: []
     values: []
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
+    keys: []
+    values: []
 --- !u!114 &78068659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +504,11 @@ MonoBehaviour:
   variables:
     keys: []
     values: []
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
+    keys: []
+    values: []
 --- !u!1 &747661717
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +596,11 @@ MonoBehaviour:
   identifier: help_change_number
   useVariables: 0
   variables:
+    keys: []
+    values: []
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
     keys: []
     values: []
 --- !u!1 &748476948
@@ -970,7 +985,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 446956, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22438236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -1137,6 +1152,11 @@ MonoBehaviour:
   variables:
     keys: []
     values: []
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
+    keys: []
+    values: []
 --- !u!1 &1290331263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1316,11 @@ MonoBehaviour:
   identifier: feminine_user_name
   useVariables: 0
   variables:
+    keys: []
+    values: []
+  useCustomFonts: 0
+  defaultFont: {fileID: 0}
+  fonts:
     keys: []
     values: []
 --- !u!114 &1585259258 stripped

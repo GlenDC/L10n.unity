@@ -1,4 +1,4 @@
-﻿/**
+/**
  * This source file is part of the Commercial L20n Unity Plugin.
  * 
  * Copyright (c) 2016 Glen De Cauwsemaecker (contact@glendc.com)
@@ -16,37 +16,31 @@
  * limitations under the License.
  */
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using L20nCore.Utils;
 
 namespace L20nUnity
 {
 	namespace Components
 	{
-		[AddComponentMenu("L20n/UIText (2D)")]
-		public sealed class L20nUIText
-			: Internal.L20nBaseTextComponent<Text>
-		{
-			public override void SetText (string text, Font font)
-			{
-				Component.UnwrapIf ((component) => {
-					component.text = text;
-					if (font != null)
-						component.font = font;
-				});
-			}
-		}
-		
-		#if UNITY_EDITOR
 		namespace Internal
 		{
-			[CustomEditor (typeof (L20nUIText))]
-			public class L20nUITextEditor : Internal.L20nBaseTextEditor {}
+			[Serializable]
+			public sealed class L20nFontCollection
+				: L20nResourceCollection<Font>
+			{
+			}
+			
+			#if UNITY_EDITOR
+			[CustomPropertyDrawer(typeof(L20nFontCollection))]
+			public sealed class L20nFontCollectionDrawer
+				: L20nResourceCollectionDrawer
+			{
+			}
+			#endif
 		}
-		#endif
 	}
 }

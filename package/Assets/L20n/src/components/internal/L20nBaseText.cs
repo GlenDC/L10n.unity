@@ -33,11 +33,23 @@ namespace L20nUnity
 			public abstract class L20nBaseText : MonoBehaviour
 			{
 				[SerializeField]
-				string identifier;
+				string
+					identifier;
 				[SerializeField]
-				bool useVariables;
+				bool
+					useVariables;
 				[SerializeField]
-				Internal.VariableCollection variables;
+				Internal.VariableCollection
+					variables;
+				[SerializeField]
+				bool
+					useCustomFonts;
+				[SerializeField]
+				Font
+					defaultFont;
+				[SerializeField]
+				L20nFontCollection
+					fonts;
 
 				public bool SetVariable (string key, int value)
 				{
@@ -93,17 +105,30 @@ namespace L20nUnity
 				{
 					if (identifier == "")
 						return;
+
+					Font font = L20n.CurrentFont;
+					if (useCustomFonts) {
+						Font f;
+
+						if (fonts.GetAllResources ().TryGetValue (L20n.CurrentLocale, out f)) {
+							font = f;
+						} else if (defaultFont != null) {
+							font = defaultFont;
+						}
+					}
 					
-					if (useVariables)
-						SetText (L20n.Translate (identifier,
-						                         variables.keys.ToArray (), variables.GetValues ()));
-					else
-						SetText (L20n.Translate (identifier));
+					if (useVariables) {
+						var text = L20n.Translate (identifier, variables.keys.ToArray (), variables.GetValues ());
+						SetText (text, font);
+					} else {
+						var text = L20n.Translate (identifier);
+						SetText (text, font);
+					}
 				}
 
 				protected abstract void Initialize ();
 
-				public abstract void SetText (string text);
+				public abstract void SetText (string text, Font font);
 			}
 			
 			namespace Internal
@@ -181,13 +206,17 @@ namespace L20nUnity
 				public sealed class ExternalValue
 				{
 					[SerializeField]
-					Type type;
+					Type
+						type;
 					[SerializeField]
-					int literal;
+					int
+						literal;
 					[SerializeField]
-					string text;
+					string
+						text;
 					[SerializeField]
-					HashValueBehaviour hash;
+					HashValueBehaviour
+						hash;
 					
 					public ExternalValue ()
 					{
@@ -244,11 +273,17 @@ namespace L20nUnity
 					SerializedProperty identifier;
 					SerializedProperty useVariables;
 					SerializedProperty variables;
+					SerializedProperty useCustomFonts;
+					SerializedProperty fonts;
+					SerializedProperty defaultFont;
 					
 					void OnEnable () {
 						identifier = serializedObject.FindProperty ("identifier");
 						useVariables = serializedObject.FindProperty ("useVariables");
 						variables = serializedObject.FindProperty ("variables");
+						useCustomFonts = serializedObject.FindProperty ("useCustomFonts");
+						fonts = serializedObject.FindProperty ("fonts");
+						defaultFont = serializedObject.FindProperty ("defaultFont");
 					}
 					
 					public override void OnInspectorGUI() {
@@ -267,7 +302,14 @@ namespace L20nUnity
 								text += "*";
 							}
 							
-							(target as L20nBaseText).SetText(String.Format("<{0}>", text));
+							(target as L20nBaseText).SetText(String.Format("<{0}>", text), null);
+						}
+						
+						EditorGUILayout.PropertyField(useCustomFonts);
+						if (useCustomFonts.boolValue) {
+							EditorGUILayout.PropertyField(defaultFont);
+							EditorGUILayout.PropertyField(fonts);
+							EditorGUILayout.EndFadeGroup();
 						}
 						
 						EditorGUILayout.PropertyField(useVariables);

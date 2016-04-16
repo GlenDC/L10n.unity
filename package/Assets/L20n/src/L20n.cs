@@ -46,6 +46,18 @@ public static class L20n
 		get { return GetCore ().IsInitialized; }
 	}
 
+	public static Font CurrentFont {
+		get {
+			Font font;
+			if (s_Fonts.TryGetValue(CurrentLocale, out font))
+				return font;
+			if (s_Fonts.TryGetValue(DefaultLocale, out font))
+				return font;
+
+			return null;
+		}
+	}
+
 	public static void Initialize (string game_id, string manifest_path, string overrideLocale = null)
 	{
 		var core = GetCore ();
@@ -238,11 +250,21 @@ public static class L20n
 		
 		return GetCore ().Translate (id, keys, values);
 	}
+
+	public static void SetFont (string locale, Font font)
+	{
+		if (!s_Fonts.ContainsKey (locale)) {
+			s_Fonts.Add (locale, font);
+		} else {
+			Debug.LogWarningFormat("locale {0} already has a font assigned to it", locale);
+		}
+	}
 	
 	private delegate Translator GetCoreDelegate ();
 
 	private static string s_GameID;
 	private static Translator s_Core;
+	private static Dictionary<string, Font> s_Fonts;
 	private static GetCoreDelegate GetCore = CreateCore;
 
 	private static Translator CreateCore ()
@@ -252,6 +274,8 @@ public static class L20n
 		s_Core = new Translator ();
 		s_Core.SetWarningDelegate (Debug.LogWarning);
 		GetCore = (() => s_Core);
+
+		s_Fonts = new Dictionary<string, Font> ();
 
 		AddUnityGlobals ();
 
