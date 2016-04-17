@@ -1,0 +1,22 @@
+<hello "Zdravo">
+
+<sl "slovenski">
+
+<plural($n) {
+  $n == 0 ? "zero" :
+  $n % 100 == 1 ? "one" :
+  $n % 100 == 2 ? "two" :
+  $n % 100 == 3 || $n % 100 == 4 ? "few" :
+  "many"
+}>
+
+<apples($amount) {
+    $amount == 0 ? "ni jabolka" :
+        $amount == 1 ? "eno jabolko" : "{{$amount}} jabolka"
+}>
+
+<neutral_user_name "Zajac">
+<masculine_user_name "Mateusz">
+<feminine_user_name "Roza">
+
+<user_has_apples "{{ $user.name }} ima {{ apples($amount) }} v svojem razredu">

@@ -2,3 +2,20 @@
 
 <change_locale_slider_desc
     "verander die huidige taal met behulp van die onderstaande skuiwer">
+
+<help_change_number "verander die hoeveelheid hier">
+<help_change_user "verander die gebruiker hier">
+
+<apples($amount) {
+    $amount == 0 ? "geen appels" :
+        $amount == 1 ? "'n appel" : "{{$amount}} appels"
+}>
+
+<neutral_user_name "Glen">
+<masculine_user_name "Harry">
+<feminine_user_name "Jenny">
+
+<user_has_apples[$user.gender] {
+    *default: "{{ $user.name }} het {{ apples($amount) }} in sy emmer.",
+    feminine: "{{ $user.name }} het {{ apples($amount) }} in haar emmer.",
+}>

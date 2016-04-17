@@ -4,7 +4,7 @@
 <en "English">
 <fr "French">
 <nl "Dutch">
-<pl "Polish">
+<sl "Slovenian">
 <pt "Portuguese">
 <jp "Japanese">
 
@@ -12,9 +12,9 @@
     "change the current locale (language) using the slider below">
 
 /* allows the user to change the amount of apples in the variable example */
-<help_change_number "change amount here">
+<help_change_number "change the amount here">
 /* allows the user to change the subject/user in the variable example */
-<help_change_user "change user here">
+<help_change_user "change the user here">
 
 <apples($amount) {
     $amount == 0 ? "no apples" :

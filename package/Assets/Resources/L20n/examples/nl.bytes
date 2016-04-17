@@ -1,19 +1,11 @@
 <hello "Hallo">
 
-<af "Afrikaans">
-<en "Engels">
-<es "Spaans">
-<fr "Frans">
 <nl "Nederlands">
-<pt "Portugees">
-<zn_Hans "Chinees (Vereenvoudigd)">
 
 <change_locale_slider_desc
     "verander de huidige taalinstelling doormiddel van de slider te gebruiken">
 
-/* allows the user to change the amount of apples in the variable example */
 <help_change_number "verander de hoeveelheid hier">
-/* allows the user to change the subject/user in the variable example */
 <help_change_user "verander de gebruiker hier">
 
 <apples($amount) {

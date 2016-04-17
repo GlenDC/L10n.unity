@@ -1,9 +1,17 @@
 <hello "Bonjour">
 
-<af "afrikaans">
-<en "anglais">
-<es "espagnol">
 <fr "français">
-<nl "néerlandais">
-<pt "portugais">
-<zn_Hans "chinois (simplifié)">
+
+<help_change_number "changer la quantité ici">
+<help_change_user "changer l'usager ici">
+
+<apples($amount) {
+    $amount == 0 ? "pas de pommes" :
+        $amount == 1 ? "une pomme" : "{{$amount}} pommes"
+}>
+
+<neutral_user_name "Camille">
+<masculine_user_name "Alain">
+<feminine_user_name "Julie">
+
+<user_has_apples "{{ $user.name }} a {{ apples($amount) }} dans son seau">
