@@ -21,3 +21,28 @@
     *default: "{{ $user.name }} heeft {{ apples($amount) }} in zijn emmer.",
     feminine: "{{ $user.name }} heeft {{ apples($amount) }} in haar emmer.",
 }>
+
+<_hours {
+    one: "uur",
+    *many: "uren",
+}>
+<_minutes {
+    one: "minuut",
+    *many: "minuten",
+}>
+<_seconds {
+    one: "seconde",
+    *many: "seconden",
+}>
+
+<remaining_time "
+    Resterende tijd: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
+    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
+    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    ">
+
+<current_time "
+    Huidige tijd: {{ @hour }} {{ _hours[plural(@hour)] }},
+    {{ @minute }} {{ _minutes[plural(@minute)] }},
+    {{ @second }} {{ _seconds[plural(@second)] }}.
+    ">

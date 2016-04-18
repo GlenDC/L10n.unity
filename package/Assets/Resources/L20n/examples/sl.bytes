@@ -2,14 +2,6 @@
 
 <sl "slovenski">
 
-<plural($n) {
-  $n == 0 ? "zero" :
-  $n % 100 == 1 ? "one" :
-  $n % 100 == 2 ? "two" :
-  $n % 100 == 3 || $n % 100 == 4 ? "few" :
-  "many"
-}>
-
 <apples($amount) {
     $amount == 0 ? "ni jabolka" :
         $amount == 1 ? "eno jabolko" : "{{$amount}} jabolka"
@@ -20,3 +12,42 @@
 <feminine_user_name "Roza">
 
 <user_has_apples "{{ $user.name }} ima {{ apples($amount) }} v svojem razredu">
+
+<plural($n) {
+  $n == 0 ? "zero" :
+  $n % 100 == 1 ? "one" :
+  $n % 100 == 2 ? "two" :
+  $n % 100 == 3 || $n % 100 == 4 ? "few" :
+  "many"
+}>
+
+<_hours {
+    one: "ura",
+    two: "uri",
+    few: "ure",
+    *many: "ur",
+}>
+<_minutes {
+    one: "minuta",
+    two: "minuti",
+    few: "minute",
+    *many: "minut",
+}>
+<_seconds {
+    one: "sekunda",
+    two: "sekundi",
+    few: "sekunde",
+    *many: "sekund",
+}>
+
+<remaining_time "
+    Preostali čas: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
+    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
+    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    ">
+
+<current_time "
+    Trenutni čas: {{ @hour }} {{ _hours[plural(@hour)] }},
+    {{ @minute }} {{ _minutes[plural(@minute)] }},
+    {{ @second }} {{ _seconds[plural(@second)] }}.
+    ">

@@ -5,6 +5,9 @@
 <help_change_number "changer la quantité ici">
 <help_change_user "changer l'usager ici">
 
+<change_locale_slider_desc
+    "changer la langue courante à l'aide du contrôleur ci-dessous">
+
 <apples($amount) {
     $amount == 0 ? "pas de pommes" :
         $amount == 1 ? "une pomme" : "{{$amount}} pommes"
@@ -15,3 +18,28 @@
 <feminine_user_name "Julie">
 
 <user_has_apples "{{ $user.name }} a {{ apples($amount) }} dans son seau">
+
+<_hours {
+    one: "heure",
+    *many: "heures",
+}>
+<_minutes {
+    one: "minute",
+    *many: "minutes",
+}>
+<_seconds {
+    one: "seconde",
+    *many: "secondes",
+}>
+
+<remaining_time "
+    Temps restant: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
+    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
+    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    ">
+
+<current_time "
+    Heure actuelle: {{ @hour }} {{ _hours[plural(@hour)] }},
+    {{ @minute }} {{ _minutes[plural(@minute)] }},
+    {{ @second }} {{ _seconds[plural(@second)] }}.
+    ">

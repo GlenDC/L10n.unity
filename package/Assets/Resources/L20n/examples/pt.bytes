@@ -19,3 +19,28 @@
 
 <user_has_apples
     "{{ $user.name }} tem {{ apples($amount) }} no seu balde.">
+
+<_hours {
+    one: "hora",
+    *many: "horas",
+}>
+<_minutes {
+    one: "minuto",
+    *many: "minutos",
+}>
+<_seconds {
+    one: "segundo",
+    *many: "segundos",
+}>
+
+<remaining_time "
+    Tempo restante: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
+    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
+    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    ">
+
+<current_time "
+    Hora atual: {{ @hour }} {{ _hours[plural(@hour)] }},
+    {{ @minute }} {{ _minutes[plural(@minute)] }},
+    {{ @second }} {{ _seconds[plural(@second)] }}.
+    ">

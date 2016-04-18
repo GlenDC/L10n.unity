@@ -49,9 +49,11 @@ public static class L20n
 	public static Font CurrentFont {
 		get {
 			Font font;
-			if (s_Fonts.TryGetValue(CurrentLocale, out font))
+			string locale = CurrentLocale;
+			if (locale != null && s_Fonts.TryGetValue(locale, out font))
 				return font;
-			if (s_Fonts.TryGetValue(DefaultLocale, out font))
+			locale = DefaultLocale;
+			if (locale != null && s_Fonts.TryGetValue(locale, out font))
 				return font;
 
 			return null;

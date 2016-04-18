@@ -30,3 +30,32 @@
     masculine: "{{ $user.name }} has {{ apples($amount) }} in his bucket.",
     feminine: "{{ $user.name }} has {{ apples($amount) }} in her bucket.",
 }>
+
+<plural($n) {
+    $n == 1 ? "one" : "many"
+}>
+
+<_hours {
+    one: "hour",
+    *many: "hours",
+}>
+<_minutes {
+    one: "minute",
+    *many: "minutes",
+}>
+<_seconds {
+    one: "second",
+    *many: "seconds",
+}>
+
+<remaining_time "
+    Remaining time: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
+    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
+    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    ">
+
+<current_time "
+    Current time: {{ @hour }} {{ _hours[plural(@hour)] }},
+    {{ @minute }} {{ _minutes[plural(@minute)] }},
+    {{ @second }} {{ _seconds[plural(@second)] }}.
+    ">

@@ -21,7 +21,6 @@ using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using L20nCore.Utils;
 
 namespace L20nUnity
 {

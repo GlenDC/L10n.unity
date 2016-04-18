@@ -19,3 +19,28 @@
     *default: "{{ $user.name }} het {{ apples($amount) }} in sy emmer.",
     feminine: "{{ $user.name }} het {{ apples($amount) }} in haar emmer.",
 }>
+
+<_hours {
+    one: "uur",
+    *many: "ure",
+}>
+<_minutes {
+    one: "minuut",
+    *many: "minute",
+}>
+<_seconds {
+    one: "sekonde",
+    *many: "sekondes",
+}>
+
+<remaining_time "
+    Oorblywende tyd: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
+    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
+    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    ">
+
+<current_time "
+    Huidige tyd: {{ @hour }} {{ _hours[plural(@hour)] }},
+    {{ @minute }} {{ _minutes[plural(@minute)] }},
+    {{ @second }} {{ _seconds[plural(@second)] }}.
+    ">

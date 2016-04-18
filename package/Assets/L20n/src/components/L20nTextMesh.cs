@@ -33,8 +33,9 @@ namespace L20nUnity
 			{
 				Component.UnwrapIf ((component) => {
 					component.text = text;
-					if (font != null)
+					if (font != null) {
 						component.font = font;
+					}
 				});
 			}
 		}

@@ -37,9 +37,11 @@ namespace L20nUnity
 				where U: L20nResourceCollection<T>
 			{
 				[SerializeField]
-				U resources;
+				U
+					resources;
 				[SerializeField]
-				T defaultResource;
+				T
+					defaultResource;
 				
 				public bool SetResource (string key, T value)
 				{
@@ -93,9 +95,11 @@ namespace L20nUnity
 			public class L20nResourceCollection<T>
 			{
 				[SerializeField]
-				List<String> keys;
+				List<String>
+					keys;
 				[SerializeField]
-				List<T> values;
+				List<T>
+					values;
 
 				public int Count {
 					get { return Math.Min (keys.Count, values.Count); }
@@ -158,16 +162,18 @@ namespace L20nUnity
 				}
 				
 				public override void OnInspectorGUI() {
-					serializedObject.Update();
+					if (!Application.isPlaying) {
+						serializedObject.Update();
 
-					EditorGUILayout.LabelField("Default");
-					EditorGUILayout.PropertyField(defaultResource, GUIContent.none);
+						EditorGUILayout.LabelField ("Default");
+						EditorGUILayout.PropertyField (defaultResource, GUIContent.none);
 
-					EditorGUILayout.Space();
-					
-					EditorGUILayout.PropertyField(resources);
-					
-					serializedObject.ApplyModifiedProperties();
+						EditorGUILayout.Space ();
+						
+						EditorGUILayout.PropertyField (resources);
+						
+						serializedObject.ApplyModifiedProperties();
+					}
 				}
 			}
 
