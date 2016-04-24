@@ -1679,6 +1679,7 @@ MonoBehaviour:
   m_DefaultFont: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
   m_JapaneseFont: {fileID: 12800000, guid: 49eda983e9ad04e04975b5cbdf5584b2, type: 3}
   m_User: {fileID: 2108967801}
+  m_Temperature: 19
 --- !u!114 &2108967801
 MonoBehaviour:
   m_ObjectHideFlags: 0

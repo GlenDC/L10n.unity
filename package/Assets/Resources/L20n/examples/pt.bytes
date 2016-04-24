@@ -47,8 +47,8 @@
 
 <_temperature_desc($temperature) {
     $temperature < 18 && $temperature >= 10 ? "Está muito frio!" :
-    $temperature < 12 ? "Está frio." :
-    $temperature < 29 ? "O tempo estiver impressionante!" :
+    $temperature < 20 ? "Está frio." :
+    $temperature < 40 ? "O tempo estiver impressionante!" :
     "Todos morreremos!"
 }>
 

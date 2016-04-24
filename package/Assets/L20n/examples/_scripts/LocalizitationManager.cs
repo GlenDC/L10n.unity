@@ -12,6 +12,10 @@ public class LocalizitationManager : MonoBehaviour
 	[SerializeField]
 	User
 		m_User;
+	[SerializeField]
+	[Tooltip("In Celcius")]
+	int
+		m_Temperature;
 
 	// It's important that you initialize L20n before you start localizing anything.
 	// Doing the initialization in Awake is a good option, or simply
@@ -29,7 +33,7 @@ public class LocalizitationManager : MonoBehaviour
 
 			// Game-Specific Globals can be added as well
 			// These variables are avaiable for all translations
-			L20n.AddStaticGlobal("temperature", 19);
+			L20n.AddStaticGlobal("temperature", m_Temperature);
 			L20n.AddComplexGlobal("user", m_User);
 		}
 	}
