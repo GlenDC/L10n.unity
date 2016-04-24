@@ -255,6 +255,16 @@ public static class L20n
 
 	public static void SetFont (string locale, Font font)
 	{
+		if (locale == null) {
+			Debug.LogError("font couldn't be set with the key as a null-value");
+			return;
+		}
+
+		if (font == null) {
+			Debug.LogErrorFormat("a null-value can't be used as the font for locale '{0}'", locale);
+			return;
+		}
+
 		if (!Locales.Contains (locale)) {
 			Debug.LogErrorFormat("can't set font as '{0}' is not a supported local", locale);
 			return;
@@ -265,6 +275,46 @@ public static class L20n
 		} else {
 			Debug.LogWarningFormat("locale '{0}' already has a font assigned to it", locale);
 		}
+	}
+
+	public static void SetFont (Font font)
+	{
+		SetFont (DefaultLocale, font);
+	}
+
+	public static void AddStaticGlobal (string id, int value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+	
+	public static void AddStaticGlobal (string id, string value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+	
+	public static void AddStaticGlobal (string id, bool value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+	
+	public static void AddDelegatedGlobal (string id, DelegatedLiteral.Delegate value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+	
+	public static void AddDelegatedGlobal (string id, DelegatedString.Delegate value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+	
+	public static void AddDelegatedGlobal (string id, DelegatedBoolean.Delegate value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+	
+	public static void AddComplexGlobal (string id, IHashValue value)
+	{
+		GetCore ().AddGlobal (id, value);
 	}
 	
 	private delegate Translator GetCoreDelegate ();

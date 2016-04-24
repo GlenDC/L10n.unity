@@ -43,3 +43,19 @@
     {{ @minute }} {{ _minutes[plural(@minute)] }},
     {{ @second }} {{ _seconds[plural(@second)] }}.
     ">
+
+<_temperature_desc($temp) {
+    $temp < 2 && $temp >= -8 ? "C'est très froid!" :
+    $temp < 12 ? "Il fait frais." :
+    $temp < 29 ? "Il fait génial!" :
+    "Nous allons tous mourir"
+}>
+
+<_third_person {
+    *default: "Il",
+    feminine: "Elle",
+}>
+
+<user_talked_about_temperature
+    "{{ _third_person[@user.gender] }} a dit:
+    \"{{ _temperature_desc(@temperature) }}\"">

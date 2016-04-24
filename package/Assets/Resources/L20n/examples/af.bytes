@@ -44,3 +44,20 @@
     {{ @minute }} {{ _minutes[plural(@minute)] }},
     {{ @second }} {{ _seconds[plural(@second)] }}.
     ">
+
+<_temperature_desc($temp) {
+    $temp < 10 && $temp > -5 ? "Dit is baie koud!" :
+    $temp < 20 ? "Dis koue" :
+    $temp < 42 ? "Die weer is goeie!" :
+    "Ons sal almal sterf!"
+}>
+
+<_third_person {
+    *default: "Dit",
+    masculine: "Hy",
+    feminine: "Sy",
+}>
+
+<user_talked_about_temperature
+    "{{ _third_person[@user.gender] }} het gesê:
+    \"{{ _temperature_desc(@temperature) }}\"">

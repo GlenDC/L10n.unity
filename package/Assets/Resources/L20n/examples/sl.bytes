@@ -51,3 +51,19 @@
     {{ @minute }} {{ _minutes[plural(@minute)] }},
     {{ @second }} {{ _seconds[plural(@second)] }}.
     ">
+
+<_temperature_desc($temperature) {
+    $temperature < -10 ?
+    "Mrzlo je!" :
+    "Vreme je super!"
+}>
+
+<_third_person {
+    *default: "Pisalo",
+    masculine: "Rekel",
+    feminine: "Rekla",
+}>
+
+<user_talked_about_temperature
+    "{{ _third_person[@user.gender] }} je:
+    \"{{ _temperature_desc(@temperature) }}\"">
