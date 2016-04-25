@@ -408,24 +408,24 @@ namespace L20nUnity
 						
 						var valueRect = Offset(position, 0.29f, 0, 0.71f, 1f);
 						switch ((ExternalValue.Type)type.enumValueIndex) {
-						case ExternalValue.Type.Literal: {
-							var value = property.FindPropertyRelative("literal");
-							EditorGUI.PropertyField(valueRect, value, GUIContent.none);
-							break;
-						}
-							
-						case ExternalValue.Type.String: {
-							var value = property.FindPropertyRelative("text");
-							EditorGUI.PropertyField(valueRect, value, GUIContent.none);
-							break;
-						}
-							
-						case ExternalValue.Type.HashValue: {
-							var hash = property.FindPropertyRelative("hash");
-							hash.objectReferenceValue = EditorGUI.ObjectField(valueRect,
-								hash.objectReferenceValue, typeof (HashValueBehaviour), true);
-							break;
-						}
+							case ExternalValue.Type.Literal: {
+								var value = property.FindPropertyRelative("literal");
+								EditorGUI.PropertyField(valueRect, value, GUIContent.none);
+								break;
+							}
+								
+							case ExternalValue.Type.String: {
+								var value = property.FindPropertyRelative("text");
+								EditorGUI.PropertyField(valueRect, value, GUIContent.none);
+								break;
+							}
+								
+							case ExternalValue.Type.HashValue: {
+								var hash = property.FindPropertyRelative("hash");
+								hash.objectReferenceValue = EditorGUI.ObjectField(valueRect,
+									hash.objectReferenceValue, typeof (HashValueBehaviour), true);
+								break;
+							}
 						}
 					}
 				}

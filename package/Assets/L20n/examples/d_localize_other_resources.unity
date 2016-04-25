@@ -466,12 +466,21 @@ MonoBehaviour:
   manifestPath: L20n/examples/manifest
   overrideLocale: 
   uniqueGameID: L20nDemo
-  destroyObject: 1
+  destroyObject: 0
   fonts:
     keys:
     - jp
     values:
-    - {fileID: 0}
+    - {fileID: 12800000, guid: 49eda983e9ad04e04975b5cbdf5584b2, type: 3}
+  globalVariables:
+    keys:
+    - temperature
+    values:
+    - type: 1
+      boolean: 0
+      literal: 19
+      text: 19
+      hash: {fileID: 0}
   defaultFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &656557306
 GameObject:

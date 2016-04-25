@@ -282,6 +282,11 @@ public static class L20n
 		SetFont (DefaultLocale, font);
 	}
 
+	public static void AddGlobal (string id, L20nObject value)
+	{
+		GetCore ().AddGlobal (id, value);
+	}
+
 	public static void AddStaticGlobal (string id, int value)
 	{
 		GetCore ().AddGlobal (id, value);

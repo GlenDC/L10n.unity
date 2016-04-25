@@ -25,7 +25,7 @@ public class LocalizitationManager : MonoBehaviour
 		// Make sure that L20n isn't already initialized
 		if (!L20n.IsInitialized) {
 			// Initialize L20n, setting the Game ID and the Manifest Path
-			L20n.Initialize ("L20nExample", "L20n/examples/manifest.json");
+			L20n.Initialize ("L20nDemo", "L20n/examples/manifest.json");
 
 			// Optinially you can also set the default fonts to use for Text Components
 			L20n.SetFont ("jp", m_JapaneseFont);
