@@ -1,4 +1,7 @@
-<hello "Hello">
+<hello {
+    *default: 'Hello',
+    long: 'Hello, World',
+}>
 
 <af "Afrikaans">
 <en "English">

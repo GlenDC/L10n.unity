@@ -190,6 +190,15 @@ public static class L20n
 	/// The given <c>values</c> will get bound with the given <c>keys</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id, string[] keys, L20nCore.Objects.L20nObject[] values)
 	{
 		return GetCore ().Translate (id, keys, values);
@@ -201,6 +210,15 @@ public static class L20n
 	/// The given <c>parameter_value</c> will get bound with the given <c>parameter_key</c> as an external value ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                        string parameter_key, int parameter_value)
 	{
@@ -213,6 +231,15 @@ public static class L20n
 	/// The given <c>parameter_value</c> will get bound with the given <c>parameter_key</c> as an external value ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key, string parameter_value)
 	{
@@ -225,6 +252,15 @@ public static class L20n
 	/// The given <c>parameter_value</c> will get bound with the given <c>parameter_key</c> as an external value ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key, L20nCore.External.IHashValue parameter_value)
 	{
@@ -237,6 +273,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, int parameter_value_a,
 	                               string parameter_key_b, int parameter_value_b)
@@ -255,6 +300,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, int parameter_value_a,
 	                               string parameter_key_b, string parameter_value_b)
@@ -273,6 +327,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, int parameter_value_a,
 	                               string parameter_key_b, IHashValue parameter_value_b)
@@ -291,6 +354,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, string parameter_value_a,
 	                               string parameter_key_b, string parameter_value_b)
@@ -309,6 +381,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, string parameter_value_a,
 	                               string parameter_key_b, int parameter_value_b)
@@ -327,6 +408,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, string parameter_value_a,
 	                               string parameter_key_b, IHashValue parameter_value_b)
@@ -345,6 +435,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, IHashValue parameter_value_a,
 	                               string parameter_key_b, IHashValue parameter_value_b)
@@ -363,6 +462,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, IHashValue parameter_value_a,
 	                               string parameter_key_b, int parameter_value_b)
@@ -381,6 +489,15 @@ public static class L20n
 	/// The given <c>parameter_values</c> will get bound with the given <c>parameter_kesy</c> as external values ($-syntax),
 	/// and will be available during the translation of the given <c>id</c>.
 	/// </summary>
+	/// <remarks>
+	/// Note that the <c>id</c> can be a simple identifier or a property-expression.
+	/// Meaning that you can have something like `foo` but also `foo.bar` or `foo.bar.baz`.
+	/// A property expression uses the dot `.` syntax and allows you to specify values within your
+	/// hash-tables used as values in your Entity. The default or index will be used in case a property
+	/// identifier couldn't be found.
+	/// For string-values this extra property identifier will simply be ignored.
+	/// Meaning that something like `foo.bar` would be equal to `foo`.
+	/// </remarks>
 	public static string Translate (string id,
 	                               string parameter_key_a, IHashValue parameter_value_a,
 	                               string parameter_key_b, string parameter_value_b)
