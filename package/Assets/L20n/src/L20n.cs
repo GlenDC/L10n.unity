@@ -31,6 +31,11 @@ using L20nCore.External;
 /// but are just yet another high level layer on this main layer,
 /// which is already high level on its own.
 /// </summary>
+/// <remarks>
+/// This API wraps around the L20nCore library (A custom L20n implementation in C#) that's available as
+/// an opensource C# Library at GitHub and developed by Glen De Cauwsemaecker.
+/// See for more information @ https://github.com/glendc/l20n.cs
+/// </remarks>
 public static class L20n
 {
 	/// <summary>
