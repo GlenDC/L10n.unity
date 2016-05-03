@@ -4,13 +4,30 @@ L20n - v1.0
 
 table of content:
 
-    1. Introduction
+    0. Why?
+    1. About this plugin
     2. How to use this plugin?
     3. FAQ
     4. License
 
 -----
-1. Introduction
+0. Why?
+---
+
+This isn't the only localization plugin, why is this one better?
+
+    1) It's the only plugin that can handle the complexity of human languages;
+    2) It's minimalistic and allows you to specify the rules and how to use it;
+    3) It's based on well-done research by Mozilla;
+    4) It's a complete package for your entire localization;
+    5) It's the only way to keep all your localization logic outside your game logic;
+    6) It's the solution to prevent programmers from making dirty & bad
+       localization solutions right before another sprint;
+    7) It's well supported by a dedicated programmer (me);
+    8) It's featuring the powerful L20n language, empowering your translators;
+
+-----
+1. About this plugin
 ---
 
 This Unity plugin is developed by Glen De Cauwsemaecker (me).
@@ -39,8 +56,8 @@ that uses the .NET environment. It's developed using the TDD principle
 and should be quite stable already. On top of that it means that any feature
 bug fixes or extensions won't break any previously tested and proven features.
 
-The second part is the actual Unity-specific wrapper, which consists out of
-a static class `L20n` and some components. Translations can be made purely
+The second part is the actual Unity-specific layer, which consists out of
+a static class `L20n` and some optional components. Translations can be made purely
 via code by using the `L20n` class, or by using one of the available
 Text Components. Take a look at the FAQ in case you need some extra components.
 
