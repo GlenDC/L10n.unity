@@ -162,18 +162,24 @@ namespace L20nUnity
 				}
 				
 				public override void OnInspectorGUI() {
-					if (!Application.isPlaying) {
-						serializedObject.Update();
-
-						EditorGUILayout.LabelField ("Default");
-						EditorGUILayout.PropertyField (defaultResource, GUIContent.none);
-
-						EditorGUILayout.Space ();
+					if (Application.isPlaying) {
+						EditorGUILayout.HelpBox (
+							"L20n components can't be modified on runtime via the editor.",
+							MessageType.Info);
 						
-						EditorGUILayout.PropertyField (resources);
-						
-						serializedObject.ApplyModifiedProperties();
+						return;
 					}
+
+					serializedObject.Update();
+
+					EditorGUILayout.LabelField ("Default");
+					EditorGUILayout.PropertyField (defaultResource, GUIContent.none);
+
+					EditorGUILayout.Space ();
+					
+					EditorGUILayout.PropertyField (resources);
+					
+					serializedObject.ApplyModifiedProperties();
 				}
 			}
 

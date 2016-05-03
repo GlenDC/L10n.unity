@@ -1,61 +1,23 @@
 <hello "こんにちは">
 
-<help_change_number "change amount here">
-<help_change_user "change user here">
-
-<apples($amount) {
-    $amount == 0 ? "no apples" :
-        $amount == 1 ? "an apple" : "{{$amount}} apples"
-}>
+<jp "日本語">
 
 <neutral_user_name "護">
 <masculine_user_name "蓮">
 <feminine_user_name "凛">
 
-<user_has_apples[$user.gender] {
-    *default: "{{ $user.name }} has {{ apples($amount) }} in its bucket.",
-    masculine: "{{ $user.name }} has {{ apples($amount) }} in his bucket.",
-    feminine: "{{ $user.name }} has {{ apples($amount) }} in her bucket.",
-}>
-
-<_hours {
-    one: "hour",
-    *many: "hours",
-}>
-<_minutes {
-    one: "minute",
-    *many: "minutes",
-}>
-<_seconds {
-    one: "second",
-    *many: "seconds",
-}>
+<_hours "時間">
+<_minutes "分">
+<_seconds "秒">
 
 <remaining_time "
-    Remaining time: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
-    {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
-    {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
+    残り：{{ $time.hours }} {{ _hours }}、
+    {{ $time.minutes }} {{ _minutes }}、
+    {{ $time.seconds }} {{ _seconds }}、
     ">
 
 <current_time "
-    Current time: {{ @hour }} {{ _hours[plural(@hour)] }},
-    {{ @minute }} {{ _minutes[plural(@minute)] }},
-    {{ @second }} {{ _seconds[plural(@second)] }}.
+    今：{{ @hour }} {{ _hours }}、
+    {{ @minute }} {{ _minutes }}、
+    {{ @second }} {{ _seconds }}、
     ">
-
-<_temperature_desc($temp) {
-    $temp < -0 && $temp >= -10 ? "It's so cold!" :
-    $temp < 10 ? "It's a bit chilly." :
-    $temp < 30 ? "The weather is awesome!" :
-    "We'll die soon!"
-}>
-
-<_third_person {
-    *default: "It",
-    masculine: "He",
-    feminine: "She",
-}>
-
-<user_talked_about_temperature
-    "{{ _third_person[@user.gender] }} said:
-    \"{{ _temperature_desc(@temperature) }}\"">

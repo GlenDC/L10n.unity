@@ -287,56 +287,60 @@ namespace L20nUnity
 					}
 					
 					public override void OnInspectorGUI() {
-						if (!Application.isPlaying) {
-							serializedObject.Update ();
+						if (Application.isPlaying) {
+							EditorGUILayout.LabelField("Identifier:");
+							EditorGUILayout.LabelField("\t" + identifier.stringValue);
 
-							EditorGUILayout.PropertyField (identifier);
+							EditorGUILayout.HelpBox (
+								"L20n components can't be modified on runtime via the editor.",
+								MessageType.Info);
 
-							var text = identifier.stringValue;
-							if (text == "") {
-								text = "<MISSING IDENTIFIER>";
-								EditorGUILayout.HelpBox (
-									"Please enter a L20n <entity> Identifier!",
-									MessageType.Error);
-							} else if (useVariables.boolValue) {
-								text += "*";
-							}
-							
-							(target as L20nBaseText).SetText (String.Format ("<{0}>", text), null);
+							return;
+						}
+
+						serializedObject.Update ();
+
+						EditorGUILayout.PropertyField (identifier);
+
+						var text = identifier.stringValue;
+						if (text == "") {
+							text = "<MISSING IDENTIFIER>";
+							EditorGUILayout.HelpBox (
+								"Please enter a L20n <entity> Identifier!",
+								MessageType.Error);
+						} else if (useVariables.boolValue) {
+							text += "*";
+						}
 						
-							EditorGUILayout.PropertyField (useCustomFonts);
-							if (useCustomFonts.boolValue) {
-								EditorGUILayout.PropertyField (defaultFont);
-								EditorGUILayout.PropertyField (fonts);
-								EditorGUILayout.EndFadeGroup ();
+						(target as L20nBaseText).SetText (String.Format ("<{0}>", text), null);
+					
+						EditorGUILayout.PropertyField (useCustomFonts);
+						if (useCustomFonts.boolValue) {
+							EditorGUILayout.PropertyField (defaultFont);
+							EditorGUILayout.PropertyField (fonts);
+							EditorGUILayout.EndFadeGroup ();
+						}
+						
+						EditorGUILayout.PropertyField (useVariables);
+
+						if (useVariables.boolValue) {
+							var size = variables.FindPropertyRelative ("keys").arraySize;
+							if (size == 0) {
+								var keys = variables.FindPropertyRelative ("keys");
+								var values = variables.FindPropertyRelative ("values");
+
+								keys.InsertArrayElementAtIndex (0);
+								values.InsertArrayElementAtIndex (0);
+								size = keys.arraySize;
 							}
-							
-							EditorGUILayout.PropertyField (useVariables);
 
-							if (useVariables.boolValue) {
-								var size = variables.FindPropertyRelative ("keys").arraySize;
-								if (size == 0) {
-									var keys = variables.FindPropertyRelative ("keys");
-									var values = variables.FindPropertyRelative ("values");
-
-									keys.InsertArrayElementAtIndex (0);
-									values.InsertArrayElementAtIndex (0);
-									size = keys.arraySize;
-								}
-
-								EditorGUILayout.BeginHorizontal (
-									GUILayout.MinHeight (30 + size * 30 + (size - 1) * 20));
-								EditorGUILayout.PropertyField (variables);
-								EditorGUILayout.EndHorizontal ();
-							}
-							
-							serializedObject.ApplyModifiedProperties ();
-						} else {
-							EditorGUILayout.BeginHorizontal();
-							EditorGUILayout.LabelField("Identifier");
-							EditorGUILayout.LabelField(identifier.stringValue);
+							EditorGUILayout.BeginHorizontal (
+								GUILayout.MinHeight (30 + size * 30 + (size - 1) * 20));
+							EditorGUILayout.PropertyField (variables);
 							EditorGUILayout.EndHorizontal ();
 						}
+						
+						serializedObject.ApplyModifiedProperties ();
 					}
 				}
 				

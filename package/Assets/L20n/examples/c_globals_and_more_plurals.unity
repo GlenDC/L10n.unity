@@ -511,6 +511,9 @@ MonoBehaviour:
     - jp
     values:
     - {fileID: 12800000, guid: 49eda983e9ad04e04975b5cbdf5584b2, type: 3}
+  globalVariables:
+    keys: []
+    values: []
   defaultFont: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
 --- !u!1 &561568076
 GameObject:
@@ -747,11 +750,13 @@ MonoBehaviour:
       literal: 0
       text: 
       hash: {fileID: 0}
-  useCustomFonts: 0
+  useCustomFonts: 1
   defaultFont: {fileID: 0}
   fonts:
-    keys: []
-    values: []
+    keys:
+    - jp
+    values:
+    - {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
 --- !u!114 &1038776605
 MonoBehaviour:
   m_ObjectHideFlags: 0

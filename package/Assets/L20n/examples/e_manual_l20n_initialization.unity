@@ -1084,10 +1084,12 @@ MonoBehaviour:
       text: 
       hash: {fileID: 0}
   useCustomFonts: 1
-  defaultFont: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
+  defaultFont: {fileID: 0}
   fonts:
-    keys: []
+    keys:
+    - jp
     values:
+    - {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
     - {fileID: 0}
 --- !u!114 &1504027418
 MonoBehaviour:

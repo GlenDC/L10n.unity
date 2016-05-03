@@ -378,11 +378,13 @@ MonoBehaviour:
       literal: 0
       text: 
       hash: {fileID: 0}
-  useCustomFonts: 0
+  useCustomFonts: 1
   defaultFont: {fileID: 0}
   fonts:
-    keys: []
-    values: []
+    keys:
+    - jp
+    values:
+    - {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
 --- !u!114 &302132281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +468,7 @@ MonoBehaviour:
   manifestPath: L20n/examples/manifest
   overrideLocale: 
   uniqueGameID: L20nDemo
-  destroyObject: 0
+  destroyObject: 1
   fonts:
     keys:
     - jp
@@ -1304,6 +1306,7 @@ MonoBehaviour:
     - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    - {fileID: 0}
   defaultResource: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &1750004367
 MonoBehaviour:

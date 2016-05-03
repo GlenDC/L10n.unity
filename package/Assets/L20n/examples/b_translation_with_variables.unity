@@ -504,8 +504,8 @@ MonoBehaviour:
   variables:
     keys: []
     values: []
-  useCustomFonts: 0
-  defaultFont: {fileID: 0}
+  useCustomFonts: 1
+  defaultFont: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
   fonts:
     keys: []
     values: []
@@ -598,8 +598,8 @@ MonoBehaviour:
   variables:
     keys: []
     values: []
-  useCustomFonts: 0
-  defaultFont: {fileID: 0}
+  useCustomFonts: 1
+  defaultFont: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af, type: 3}
   fonts:
     keys: []
     values: []
@@ -955,11 +955,19 @@ Prefab:
       propertyPath: fonts.keys.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.values.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.values.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1110,6 +1118,19 @@ Prefab:
       propertyPath: fonts.values.Array.data[0]
       value: 
       objectReference: {fileID: 12800000, guid: 49eda983e9ad04e04975b5cbdf5584b2,
+        type: 3}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: useCustomFonts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.keys.Array.data[0]
+      value: jp
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
+      propertyPath: fonts.values.Array.data[0]
+      value: 
+      objectReference: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}

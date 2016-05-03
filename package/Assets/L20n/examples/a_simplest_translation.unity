@@ -94,7 +94,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.keys.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.keys.Array.size
@@ -102,7 +102,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.values.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11445236, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.values.Array.size
@@ -171,7 +171,8 @@ Prefab:
     - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: fonts.values.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af,
+        type: 3}
     - target: {fileID: 11442546, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: defaultFont
       value: 
@@ -203,8 +204,7 @@ Prefab:
     - target: {fileID: 11428408, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: defaultFont
       value: 
-      objectReference: {fileID: 12800000, guid: 8b73ad98227a648a9877aa85feec14af,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 11427602, guid: 5d4b3a4c3c04a4deeba8761e3223acc3, type: 2}
       propertyPath: m_FontData.m_Font
       value: 
