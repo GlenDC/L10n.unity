@@ -743,13 +743,8 @@ MonoBehaviour:
   identifier: change_locale_slider_desc
   useVariables: 0
   variables:
-    keys:
-    - 
-    values:
-    - type: 0
-      literal: 0
-      text: 
-      hash: {fileID: 0}
+    m_Keys: []
+    m_Values: []
   useCustomFonts: 1
   defaultFont: {fileID: 0}
   fonts:
@@ -1257,13 +1252,8 @@ MonoBehaviour:
   identifier: current_time
   useVariables: 0
   variables:
-    keys:
-    - time
-    values:
-    - type: 2
-      literal: 0
-      text: 
-      hash: {fileID: 0}
+    m_Keys: []
+    m_Values: []
   useCustomFonts: 1
   defaultFont: {fileID: 12800000, guid: e365dff10e42a4a34af6be778a008ce6, type: 3}
   fonts:
@@ -1790,9 +1780,9 @@ MonoBehaviour:
   identifier: remaining_time
   useVariables: 1
   variables:
-    keys:
+    m_Keys:
     - time
-    values:
+    m_Values:
     - type: 2
       literal: 0
       text: 

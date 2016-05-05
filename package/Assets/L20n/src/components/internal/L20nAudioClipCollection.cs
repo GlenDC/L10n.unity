@@ -28,6 +28,13 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			/// <summary>
+			/// A AudioClip Collection, that can be used
+			/// in combination with any L20nBaseResource class.
+			/// </summary>
+			/// <remarks>
+			/// Look at the `L20nAudioSource` class for a use-case example.
+			/// </remarks>
 			[Serializable]
 			public sealed class L20nAudioClipCollection
 			: L20nResourceCollection<AudioClip>
@@ -35,6 +42,10 @@ namespace L20nUnity
 			}
 
 			#if UNITY_EDITOR
+			/// <summary>
+			/// A custom drawer for this collection,
+			/// inhereting away the template argument.
+			/// </summary>
 			[CustomPropertyDrawer(typeof(L20nAudioClipCollection))]
 			public sealed class L20nAudioClipCollectionDrawer
 				: L20nResourceCollectionDrawer

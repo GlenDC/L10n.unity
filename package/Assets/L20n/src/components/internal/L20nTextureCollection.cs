@@ -28,6 +28,13 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			/// <summary>
+			/// A Texture Collection, that can be used
+			/// in combination with any L20nBaseResource class.
+			/// </summary>
+			/// <remarks>
+			/// Look at the `L20nUIRawImage` class for a use-case example.
+			/// </remarks>
 			[Serializable]
 			public sealed class L20nTextureCollection
 			: L20nResourceCollection<Texture>
@@ -35,6 +42,10 @@ namespace L20nUnity
 			}
 			
 			#if UNITY_EDITOR
+			/// <summary>
+			/// A custom drawer for this collection,
+			/// inhereting away the template argument.
+			/// </summary>
 			[CustomPropertyDrawer(typeof(L20nTextureCollection))]
 			public sealed class L20nTextureCollectionDrawer
 			: L20nResourceCollectionDrawer

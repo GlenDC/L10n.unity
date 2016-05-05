@@ -28,6 +28,10 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			/// <summary>
+			/// A Font Collection, that can be used
+			/// in combination with any L20nBaseResource class.
+			/// </summary>
 			[Serializable]
 			public sealed class L20nFontCollection
 				: L20nResourceCollection<Font>

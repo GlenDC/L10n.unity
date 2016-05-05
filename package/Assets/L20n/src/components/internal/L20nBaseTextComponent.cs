@@ -28,10 +28,19 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			/// <summary>
+			/// An abstract base class used for all L20n Resource Components.
+			/// The template type specifies the ComponentType (T).
+			/// It specifies the logic for lazily getting and chacing the specified component.
+			/// </summary>
 			public abstract class L20nBaseTextComponent<T> : L20nBaseText
 			{
 				protected Option<T> m_Component;
 
+				/// <summary>
+				/// Gets the specified component from cache.
+				/// If the component has not been cached yet, this will be done first.
+				/// </summary>
 				protected Option<T> Component {
 					get {
 						if (!m_Component.IsSet) {

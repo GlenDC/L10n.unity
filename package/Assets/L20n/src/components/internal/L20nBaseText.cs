@@ -29,6 +29,10 @@ namespace L20nUnity
 	{
 		namespace Internal
 		{
+			/// <summary>
+			/// The L20n component used for all Text components that
+			/// need the localization magic of L20n.
+			/// </summary>
 			[DisallowMultipleComponent]
 			public abstract class L20nBaseText : MonoBehaviour
 			{
@@ -51,21 +55,33 @@ namespace L20nUnity
 				L20nFontCollection
 					fonts;
 
+				/// <summary>
+				/// Set a literal value for the given locale key.
+				/// </summary>
 				public bool SetVariable (string key, int value)
 				{
 					return useVariables && variables.SetVariable (key, value);
 				}
-				
+
+				/// <summary>
+				/// Set a string value for the given locale key.
+				/// </summary>
 				public bool SetVariable (string key, string value)
 				{
 					return useVariables && variables.SetVariable (key, value);
 				}
-				
+
+				/// <summary>
+				/// Set a HashValueBehaviour value for the given locale key.
+				/// </summary>
 				public bool SetVariable (string key, HashValueBehaviour value)
 				{
 					return useVariables && variables.SetVariable (key, value);
 				}
 
+				/// <summary>
+				/// Set the L20n identifier used to look up the relevant translation. 
+				/// </summary>
 				public bool SetIdentifier (string id)
 				{
 					if (id != null) {
@@ -118,7 +134,7 @@ namespace L20nUnity
 					}
 					
 					if (useVariables) {
-						var text = L20n.Translate (identifier, variables.keys.ToArray (), variables.GetValues ());
+						var text = L20n.Translate (identifier, variables.GetKeys(), variables.GetValues ());
 						SetText (text, font);
 					} else {
 						var text = L20n.Translate (identifier);
@@ -133,32 +149,57 @@ namespace L20nUnity
 			
 			namespace Internal
 			{
+				/// <summary>
+				/// A collection used for External Variables.
+				/// </summary>
 				[Serializable]
 				public sealed class VariableCollection
 				{
-					public List<String> keys;
-					public List<ExternalValue> values;
+					[SerializeField]
+					private List<String> m_Keys;
+					[SerializeField]
+					private List<ExternalValue> m_Values;
 
+					/// <summary>
+					/// Returns the amount of external variables in this collection.
+					/// </summary>
 					public int Count {
-						get { return Math.Min (keys.Count, values.Count); }
+						get { return Math.Min (m_Keys.Count, m_Values.Count); }
 					}
-					
+
+					/// <summary>
+					/// Initializes a new instance of the <see cref="L20nUnity.Components.Internal.Internal.VariableCollection"/> class.
+					/// </summary>
 					public VariableCollection ()
 					{
-						keys = new List<string> ();
-						values = new List<ExternalValue> ();
+						m_Keys = new List<string> ();
+						m_Values = new List<ExternalValue> ();
 					}
-					
+
+					/// <summary>
+					/// Return all external values stored in this collection.
+					/// </summary>
 					public L20nCore.Objects.L20nObject[] GetValues ()
 					{
-						var output = new L20nCore.Objects.L20nObject[values.Count];
+						var output = new L20nCore.Objects.L20nObject[m_Values.Count];
 						for (int i = 0; i < output.Length; ++i) {
-							output [i] = values [i].GetValue ();
+							output [i] = m_Values [i].GetValue ();
 						}
 						
 						return output;
 					}
-					
+
+					/// <summary>
+					/// Return all keys stored in this collection.
+					/// </summary>
+					public string[] GetKeys ()
+					{
+						return m_Keys.ToArray ();
+					}
+
+					/// <summary>
+					/// Set a literal value for the given key.
+					/// </summary>
 					public bool SetVariable (string key, int value)
 					{
 						var variable = GetVariable (key);
@@ -168,7 +209,10 @@ namespace L20nUnity
 						variable.SetValue (value);
 						return true;
 					}
-					
+
+					/// <summary>
+					/// Set a string value for the given key.
+					/// </summary>
 					public bool SetVariable (string key, string value)
 					{
 						var variable = GetVariable (key);
@@ -178,7 +222,10 @@ namespace L20nUnity
 						variable.SetValue (value);
 						return true;
 					}
-					
+
+					/// <summary>
+					/// Set a HashValueBehaviour value for the given key.
+					/// </summary>
 					public bool SetVariable (string key, HashValueBehaviour value)
 					{
 						var variable = GetVariable (key);
@@ -188,20 +235,26 @@ namespace L20nUnity
 						variable.SetValue (value);
 						return true;
 					}
-					
+
+					/// <summary>
+					/// Get the variable for the given key.
+					/// </summary>
 					private ExternalValue GetVariable (string key)
 					{
 						var count = Count;
 						for (int i = 0; i < count; ++i) {
-							if (keys [i].Equals (key)) {
-								return values [i];
+							if (m_Keys [i].Equals (key)) {
+								return m_Values [i];
 							}
 						}
 						
 						return null;
 					}
 				}
-				
+
+				/// <summary>
+				/// A helper class used to represent an External Value.
+				/// </summary>
 				[Serializable]
 				public sealed class ExternalValue
 				{
@@ -217,12 +270,18 @@ namespace L20nUnity
 					[SerializeField]
 					HashValueBehaviour
 						hash;
-					
+
+					/// <summary>
+					/// Initializes a new instance of the <see cref="L20nUnity.Components.Internal.Internal.ExternalValue"/> class.
+					/// </summary>
 					public ExternalValue ()
 					{
 						type = Type.String;
 					}
-					
+
+					/// <summary>
+					/// Gets the L20n value based on the currently specified type.
+					/// </summary>
 					public L20nCore.Objects.L20nObject GetValue ()
 					{
 						switch (type) {
@@ -241,33 +300,48 @@ namespace L20nUnity
 						return null;
 					}
 
+					/// <summary>
+					/// Set this literal value.
+					/// </summary>
 					public void SetValue (int value)
 					{
 						type = Type.Literal;
 						literal = value;
 					}
-					
+
+					/// <summary>
+					/// Set this string value.
+					/// </summary>
 					public void SetValue (string value)
 					{
 						type = Type.String;
 						text = value;
 					}
-					
+
+					/// <summary>
+					/// Set this HashValueBehaviour value.
+					/// </summary>
 					public void SetValue (HashValueBehaviour value)
 					{
 						type = Type.HashValue;
 						hash = value;
 					}
-					
+
+					/// <summary>
+					/// All types supported for the External Variables.
+					/// </summary>
 					public enum Type
 					{
-						Literal,
-						String,
-						HashValue
+						Literal,	// a C# integer
+						String,		// a C# string
+						HashValue	// a HashValueBehaviour-object
 					}
 				}
 				
 				#if UNITY_EDITOR
+				/// <summary>
+				/// A custom editor for the L20nBaseText.
+				/// </summary>
 				[CustomEditor (typeof (L20nBaseText))]
 				public class L20nBaseTextEditor : Editor {
 					SerializedProperty identifier;
@@ -324,10 +398,10 @@ namespace L20nUnity
 						EditorGUILayout.PropertyField (useVariables);
 
 						if (useVariables.boolValue) {
-							var size = variables.FindPropertyRelative ("keys").arraySize;
+							var size = variables.FindPropertyRelative ("m_Keys").arraySize;
 							if (size == 0) {
-								var keys = variables.FindPropertyRelative ("keys");
-								var values = variables.FindPropertyRelative ("values");
+								var keys = variables.FindPropertyRelative ("m_Keys");
+								var values = variables.FindPropertyRelative ("m_Values");
 
 								keys.InsertArrayElementAtIndex (0);
 								values.InsertArrayElementAtIndex (0);
@@ -343,7 +417,10 @@ namespace L20nUnity
 						serializedObject.ApplyModifiedProperties ();
 					}
 				}
-				
+
+				/// <summary>
+				/// A custom editor for the VariableCollection.
+				/// </summary>
 				[CustomPropertyDrawer(typeof(VariableCollection))]
 				public class VariableCollectionDrawer : PropertyDrawer {
 					Rect Offset(Rect position, float sx, float sy, float sw, float sh) {
@@ -353,8 +430,8 @@ namespace L20nUnity
 					}
 
 					public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-						var keys = property.FindPropertyRelative("keys");
-						var values = property.FindPropertyRelative("values");
+						var keys = property.FindPropertyRelative("m_Keys");
+						var values = property.FindPropertyRelative("m_Values");
 
 						var labelRect = new Rect(position.x, position.y, 120, position.height);
 						EditorGUI.LabelField(labelRect, "External Variables");
@@ -395,7 +472,10 @@ namespace L20nUnity
 						}
 					}
 				}
-				
+
+				/// <summary>
+				/// A custom editor for the ExternalValue.
+				/// </summary>
 				[CustomPropertyDrawer(typeof(ExternalValue))]
 				public class ExternalValueDrawer : PropertyDrawer {
 					Rect Offset(Rect position, float sx, float sy, float sw, float sh) {

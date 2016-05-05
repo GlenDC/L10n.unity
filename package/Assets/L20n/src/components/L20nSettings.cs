@@ -27,6 +27,15 @@ namespace L20nUnity
 {
 	namespace Components
 	{
+		/// <summary>
+		/// A component that can be used in all scenes that you wish to start-up from.
+		/// It will initialize & setup the L20n System with all your specified settings.
+		/// </summary>
+		/// <remarks>
+		/// All of its logic will happen during the `Awake` phase.
+		/// Once the initialization and setup is done this component will be destroyed
+		/// and optionally the object containing this component as well.
+		/// </remarks>
 		[AddComponentMenu("L20n/Settings (initialization)")]
 		[DisallowMultipleComponent]
 		public class L20nSettings : MonoBehaviour
@@ -53,6 +62,12 @@ namespace L20nUnity
 			Font
 				defaultFont;
 
+			/// <summary>
+			/// Sets all the settings to its defaults.
+			/// </summary>
+			/// <remarks>
+			/// This doesn't do any of the actual L20n setup/initialization yet.
+			/// </remarks>
 			public L20nSettings ()
 			{
 				manifestPath = "";
@@ -64,8 +79,16 @@ namespace L20nUnity
 				globalVariables = new Internal.GlobalValueCollection ();
 			}
 
+			/// <summary>
+			/// Initialized and setups the L20n System.
+			/// Called during the `Awake` phase.
+			/// </summary>
 			void Awake ()
 			{
+				// Make sure that L20n isn't initialized yet.
+				// This can happen as you might have used this component already in a previous scene.
+				// Which might be quite common as this component should be used in all scenes
+				// that you may want to start up from directly during development.
 				if (!L20n.IsInitialized) {
 					if (manifestPath == null) {
 						Debug.LogError ("<L20nSettings> requires the manifest to be set", this);
@@ -75,8 +98,10 @@ namespace L20nUnity
 					if (overrideLocale == "")
 						overrideLocale = null;
 
+					// Initialize L20n
 					L20n.Initialize (uniqueGameID, manifestPath, overrideLocale);
 
+					// Set the default fonts and global variables (if there are any)
 					L20n.SetFont (L20n.DefaultLocale, defaultFont);
 					foreach (var pair in fonts.GetAllResources()) {
 						L20n.SetFont (pair.Key, pair.Value);
@@ -94,6 +119,9 @@ namespace L20nUnity
 
 		namespace Internal
 		{
+			/// <summary>
+			/// A helper class that serves as the Collection of Global Values.
+			/// </summary>
 			[Serializable]
 			public sealed class GlobalValueCollection
 			{
@@ -107,22 +135,37 @@ namespace L20nUnity
 				private int Count {
 					get { return Math.Min (keys.Count, values.Count); }
 				}
-				
+
+				/// <summary>
+				/// Initializes a new instance of the <see cref="L20nUnity.Components.Internal.GlobalValueCollection"/> class.
+				/// </summary>
 				public GlobalValueCollection ()
 				{
 					keys = new List<string> ();
 					values = new List<GlobalValue> ();
 				}
 
+				/// <summary>
+				/// Add all the values specified in this collection to the Global Environment.
+				/// </summary>
+				/// <remarks>
+				/// All values in this collection will get removed at the end of this method.
+				/// </remarks>
 				public void AddValuesToEnvironment ()
 				{
 					var count = Count;
 					for (int i = 0; i < count; ++i) {
 						L20n.AddGlobal (keys [i], values [i].GetValue());
 					}
+
+					keys.Clear ();
+					values.Clear ();
 				}
 			}
 
+			/// <summary>
+			/// A helper class for any supported type of Global Values.
+			/// </summary>
 			[Serializable]
 			public sealed class GlobalValue
 			{
@@ -141,12 +184,18 @@ namespace L20nUnity
 				[SerializeField]
 				HashValueBehaviour
 					hash;
-				
+
+				/// <summary>
+				/// Initializes a new instance of the <see cref="L20nUnity.Components.Internal.GlobalValue"/> class.
+				/// </summary>
 				public GlobalValue ()
 				{
 					type = Type.String;
 				}
-				
+
+				/// <summary>
+				/// Returns the L20nObject value based on the specified type and set value.
+				/// </summary>
 				public L20nCore.Objects.L20nObject GetValue ()
 				{
 					switch (type) {
@@ -166,17 +215,28 @@ namespace L20nUnity
 					
 					return null;
 				}
-				
+
+				/// <summary>
+				/// The supported types of GLobal Variables.
+				/// </summary>
 				public enum Type
 				{
-					Boolean,
-					Literal,
-					String,
-					HashValue
+					Boolean,	// a C# boolean
+					Literal,	// a C# integer
+					String,		// a C# string
+					HashValue	// a `HashValueBehaviour`-object
 				}
 			}
 
 			#if UNITY_EDITOR
+			/// <summary>
+			/// A custom drawer for the `L20nSettings` component.
+			/// </summary>
+			/// <remarks>
+			/// This class is quite ugly and big, thanks to the poor API exposed by Unity.
+			/// If you read this and have any idea's on how to improve it,
+			/// feel free to reach out to me and you might get a free license in return.
+			/// </remarks>
 			[CustomEditor (typeof (L20nSettings))]
 			public class L20nSettingsEditor : Editor {
 				SerializedProperty manifestPath;
@@ -310,6 +370,9 @@ namespace L20nUnity
 				}
 			}
 
+			/// <summary>
+			/// A custom drawer for a `GlobalValueCollection`.
+			/// </summary>
 			[CustomPropertyDrawer(typeof(GlobalValueCollection))]
 			public class GlobalValueCollectionDrawer : PropertyDrawer {
 				Rect Offset(Rect position, float sx, float sy, float sw, float sh) {
@@ -355,6 +418,9 @@ namespace L20nUnity
 				}
 			}
 
+			/// <summary>
+			/// A custom drawer used for each `GlobalValue`.
+			/// </summary>
 			[CustomPropertyDrawer(typeof(GlobalValue))]
 			public class GlobalValueDrawer : PropertyDrawer {
 				Rect Offset(Rect position, float sx, float sy, float sw, float sh) {
