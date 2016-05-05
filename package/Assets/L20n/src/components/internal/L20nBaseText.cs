@@ -179,11 +179,11 @@ namespace L20nUnity
 					/// <summary>
 					/// Return all external values stored in this collection.
 					/// </summary>
-					public L20nCore.Objects.L20nObject[] GetValues ()
+					public List<L20nCore.Objects.L20nObject> GetValues ()
 					{
-						var output = new L20nCore.Objects.L20nObject[m_Values.Count];
-						for (int i = 0; i < output.Length; ++i) {
-							output [i] = m_Values [i].GetValue ();
+						var output = new List<L20nCore.Objects.L20nObject>(m_Values.Count);
+						for (int i = 0; i < m_Values.Count; ++i) {
+							output.Add (m_Values [i].GetValue ());
 						}
 						
 						return output;
@@ -192,9 +192,9 @@ namespace L20nUnity
 					/// <summary>
 					/// Return all keys stored in this collection.
 					/// </summary>
-					public string[] GetKeys ()
+					public List<string> GetKeys ()
 					{
-						return m_Keys.ToArray ();
+						return m_Keys;
 					}
 
 					/// <summary>

@@ -204,7 +204,7 @@ public static class L20n
 	/// For string-values this extra property identifier will simply be ignored.
 	/// Meaning that something like `foo.bar` would be equal to `foo`.
 	/// </remarks>
-	public static string Translate (string id, string[] keys, L20nCore.Objects.L20nObject[] values)
+	public static string Translate (string id, List<string> keys, List<L20nCore.Objects.L20nObject> values)
 	{
 		return GetCore ().Translate (id, keys, values);
 	}
@@ -291,8 +291,8 @@ public static class L20n
 	                               string parameter_key_a, int parameter_value_a,
 	                               string parameter_key_b, int parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new Literal (parameter_value_a), new Literal (parameter_value_b)
 		};
 
@@ -318,8 +318,8 @@ public static class L20n
 	                               string parameter_key_a, int parameter_value_a,
 	                               string parameter_key_b, string parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new Literal (parameter_value_a), new StringOutput (parameter_value_b)
 		};
 		
@@ -345,8 +345,8 @@ public static class L20n
 	                               string parameter_key_a, int parameter_value_a,
 	                               string parameter_key_b, IHashValue parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new Literal (parameter_value_a), new Entity (parameter_value_b)
 		};
 		
@@ -372,8 +372,8 @@ public static class L20n
 	                               string parameter_key_a, string parameter_value_a,
 	                               string parameter_key_b, string parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new StringOutput (parameter_value_a), new StringOutput (parameter_value_b)
 		};
 		
@@ -399,8 +399,8 @@ public static class L20n
 	                               string parameter_key_a, string parameter_value_a,
 	                               string parameter_key_b, int parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new StringOutput (parameter_value_a), new Literal (parameter_value_b)
 		};
 		
@@ -426,8 +426,8 @@ public static class L20n
 	                               string parameter_key_a, string parameter_value_a,
 	                               string parameter_key_b, IHashValue parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new StringOutput (parameter_value_a), new Entity (parameter_value_b)
 		};
 		
@@ -453,8 +453,8 @@ public static class L20n
 	                               string parameter_key_a, IHashValue parameter_value_a,
 	                               string parameter_key_b, IHashValue parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new Entity (parameter_value_a), new Entity (parameter_value_b)
 		};
 		
@@ -480,8 +480,8 @@ public static class L20n
 	                               string parameter_key_a, IHashValue parameter_value_a,
 	                               string parameter_key_b, int parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new Entity (parameter_value_a), new Literal (parameter_value_b)
 		};
 		
@@ -507,8 +507,8 @@ public static class L20n
 	                               string parameter_key_a, IHashValue parameter_value_a,
 	                               string parameter_key_b, string parameter_value_b)
 	{
-		var keys = new string[] { parameter_key_a, parameter_key_b };
-		var values = new L20nObject[] {
+		var keys = new List<string> { parameter_key_a, parameter_key_b };
+		var values = new List<L20nObject> {
 			new Entity (parameter_value_a), new StringOutput (parameter_value_b)
 		};
 		
