@@ -13,6 +13,16 @@
 
 <user_has_apples "{{ $user.name }} ima {{ apples($amount) }} v svojem razredu">
 
+/* In most languages you only have a singular and plural form of a word.
+ * Which is why you often see something like `book(s)` in translations.
+ * In Slovenian that wouldn't work however, as you have up to 4 different
+ * forms based on the amount!
+ *
+ * This is just one example of many out there in the world,
+ * that shows that human languages can be quite complex and that plugging
+ * in variables into your translations would be impossible without
+ * the power of the L20n plugin.
+ */
 <plural($n) {
   $n == 0 ? "zero" :
   $n % 100 == 1 ? "one" :

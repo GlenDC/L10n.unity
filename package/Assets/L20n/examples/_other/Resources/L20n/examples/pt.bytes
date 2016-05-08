@@ -45,6 +45,11 @@
     {{ @second }} {{ _seconds[plural(@second)] }}.
     ">
 
+/* Brazilians will think it's colder much quicker
+ * than people from Western Europe.
+ *
+ * This is an example on how you can localize your sentences even better.
+ */
 <_temperature_desc($temperature) {
     $temperature < 18 && $temperature >= 10 ? "Está muito frio!" :
     $temperature < 20 ? "Está frio." :

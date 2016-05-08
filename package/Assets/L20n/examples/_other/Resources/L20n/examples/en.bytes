@@ -1,8 +1,16 @@
-<hello {
-    *default: 'Hello',
-    long: 'Hello, World',
-}>
+/* In our example this is the default locale.
+ * This document specifies the different tntities and uses the L20n Grammer.
+ * Check out https://github.com/GlenDC/L20n/blob/master/design/l20n-specs.md
+ * for more information.
+ */
 
+/* Used for the different UI Elements accross all examples */
+
+/* The different languages (locales) used in the examples.
+ *
+ * An entity is simply a translation-unit identified by an identifier.
+ * In it's simplest form it looks like ``<IDENTIFIER TRANSLATION>`.
+ */
 <af "Afrikaans">
 <en "English">
 <fr "French">
@@ -14,26 +22,76 @@
 <change_locale_slider_desc
     "change the current locale (language) using the slider below">
 
+/* Used for example: `a_simplest_translation
+ *
+ * A simple hash-table example, although this is a simple string
+ * in the other locales. This shows that you can easily use
+ * a string value where you would normally use a hash-table
+ * and thus there is never a need for a 1-element hash-table.
+ */
+<hello {
+    *default: 'Hello',
+    long: 'Hello, World',
+}>
+
+/* Used for example: `b_translation_with_variables` */
+
 /* allows the user to change the amount of apples in the variable example */
 <help_change_number "change the amount here">
 /* allows the user to change the subject/user in the variable example */
 <help_change_user "change the user here">
 
+/* a simple function (macro) that's used to talk about apples
+ * the amount of apples has influence over our sentence
+ *
+ * Expressions can be plugged into sentences (strings)
+ * via the ``{{ EXPRESSION }}` syntax, as can be seen below.
+ *
+ * Branches are also possible (if-else).
+ * The syntax is the same as available in many programming languages:
+ * `CONDITION ? IF_TRUE : IF_FALSE`
+ */
 <apples($amount) {
     $amount == 0 ? "no apples" :
         $amount == 1 ? "an apple" : "{{$amount}} apples"
 }>
 
+/* a localization of names, to give the player
+ * a more familiar/immersive experience
+ */
 <neutral_user_name "Ashton">
 <masculine_user_name "Oliver">
 <feminine_user_name "Amelia">
 
+/* a sentence describing a user that has a certain amount of apples
+ *
+ * This is the first example where we require external variables ($-syntax),
+ * passed on from C# as given by the programmer.
+ * In English the gender of the subject will change the possisive indicator
+ * at the end of the sentence. On top of that, English provides also a neutral form.
+ * That's why in English we can provide 3 different versions of this sentence.
+ *
+ * Good luck handling cases like this in all the different human languages,
+ * in the other technologies out there.
+ *
+ * Below you can also see that we're calling the `apples` macro, which is done
+ * via the syntax: `MACRO_NAME(PARAM_1, ..., PARAM_N)`
+ *
+ * In the entity below, you can also see that `default` is the
+ * default HashTable item, as is indicated by the asterix (`*`) at the front
+ */
 <user_has_apples[$user.gender] {
     *default: "{{ $user.name }} has {{ apples($amount) }} in its bucket.",
     masculine: "{{ $user.name }} has {{ apples($amount) }} in his bucket.",
     feminine: "{{ $user.name }} has {{ apples($amount) }} in her bucket.",
 }>
 
+/* Used for example: `c_globals_and_more_plurals` */
+
+/* A simple helper function (macro) that outputs an identifier,
+ * to be used to choose between the singular or plural form of a word.
+ * Note that in English we use the plural form for the 0-case.
+ */
 <plural($n) {
     $n == 1 ? "one" : "many"
 }>
@@ -51,18 +109,46 @@
     *many: "seconds",
 }>
 
+/* a simple sentence that tells the remaining time left, based
+ * a timing given via an external HashTable value.
+ *
+ * Below you can see that you can access the property of a HashTable,
+ * via the dot-syntax (`.`). Thus in this example,
+ * `hours` is a property/item in the external HashTable value `time`.
+ */
 <remaining_time "
     Remaining time: {{ $time.hours }} {{ _hours[plural($time.hours)] }},
     {{ $time.minutes }} {{ _minutes[plural($time.minutes)] }},
     {{ $time.seconds }} {{ _seconds[plural($time.seconds)] }}.
     ">
 
+/* Thanks to the globals, we can use the current time of the day in our translations.
+ * This can for example be used to greet the user correctly based on the time.
+ * The date can also be used on top of this.
+ * For even more control, you could expose custom globals yourself.
+ *
+ * Properties can also be accessed via an expression that results
+ * in an identifier, rather than given the identifier directly yourself.
+ * This can be done via the `[ EXPRESSION ]` syntax, instead of
+ * the dot-syntax `.IDENTIFIER`.
+ */
 <current_time "
     Current time: {{ @hour }} {{ _hours[plural(@hour)] }},
     {{ @minute }} {{ _minutes[plural(@minute)] }},
     {{ @second }} {{ _seconds[plural(@second)] }}.
     ">
 
+/* Used for example: `e_manual_l20n_initialization`. */
+
+/* L20n resource files can also specify private variables.
+ * These are variables whose identifier start with an underscore (`_`).
+ * Private variables can only be accessed from within L20n Resource files,
+ * and cannot directly be used within a translation request.
+ *
+ * We already saw an example of a conditional branch in a previous translation.
+ * Here we can see how you could generate the CONDITION_PART of such a branch.
+ * Here we compare an external literal (`$temp`) with some constant values (e.g. `10`)
+ */
 <_temperature_desc($temp) {
     $temp < -0 && $temp >= -10 ? "It's so cold!" :
     $temp < 10 ? "It's a bit chilly." :

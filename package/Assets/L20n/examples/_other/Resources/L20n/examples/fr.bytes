@@ -51,6 +51,10 @@
     "Nous allons tous mourir"
 }>
 
+/* Like is often the case in Latin languages,
+ * there is no neutral form, and instead the masculine form
+ * is used for the default or neutral cases as well.
+ */
 <_third_person {
     *default: "Il",
     feminine: "Elle",

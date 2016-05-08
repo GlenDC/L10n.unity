@@ -1,3 +1,7 @@
+/* The Japanese translations are very incomplete.
+ * It does show that you can also use unicode within UTF-8 files.
+ */
+
 <hello "こんにちは">
 
 <jp "日本語">
