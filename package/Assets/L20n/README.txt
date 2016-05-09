@@ -4,27 +4,10 @@ L20n - v1.0
 
 table of content:
 
-    0. Why?
     1. About this plugin
     2. How to use this plugin?
     3. FAQ
     4. License
-
------
-0. Why?
----
-
-This isn't the only localization plugin, why is this one better?
-
-    1) It's the only plugin that can handle the complexity of human languages;
-    2) It's minimalistic and allows you to specify the rules and how to use it;
-    3) It's based on well-done research by Mozilla;
-    4) It's a complete package for your entire localization;
-    5) It's the only way to keep all your localization logic outside your game logic;
-    6) It's the solution to prevent programmers from making dirty & bad
-       localization solutions right before another sprint;
-    7) It's well supported by a dedicated programmer (me);
-    8) It's featuring the powerful L20n language, empowering your translators;
 
 -----
 1. About this plugin
@@ -66,7 +49,7 @@ Text Components. Take a look at the FAQ in case you need some extra components.
 ---
 
 You can see all the different parts of this plugin in action
-by taking a look at the `L20n/examples/demo` project.
+by taking a look at the scenes in `L20n/examples`.
 
 What follows is a more technical description.
 
@@ -172,9 +155,9 @@ More in-depth information can be found as code-comments.
     play with them and discover how they work.
     This will give you a quick overview of what is possible and what you can expect.
 
-    After that I would recommend opening the Localize (.byte) files.
+    While you're doing that I would recommend opening the Localize (.byte) files.
     These contain the actual localizations used in the examples.
-    You can find them under `Resources/L20n/examples`.
+    You can find them under `examples/_other/Resources/L20n/examples`.
 
     After that you are ready to start. It takes a while to get used to it
     as it means that the relationship between developer and translator shifts.
@@ -183,7 +166,7 @@ More in-depth information can be found as code-comments.
 > I'm using some custom GUI plugin,
   how can I localize my text with a component?
 
-    This is easy, and can be done in following steps (1 to 5 minutes):
+    This is easy, and can be done in following steps:
 
         1. Duplicate an L20n textComponent (e.g. `L20nUIText`);
         2. Name it appropriately and point to the correct component type;
