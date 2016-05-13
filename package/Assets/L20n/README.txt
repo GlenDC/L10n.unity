@@ -44,6 +44,15 @@ a static class `L20n` and some optional components. Translations can be made pur
 via code by using the `L20n` class, or by using one of the available
 Text Components. Take a look at the FAQ in case you need some extra components.
 
+The official website for this project can be found at http://l20n.glendc.com.
+
+You can also read a series of articles I've written on this subject for more information.
+The first part of the series can be found here:
+https://medium.com/@ORPH4NUS/improving-localization-in-video-games-one-step-at-a-time-f83be4882085
+
+A full L20n DSL example file can be found here:
+https://github.com/GlenDC/L20n/blob/master/examples/complete_spec.l20n
+
 -----
 2. How to use this plugin?
 ---
