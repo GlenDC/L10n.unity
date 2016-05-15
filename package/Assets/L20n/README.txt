@@ -7,7 +7,6 @@ table of content:
     1. About this plugin
     2. How to use this plugin?
     3. FAQ
-    4. License
 
 -----
 1. About this plugin
@@ -208,9 +207,3 @@ More in-depth information can be found as code-comments.
     A free-to-use editor is in development and will be released
     in the near future. Feel free to mail me in case you want to know more about it.
     The editor will be open source and contributions will be possible in the future.
-
------
-4. License
----
-
-This project is licensed under the Apache License, Version 2.0.
