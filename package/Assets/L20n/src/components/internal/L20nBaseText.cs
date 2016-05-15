@@ -82,9 +82,10 @@ namespace L20nUnity
 				
 				void OnEnable ()
 				{
-					Debug.Assert (
-						identifier != "",
-						"<L20nText> requires an <identifier> to be givn");
+					if (identifier == "") {
+						Debug.LogError ("<L20nText> requires an <identifier> to be given");
+						return;
+					}
 					Initialize ();
 					UpdateText ();
 				}
@@ -121,7 +122,7 @@ namespace L20nUnity
 					}
 					
 					if (useVariables) {
-						var text = L20n.Translate (identifier, variables.GetKeys(), variables.GetValues ());
+						var text = L20n.Translate (identifier, variables.GetKeys (), variables.GetValues ());
 						SetText (text, font);
 					} else {
 						var text = L20n.Translate (identifier);
@@ -143,9 +144,11 @@ namespace L20nUnity
 				public sealed class VariableCollection
 				{
 					[SerializeField]
-					private List<String> m_Keys;
+					private List<String>
+						m_Keys;
 					[SerializeField]
-					private List<ExternalValue> m_Values;
+					private List<ExternalValue>
+						m_Values;
 
 					/// <summary>
 					/// Returns the amount of external variables in this collection.
@@ -168,7 +171,7 @@ namespace L20nUnity
 					/// </summary>
 					public List<L20nCore.Objects.L20nObject> GetValues ()
 					{
-						var output = new List<L20nCore.Objects.L20nObject>(m_Values.Count);
+						var output = new List<L20nCore.Objects.L20nObject> (m_Values.Count);
 						for (int i = 0; i < m_Values.Count; ++i) {
 							output.Add (m_Values [i].GetValue ());
 						}

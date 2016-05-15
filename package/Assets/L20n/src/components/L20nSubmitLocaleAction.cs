@@ -24,15 +24,16 @@ namespace L20nUnity
 		public sealed class L20nSubmitLocaleAction : MonoBehaviour
 		{
 			[SerializeField]
-			private string m_LocaleIdentifier = null;
+			private string
+				m_LocaleIdentifier = null;
 
 			/// <summary>
 			/// Asserts the locale has been set.
 			/// </summary>
 			void Start ()
 			{
-				Debug.Assert (m_LocaleIdentifier != null && m_LocaleIdentifier != "",
-				             "<L20nSubmitLocale> requires a local identifier to be specified");
+				if (m_LocaleIdentifier == null && m_LocaleIdentifier == "")
+					Debug.LogError ("<L20nSubmitLocale> requires a local identifier to be specified");
 			}
 
 			/// <summary>
@@ -42,8 +43,10 @@ namespace L20nUnity
 			void OnEnable ()
 			{
 				var btn = GetComponent<Button> ();
-				Debug.Assert (btn != null,
-				              "<L20nSubmitLocale> requires a <UnityEngine.UI.Button> to be specified");
+				if (btn == null) {
+					Debug.LogError ("<L20nSubmitLocale> requires a <UnityEngine.UI.Button> to be specified");
+					return;
+				}
 				btn.onClick.AddListener (OnSubmit);
 			}
 
@@ -54,8 +57,10 @@ namespace L20nUnity
 			void OnDisable ()
 			{
 				var btn = GetComponent<Button> ();
-				Debug.Assert (btn != null,
-				              "<L20nSubmitLocale> requires a <UnityEngine.UI.Button> to be specified");
+				if (btn == null) {
+					Debug.LogError ("<L20nSubmitLocale> requires a <UnityEngine.UI.Button> to be specified");
+					return;
+				}
 				btn.onClick.RemoveListener (OnSubmit);
 			}
 

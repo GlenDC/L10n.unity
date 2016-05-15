@@ -48,9 +48,11 @@ namespace L20nUnity
 				
 				protected override void Initialize ()
 				{
-					Debug.Assert (Component.IsSet,
-					             "{0} requires a {1} to be attached",
-					             GetType (), typeof(T));
+					if(!Component.IsSet) {
+						Debug.LogErrorFormat(
+							"{0} requires a {1} to be attached",
+							GetType (), typeof(T));
+					}
 				}
 			}
 		}
