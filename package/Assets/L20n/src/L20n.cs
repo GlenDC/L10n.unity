@@ -763,6 +763,7 @@ public static class L20n
 		{SystemLanguage.Czech, "cs"},
 		{SystemLanguage.Danish, "da"},
 		{SystemLanguage.Dutch, "nl"},
+		{SystemLanguage.English, "en"},
 		{SystemLanguage.Estonian, "et"},
 		{SystemLanguage.Faroese, "fo"},
 		{SystemLanguage.Finnish, "fi"},
